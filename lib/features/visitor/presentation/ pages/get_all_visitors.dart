@@ -1,7 +1,7 @@
 import 'package:clinic/features/visitor/presentation/bloc/visitor/visitor_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../../../../injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../widgets/Visitor_list_widget.dart';
 import '../widgets/message_display_widget.dart';
@@ -24,21 +24,25 @@ class GetAllVisitors extends StatelessWidget{
   Widget _buildBody(){
     return Padding(
         padding: EdgeInsets.only(top: 10),
-        child: BlocBuilder<VisitorBloc, VisitorState>(
-          builder: (context, state) {
-
-            if (state is LoadingVisitorsState){
+        child: BlocProvider<VisitorBloc>(
+          create: (context) => di.sl<VisitorBloc>()..add(GetAllVisitorsEvent()),
+          child:BlocBuilder<VisitorBloc, VisitorState>(
+            builder: (context, state) {
+              if (state is LoadingVisitorsState){
+                return LoadingWidget();
+              }
+              else if (state is LoadedVisitorsState) {
+                return RefreshIndicator(
+                    onRefresh: () => _onRefresh(context),
+                    child: VisitorListWidget(visitor: state.visitors, typeOfLogin: typeOfLogin));
+              }
+              else if (state is ErrorVisitorssState) {
+                return MessageDisplayWidget(message: state.message, typeOfLogin: typeOfLogin);
+              }
               return LoadingWidget();
-            }else if (state is LoadedVisitorsState) {
-              return RefreshIndicator(
-                  onRefresh: () => _onRefresh(context),
-                  child: VisitorListWidget(visitor: state.visitors, typeOfLogin: typeOfLogin));
-            } else if (state is ErrorVisitorssState) {
-              return MessageDisplayWidget(message: state.message, typeOfLogin: typeOfLogin);
-            }
-            return LoadingWidget();
-          },
-        ) ,
+            },
+          )
+        ),
     );
   }
 
