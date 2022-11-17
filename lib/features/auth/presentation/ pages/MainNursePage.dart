@@ -1,10 +1,9 @@
-import 'package:clinic/features/sick/%20domain/usecases/get_all_sicks.dart';
 import 'package:clinic/features/sick/presentation/%20pages/get_all_sicks.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
-import '../../../sick/presentation/ pages/add_sick.dart';
 import '../../../visitor/presentation/ pages/get_all_visitors.dart';
 
 class MainNursePage extends StatelessWidget{
@@ -46,6 +45,12 @@ class MainNursePage extends StatelessWidget{
             title: const Text('Clinic data'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_)=> GetClinicDataPage(showAddAndEdit:false)));
+            },
+          ),
+          ListTile(
+            title: const Text('Logout'),
+            onTap: () {
+              LogoutMethod().Logout(context: context);
             },
           ),
         ],

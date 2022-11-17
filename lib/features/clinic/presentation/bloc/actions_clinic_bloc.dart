@@ -22,7 +22,6 @@ class AddUpdateGetClinicBloc extends Bloc<ClinicEvent, AddUpdateGetClinicState>{
     required this.updateClinic,
     required this.getClinic}) : super(ClinicInitial()){
     on<ClinicEvent>((event, emit) async {
-      print(event);
       if (event is AddClinicEvent){
         emit(LoadingClinicState());
         final failureOrDoneMessage = await addClinic(event.clinic);

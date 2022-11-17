@@ -7,7 +7,6 @@ import 'package:hive/hive.dart';
 import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
-import '../../../sick/presentation/ pages/get_all_sicks.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/login_state.dart';
 import '../widgets/form_widget.dart';
@@ -34,27 +33,22 @@ class LoginPage extends StatelessWidget{
 
                 SnackBarMessage().showSuccesSnackBar(message: state.message, context: context);
                 var tasksBox = await Hive.openBox<Person>('user');
-                //
-                print(tasksBox.length);
-                print(tasksBox.get(tasksBox.length-1)!.name);
-                print(tasksBox.get(tasksBox.length-1)!.pk);
-                print(tasksBox.get(tasksBox.length-1)!.typeOfAccount);
-                if (tasksBox.get(tasksBox.length-1)!.typeOfAccount == 'Nurse'){
+                if (tasksBox.get(0)!.typeOfAccount == 'Nurse'){
                   Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (_) => MainNursePage(name:tasksBox.get(tasksBox.length-1)!.name.toString())),
+                    MaterialPageRoute(builder: (_) => MainNursePage(name:tasksBox.get(0)!.name.toString())),
                           (route) => false);
-                }else if (tasksBox.get(tasksBox.length-1)!.typeOfAccount == 'Doctor'){
+                }else if (tasksBox.get(0)!.typeOfAccount == 'Doctor'){
 
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => MainDoctorPage(name:tasksBox.get(tasksBox.length-1)!.name.toString())),
+                      MaterialPageRoute(builder: (_) => MainDoctorPage(name:tasksBox.get(0)!.name.toString())),
                           (route) => false);
-                }else if (tasksBox.get(tasksBox.length-1)!.typeOfAccount == 'User'){
+                }else if (tasksBox.get(0)!.typeOfAccount == 'User'){
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => MainUserPage(name:tasksBox.get(tasksBox.length-1)!.name.toString())),
+                      MaterialPageRoute(builder: (_) => MainUserPage(name:tasksBox.get(0)!.name.toString())),
                           (route) => false);
                 } else{
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (_) => MainUserPage(name:tasksBox.get(tasksBox.length-1)!.name.toString())),
+                      MaterialPageRoute(builder: (_) => MainUserPage(name:tasksBox.get(0)!.name.toString())),
                           (route) => false);
                 }
               }else if (state is ErrorLoginState){

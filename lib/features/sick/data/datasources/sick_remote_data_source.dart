@@ -28,7 +28,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
       'name': sick.name.toString(),
       'type_of_statement': sick.typeOfStatment.toString(),
       'phone_number': sick.phoneNumber.toString(),
-      'pk': tasksBox.get(tasksBox.length-1)!.pk.toString()
+      'pk': tasksBox.get(0)!.pk.toString()
     };
     try{
       final response = await client.post(Uri.parse(BASE_URL + '/nurse/add_booking/'),body: body);
@@ -50,11 +50,9 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
         Uri.parse(BASE_URL+"/nurse/add_booking/"),
         headers: {"Content-Type": "application/json"}
     );
-    print(response.statusCode);
     if (response.statusCode == 200){
       try {
         final List decodeJson = json.decode(response.body) as List;
-        print(decodeJson);
         final List<SickModel> sickModels = decodeJson
             .map<SickModel>((jsonSickModel) =>
             SickModel.fromJson(jsonSickModel))
@@ -76,7 +74,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
 
     final body ={
       'row_pk': id,
-      'user_pk':tasksBox.get(tasksBox.length-1)!.pk.toString()
+      'user_pk':tasksBox.get(0)!.pk.toString()
     };
     final response = await client.patch(
         Uri.parse(BASE_URL+'nurse/approve_booking/'), body: body

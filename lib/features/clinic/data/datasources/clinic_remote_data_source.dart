@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:clinic/features/clinic/%20domain/entities/Clinic.dart';
 import 'package:clinic/features/clinic/data/models/ClinicModel.dart';
 import 'package:dartz/dartz.dart';
-import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/error/Exception.dart';
 import '../../../../core/string/basic.dart';
 
@@ -27,7 +25,6 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
         Uri.parse(BASE_URL+"/users/get_clinic_data/"),
         headers: {"Content-Type": "application/json"}
     );
-    print(response.statusCode);
     if (response.statusCode == 200){
       try {
         final List decodeJson = json.decode(response.body) as List;
@@ -84,8 +81,6 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
     final response = await client.patch(
         Uri.parse(BASE_URL+'/doctor/edit_data_clinic/'), body: body
     );
-    print(response.statusCode);
-    print(response.body);
     if (response.statusCode == 200){
       return Future.value(unit);
     }else{

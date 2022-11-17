@@ -48,7 +48,7 @@ class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource{
       'name': visitor.name.toString(),
       'reason_of_visitor': visitor.reasonOfVisitor.toString(),
 
-      'pk': tasksBox.get(tasksBox.length-1)!.pk.toString()
+      'pk': tasksBox.get(0)!.pk.toString()
     };
     try{
     final response = await client.post(Uri.parse(BASE_URL + '/nurse/add_visitor/'),body: body);

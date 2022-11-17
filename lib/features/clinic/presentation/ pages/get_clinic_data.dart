@@ -30,7 +30,6 @@ class GetClinicDataPage extends StatelessWidget{
         create: (context) => di.sl<AddUpdateGetClinicBloc>()..add(GetClinicEvent()),
         child:  BlocBuilder<AddUpdateGetClinicBloc, AddUpdateGetClinicState>(
             builder: (context, state) {
-              print(state);
               if (state is LoadingClinicState){
                 return LoadingWidget();
               }else if (state is LoadedClinicState) {

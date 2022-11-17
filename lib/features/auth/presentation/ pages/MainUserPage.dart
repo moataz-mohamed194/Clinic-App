@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/util/Logout.dart';
+import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
 
 class MainUserPage extends StatelessWidget{
@@ -41,8 +43,7 @@ class MainUserPage extends StatelessWidget{
           ListTile(
             title: const Text('Clinic data'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetClinicDataPage(showAddAndEdit:false)));
             },
           ),
           ListTile(
@@ -50,6 +51,12 @@ class MainUserPage extends StatelessWidget{
             onTap: () {
               // Update the state of the app.
               // ...
+            },
+          ),
+          ListTile(
+            title: const Text('Logout'),
+            onTap: () {
+              LogoutMethod().Logout(context: context);
             },
           ),
         ],

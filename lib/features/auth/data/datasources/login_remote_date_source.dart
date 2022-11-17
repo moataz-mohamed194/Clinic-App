@@ -32,14 +32,13 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
       );
       if (response.statusCode == 201 || response.statusCode == 200 ){
         Map valueMap = json.decode(response.body);
-        print(valueMap);
         var addData = await Hive.openBox<Person>('user');
         var person = Person()
           ..typeOfAccount =valueMap['typeOfAccount']
           ..pk = valueMap['pk'].toString()
           ..logged = true
           ..name = valueMap['name'];
-        addData.add(person);
+        addData.putAt(0, person);
 
         return Future.value(unit);
       }else{

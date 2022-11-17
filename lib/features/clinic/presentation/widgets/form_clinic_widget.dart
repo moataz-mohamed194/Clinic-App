@@ -99,8 +99,6 @@ class FormClinicWidget extends StatelessWidget{
                 autovalidateMode: AutovalidateMode.always,
 
                 onDateSelected: (DateTime value) {
-                  print(clinic!.fromTime);
-                  print(value);
                   if(clinic!.fromTime != '${value.hour}:${value.minute}:${value.second}'){
                     _fromTimesController.text = '${value.hour}:${value.minute}:${value.second}'.toString();
                   }else{
@@ -136,8 +134,6 @@ class FormClinicWidget extends StatelessWidget{
                     hintText:clinic?.toTime),
                 mode: DateTimeFieldPickerMode.time,
                 onDateSelected: (DateTime value) {
-                  print(clinic!.fromTime);
-                  print(value);
                   if(clinic!.toTime != '${value.hour}:${value.minute}:${value.second}'){
                     _fromTimesController.text = '${value.hour}:${value.minute}:${value.second}'.toString();
                   }else{
@@ -206,12 +202,6 @@ class FormClinicWidget extends StatelessWidget{
 
   void validateFormUpdateClinic(BuildContext context, Clinic? oldClinic) {
     final isValid = _formKey.currentState!.validate();
-    print(oldClinic);
-    _addressController.text==''?print(oldClinic!.addrees):print(_addressController.text);
-    _noteController.text==''?print(oldClinic?.note):print(_noteController.text);
-    _fromTimesController.text==''?print(oldClinic!.fromTime):print(_fromTimesController.text);
-    _toTimeController.text==''?print(oldClinic!.toTime):print(_toTimeController.text);
-    _timeOfVacationsController.text==''?print(oldClinic!.timeOfVacation):print(_timeOfVacationsController.text);
     if (isValid) {
       try {
         final clinic = Clinic(
