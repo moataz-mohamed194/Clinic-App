@@ -29,8 +29,8 @@ class GetAllFeesPage extends StatelessWidget{
         child: BlocProvider<AddUpdateGetFeesBloc>(
             create: (context) => di.sl<AddUpdateGetFeesBloc>()
               ..add(isItDay == true ?
-                GetFeesOfDayEvent(day: this.date??'2022-09-12'):
-                GetFeesOfMonthEvent(month: this.date??'2022-09-12')),
+                GetFeesOfDayEvent(day: this.date):
+                GetFeesOfMonthEvent(month: this.date)),
             child: BlocBuilder<AddUpdateGetFeesBloc, AddUpdateGetFeesState>(
               builder: (context, state) {
                 if (state is LoadingFeesState){

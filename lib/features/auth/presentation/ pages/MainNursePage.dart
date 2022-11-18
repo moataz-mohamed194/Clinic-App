@@ -49,7 +49,7 @@ class MainNursePage extends StatelessWidget{
           ListTile(
             title: const Text('Logout'),
             onTap: () {
-              LogoutMethod().Logout(context: context);
+              LogoutMethod().logout(context: context);
             },
           ),
         ],

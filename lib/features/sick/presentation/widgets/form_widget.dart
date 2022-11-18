@@ -5,10 +5,11 @@ import '../../ domain/entities/sick.dart';
 import '../bloc/add_sick_bloc.dart';
 import '../bloc/add_sick_event.dart';
 
+@immutable
 class FormSickWidget extends StatelessWidget{
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _phoneNumberController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(

@@ -1,20 +1,19 @@
 import 'package:clinic/features/clinic/presentation/bloc/actions_clinic_bloc.dart';
 import 'package:clinic/features/clinic/presentation/bloc/actions_clinic_event.dart';
-import 'package:date_field/date_field.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../ domain/entities/Clinic.dart';
 
 
 class FormClinicWidget extends StatelessWidget{
   final Clinic? clinic;
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _addressController = TextEditingController();
-  TextEditingController _noteController = TextEditingController();
-  TextEditingController _timeOfVacationsController = TextEditingController();
-  TextEditingController _fromTimesController = TextEditingController();
-  TextEditingController _toTimeController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _timeOfVacationsController = TextEditingController();
+  final TextEditingController _fromTimesController = TextEditingController();
+  final TextEditingController _toTimeController = TextEditingController();
 
   FormClinicWidget({Key? key, this.clinic}) : super(key: key);
   @override
@@ -90,76 +89,87 @@ class FormClinicWidget extends StatelessWidget{
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child:this.clinic != null?
-            DateTimeFormField(
-
-                decoration: InputDecoration(
-                    hintText:  clinic!.fromTime
-                ),
-                mode: DateTimeFieldPickerMode.time,
-                autovalidateMode: AutovalidateMode.always,
-
-                onDateSelected: (DateTime value) {
-                  if(clinic!.fromTime != '${value.hour}:${value.minute}:${value.second}'){
-                    _fromTimesController.text = '${value.hour}:${value.minute}:${value.second}'.toString();
-                  }else{
-                    _fromTimesController.text = clinic!.fromTime.toString();
-                  }
-                },
-                use24hFormat:true
-              // initialValue:DateTime.parse(clinic!.fromTime) != null? DateTime.parse(clinic!.fromTime):null
-            ):
-            DateTimeFormField(
-            decoration: InputDecoration(
-              hintText: 'Start time'
-            ),
-            mode: DateTimeFieldPickerMode.time,
-            autovalidateMode: AutovalidateMode.always,
-            validator: (DateTime? e) {
-
-              return e?.hour ==null ? 'must add the Start time of clinic':'';
-            },
-              onDateSelected: (DateTime value) {
-                  _fromTimesController.text = '${value.hour}:${value.minute}'.toString();
-
+            DateTimePicker(
+              type: DateTimePickerType.time,
+              initialValue: this.clinic!.fromTime,
+              firstDate: DateTime(2000),
+              decoration:InputDecoration(
+                  hintText:'Date'),
+              dateLabelText:'Choose the date',
+              lastDate: DateTime(2100),
+              onChanged: (value) {
+                if(clinic!.fromTime != '$value'){
+                  _fromTimesController.text = '$value'.toString();
+                }else{
+                  _fromTimesController.text = clinic!.fromTime.toString();
+                }
               },
-              use24hFormat:true
-            // initialValue:DateTime.parse(clinic!.fromTime) != null? DateTime.parse(clinic!.fromTime):null
+              validator: (val) {
+                if(val == null){
+                  return 'must choose date of fees';
+                }
+                return null;
+              },
+            )
+            :DateTimePicker(
+              type: DateTimePickerType.time,
+              firstDate: DateTime(2000),
+              decoration:InputDecoration(
+                hintText:'Start time'),
+              lastDate: DateTime(2100),
+              controller: _fromTimesController,
+              onChanged: (value) {
+                _fromTimesController.text = '$value'.toString();
+              },
+              validator: (val) {
+                if(val == null){
+                  return 'must add the Start time of clinic';
+                }
+                return null;
+              },
             )
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child:clinic !=null?
-              DateTimeFormField(
-                decoration: InputDecoration(
-                    hintText:clinic?.toTime),
-                mode: DateTimeFieldPickerMode.time,
-                onDateSelected: (DateTime value) {
-                  if(clinic!.toTime != '${value.hour}:${value.minute}:${value.second}'){
-                    _fromTimesController.text = '${value.hour}:${value.minute}:${value.second}'.toString();
+              DateTimePicker(
+                type: DateTimePickerType.time,
+                initialValue: this.clinic!.toTime,
+                firstDate: DateTime(2000),
+                decoration:InputDecoration(
+                  hintText:'Date'),
+                dateLabelText:'Choose the date',
+                lastDate: DateTime(2100),
+                onChanged: (value) {
+                  if(clinic!.toTime != '$value'){
+                    _toTimeController.text = '$value'.toString();
                   }else{
-                    _fromTimesController.text = clinic!.toTime.toString();
+                    _toTimeController.text = clinic!.toTime.toString();
                   }
                 },
-                use24hFormat:true,
-
-            )
-              : DateTimeFormField(
-                decoration: InputDecoration(
-                hintText:clinic?.toTime != null? clinic!.toTime:'End time'),
-                mode: DateTimeFieldPickerMode.time,
-                validator: (DateTime? e) {
-                  return
-                    e?.hour!=null ? null:'must add the end time of clinic';
-                },
-                onDateSelected: (DateTime value) {
-                  DateTime old_date = DateTime.parse(clinic!.toTime);
-                  if(old_date.hour == value.hour && old_date.minute == value.minute){
-                    _toTimeController.text = '${old_date.hour}:${old_date.minute}'.toString();
-                  }else{
-                    _toTimeController.text = '${value.hour}:${value.minute}'.toString();
+                validator: (val) {
+                  if(val == null){
+                    return 'must choose time';
                   }
+                  return null;
                 },
-                use24hFormat:true
+              )
+              :DateTimePicker(
+              type: DateTimePickerType.time,
+              firstDate: DateTime(2000),
+              decoration:InputDecoration(
+                  hintText:'End time'),
+              lastDate: DateTime(2100),
+              controller: _toTimeController,
+              onChanged: (value) {
+                _toTimeController.text = '$value'.toString();
+              },
+              validator: (val) {
+                if(val == null){
+                  return 'must add the end time of clinic';
+                }
+                return null;
+              },
             )
           ),
 
@@ -188,6 +198,7 @@ class FormClinicWidget extends StatelessWidget{
           toTime: _toTimeController.text,
           timeOfVacation: _timeOfVacationsController.text,
         );
+        print(clinic);
         BlocProvider.of<AddUpdateGetClinicBloc>(context)
             .add(AddClinicEvent(clinic: clinic));
       }

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
-import '../../../fees/presentation/ pages/add_fees.dart';
 import '../../../fees/presentation/ pages/choose_date_page.dart';
-import '../../../fees/presentation/ pages/get_fees.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
 
 class MainDoctorPage extends StatelessWidget{
@@ -66,7 +64,7 @@ class MainDoctorPage extends StatelessWidget{
           ListTile(
             title: const Text('Logout'),
             onTap: () {
-              LogoutMethod().Logout(context: context);
+              LogoutMethod().logout(context: context);
             },
           ),
         ],

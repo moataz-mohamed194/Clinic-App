@@ -5,7 +5,7 @@ import '../../main.dart';
 import '../StrogeData/hive.dart';
 
 class LogoutMethod{
-  Future<void> Logout({required BuildContext context}) async {
+  Future<void> logout({required BuildContext context}) async {
     var tasksBox = await Hive.openBox<Person>('user');
     tasksBox.get(0)!.logged = false;
     tasksBox.get(0)!.save();

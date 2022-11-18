@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class FormVisitorWidget extends StatelessWidget{
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _bodyController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _bodyController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(

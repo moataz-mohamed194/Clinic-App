@@ -5,17 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../ domain/entities/login.dart';
 
-class FormWidget extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    return _FormWidgetState();
-  }
-}
+class FormWidget extends StatelessWidget{
 
-class _FormWidgetState extends State<FormWidget>{
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -45,7 +39,7 @@ class _FormWidgetState extends State<FormWidget>{
             ),
           ),
           ElevatedButton.icon(
-              onPressed: validateFormThenUpdateOrAddPost,
+              onPressed:()=> validateFormThenUpdateOrAddPost(context),
               icon: Icon(Icons.login),
               label: Text('Login')
           )
@@ -54,7 +48,7 @@ class _FormWidgetState extends State<FormWidget>{
     );
   }
 
-  void validateFormThenUpdateOrAddPost() {
+  void validateFormThenUpdateOrAddPost(BuildContext context) {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {

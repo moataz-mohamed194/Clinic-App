@@ -9,9 +9,9 @@ class FormFeesWidget extends StatelessWidget{
   final Fees? feesData;
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _priceController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
 
   FormFeesWidget({Key? key, this.feesData}) : super(key: key);
 

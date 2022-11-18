@@ -1,6 +1,4 @@
-import 'package:date_field/date_field.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'get_fees.dart';
@@ -8,7 +6,7 @@ import 'get_fees.dart';
 class ChooseDatePage extends StatelessWidget{
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _dateController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
   final bool isItDay;
 
   ChooseDatePage({Key? key, required this.isItDay}) : super(key: key);

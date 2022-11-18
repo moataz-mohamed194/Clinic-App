@@ -12,7 +12,6 @@ import 'core/App_Theme.dart';
 import 'features/auth/presentation/ pages/MainDoctorPage.dart';
 import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
-import 'features/fees/presentation/ pages/choose_date_page.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
 import 'injection_container.dart' as di;
 void main() async{
