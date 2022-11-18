@@ -4,7 +4,6 @@ import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import '../widgets/form_widget.dart';
-import 'get_all_visitors.dart';
 
 class VisitorAddPage extends StatelessWidget{
   @override

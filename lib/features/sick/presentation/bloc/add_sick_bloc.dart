@@ -21,8 +21,6 @@ class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickS
     required this.updateSick,
     required this.getSick}) : super(SickInitial()){
     on<AddUpdateGetSickEvent>((event, emit) async {
-      print(event);
-      print(event);
       if (event is AddSickEvent){
         emit(LoadingSicksState());
         final failureOrDoneMessage = await addSick(event.sick);

@@ -4,9 +4,7 @@ import 'package:clinic/features/auth/%20domain/repositories/Login_repositorie.da
 import 'package:clinic/features/auth/data/models/LoginMethod.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/error/Exception.dart';
 import '../../../../core/network/network_info.dart';
-import '../../../sick/data/datasources/sick_remote_data_source.dart';
 import '../datasources/login_remote_date_source.dart';
 
 class LoginRepositoriesImpl extends LoginRepositorie{

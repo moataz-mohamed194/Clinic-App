@@ -7,12 +7,13 @@ import 'package:clinic/features/visitor/presentation/bloc/visitor/visitor_bloc.d
 import 'package:clinic/core/StrogeData/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'core/App_Theme.dart';
 import 'features/auth/presentation/ pages/MainDoctorPage.dart';
 import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
+import 'features/fees/presentation/ pages/choose_date_page.dart';
+import 'features/fees/presentation/bloc/Fees_bloc.dart';
 import 'injection_container.dart' as di;
 void main() async{
   await Hive.initFlutter();
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
     // final batteryBox =
     return MultiBlocProvider(
         providers: [
+          BlocProvider(create: (_)=> di.sl<AddUpdateGetFeesBloc>()),
           BlocProvider(create: (_)=> di.sl<AddUpdateGetSickBloc>()),
           BlocProvider(create: (_)=> di.sl<VisitorBloc>()),
           BlocProvider(create: (_)=> di.sl<AddUpdateGetClinicBloc>()),
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
+            // home:ChooseDatePage(isItDay: True,)
             home:loggedData!.logged == false?LoginPage():
               loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
               loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):

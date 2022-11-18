@@ -49,7 +49,6 @@ class ClinicRepositoriesImpl implements ClinicRepository{
 
   @override
   Future<Either<Failures, Unit>> updateClinic(Clinic clinic) async {
-  // Future<Either<Failures, Unit>> updateClinic(int id) async {
     if (await networkInfo.isConnected){
       try{
         await remoteDataSource.updateClinic(clinic);

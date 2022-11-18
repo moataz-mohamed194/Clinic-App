@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
+import '../../../fees/presentation/ pages/add_fees.dart';
+import '../../../fees/presentation/ pages/choose_date_page.dart';
+import '../../../fees/presentation/ pages/get_fees.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
 
 class MainDoctorPage extends StatelessWidget{
@@ -44,6 +46,20 @@ class MainDoctorPage extends StatelessWidget{
             title: const Text('Clinic data'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_)=> GetClinicDataPage(showAddAndEdit:true)));
+
+            },
+          ),
+          ListTile(
+            title: const Text('Fees of day'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> ChooseDatePage(isItDay: true,)));
+
+            },
+          ),
+          ListTile(
+            title: const Text('Fees of month'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> ChooseDatePage(isItDay: false,)));
 
             },
           ),

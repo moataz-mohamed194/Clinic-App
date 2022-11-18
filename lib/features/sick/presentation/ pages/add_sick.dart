@@ -1,4 +1,3 @@
-import 'package:clinic/features/sick/presentation/%20pages/get_all_sicks.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_bloc.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_state.dart';
 import 'package:flutter/material.dart';

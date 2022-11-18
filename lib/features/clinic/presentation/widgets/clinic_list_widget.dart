@@ -1,9 +1,4 @@
-import 'package:clinic/features/sick/presentation/%20pages/get_all_sicks.dart';
-import 'package:clinic/features/sick/presentation/bloc/add_sick_bloc.dart';
-import 'package:clinic/features/sick/presentation/bloc/add_sick_event.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../ pages/Add_New_Clinic_data.dart';
 import '../../ domain/entities/Clinic.dart';
 

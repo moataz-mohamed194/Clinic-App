@@ -1,5 +1,4 @@
 import 'package:clinic/features/auth/%20domain/usecases/login_usecases.dart';
-import 'package:clinic/features/auth/data/models/LoginMethod.dart';
 import 'package:clinic/features/auth/presentation/bloc/login_event.dart';
 import 'package:clinic/features/auth/presentation/bloc/login_state.dart';
 import 'package:dartz/dartz.dart';

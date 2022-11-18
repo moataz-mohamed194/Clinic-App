@@ -1,22 +1,23 @@
-import 'package:clinic/features/clinic/presentation/bloc/actions_clinic_bloc.dart';
-import 'package:clinic/features/clinic/presentation/bloc/actions_clinic_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../ domain/entities/Clinic.dart';
+import '../../ domain/entities/Fees.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
-import '../widgets/form_clinic_widget.dart';
+import '../bloc/Fees_bloc.dart';
+import '../bloc/Fees_state.dart';
+import '../widgets/form_fees_widget.dart';
 
-class AddNewClinicDataPage extends StatelessWidget{
-  final bool showAddAndEdit;
-  final Clinic? clinic;
-  const AddNewClinicDataPage({Key? key, required this.showAddAndEdit, this.clinic}) : super(key: key);
+class AddFeesPage extends StatelessWidget{
+  final Fees? feesData;
+
+  const AddFeesPage({Key? key, this.feesData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text(clinic!=null?'Update Clinic Data':'Add Clinic Data'),
+        title:this.feesData==null? Text('Add The Fees of Clinic'):Text('Update The Fees of Clinic'),
       ),
       body: appBody(context),
     );
@@ -25,20 +26,21 @@ class AddNewClinicDataPage extends StatelessWidget{
     return Center(
       child: Padding(
         padding: EdgeInsets.all(10),
-        child: BlocConsumer<AddUpdateGetClinicBloc, AddUpdateGetClinicState>(
+        child:
+        BlocConsumer<AddUpdateGetFeesBloc, AddUpdateGetFeesState>(
           listener: (context, state){
-            if (state is MessageAddUpdateGetClinicState){
+            if (state is MessageAddUpdateGetFeesState){
               SnackBarMessage().showSuccesSnackBar(message: state.message, context: context);
               Navigator.pop(context);
-            }else if (state is ErrorClinicState){
+            }else if (state is ErrorFeesState){
               SnackBarMessage().showErrorSnackBar(message: state.message, context: context);
             }
           },
           builder: (context, state){
-            if (state is LoadingClinicState){
+            if (state is LoadingFeesState){
               return LoadingWidget();
             }
-            return FormClinicWidget(clinic: this.clinic);
+        return FormFeesWidget(feesData: this.feesData);
 
           },
 

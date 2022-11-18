@@ -1,5 +1,4 @@
 import 'package:clinic/features/sick/presentation/%20pages/get_all_sicks.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/Logout.dart';

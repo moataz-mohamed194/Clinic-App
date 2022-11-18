@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../widgets/Visitor_list_widget.dart';
-import '../widgets/message_display_widget.dart';
+import '../../../../core/widgets/message_display_widget.dart';
 import 'add_visitor.dart';
 class GetAllVisitors extends StatelessWidget{
   final String? typeOfLogin;

@@ -16,7 +16,6 @@ class Clinic extends Equatable{
        required this.toTime,
        required this.timeOfVacation});
   @override
-  // TODO: implement props
   List<Object?> get props => [id, addrees, note, fromTime, toTime, timeOfVacation];
 
 }

@@ -12,7 +12,4 @@ class UpdateClinicData{
   Future<Either<Failures, Unit>> call(Clinic clinic) async{
     return await repository.updateClinic(clinic);
   }
-  // Future<Either<Failures, Unit>> call(int id) async{
-  //   return await repository.updateClinic(id);
-  // }
 }
