@@ -12,9 +12,9 @@ import 'features/auth/presentation/ pages/MainDoctorPage.dart';
 import 'features/auth/presentation/ pages/MainNursePage.dart';
 import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
-import 'features/doctor/presentation/ pages/get_all_doctors.dart';
 import 'features/doctor/presentation/bloc/doctor_bloc.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
+import 'features/sick/presentation/ pages/get_sicks_based_on_user.dart';
 import 'injection_container.dart' as di;
 
 void main() async{
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
-            // home:GetDoctorDataPage()
+            // home:GetSicksBasedOnUser()
             home:loggedData!.logged == false?LoginPage():
               loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
               loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):

@@ -1,7 +1,5 @@
-import 'package:clinic/features/doctor/%20domain/entities/Doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../bloc/doctor_bloc.dart';

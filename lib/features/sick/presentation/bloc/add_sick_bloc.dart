@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../ domain/entities/sick.dart';
 import '../../ domain/usecases/add _sick.dart';
+import '../../ domain/usecases/get_sicks_based_on_user.dart';
 import '../../ domain/usecases/update_sick.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/string/failures.dart';
@@ -15,10 +16,12 @@ class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickS
   final AddSick addSick;
   final UpdateSick updateSick;
   final GetAllSick getSick;
+  final GetSickBasedOnUser getSickBasedOnUser;
 
   AddUpdateGetSickBloc({
     required this.addSick,
     required this.updateSick,
+    required this.getSickBasedOnUser,
     required this.getSick}) : super(SickInitial()){
     on<AddUpdateGetSickEvent>((event, emit) async {
       if (event is AddSickEvent){
@@ -32,6 +35,10 @@ class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickS
       }else if(event is GetSickEvent || event is RefreshSickEvent){
         emit(LoadingSicksState());
         final failureOrDoneMessage = await getSick();
+        emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
+      }else if(event is GetSickBasedOnUserEvent || event is RefreshSickEvent){
+        emit(LoadingSicksState());
+        final failureOrDoneMessage = await getSickBasedOnUser();
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
       }
     });

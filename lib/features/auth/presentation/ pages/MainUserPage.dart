@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
+import '../../../sick/presentation/ pages/get_sicks_based_on_user.dart';
 
 class MainUserPage extends StatelessWidget{
   final String name;
@@ -30,6 +31,12 @@ class MainUserPage extends StatelessWidget{
             title: const Text('Add medical re-examination'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_)=> AddSickPage()));
+            },
+          ),
+          ListTile(
+            title: const Text('Get medical re-examination added by me'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetSicksBasedOnUser()));
             },
           ),
           ListTile(

@@ -14,6 +14,7 @@ import 'package:clinic/features/fees/%20domain/usecases/get_fees_of_month.dart';
 import 'package:clinic/features/sick/%20domain/repositories/Sick_repositorie.dart';
 import 'package:clinic/features/sick/%20domain/usecases/add%20_sick.dart';
 import 'package:clinic/features/sick/%20domain/usecases/get_all_sicks.dart';
+import 'package:clinic/features/sick/%20domain/usecases/get_sicks_based_on_user.dart';
 import 'package:clinic/features/sick/%20domain/usecases/update_sick.dart';
 import 'package:clinic/features/sick/data/datasources/sick_remote_data_source.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_bloc.dart';
@@ -60,7 +61,7 @@ Future<void> init() async{
   sl.registerFactory(() => AddUpdateGetClinicBloc(getClinic: sl(),addClinic: sl(),
     updateClinic: sl(),));
   sl.registerFactory(() => AddUpdateGetSickBloc(getSick: sl(), addSick: sl(),
-      updateSick: sl(), ));
+      updateSick: sl(), getSickBasedOnUser: sl(), ));
   sl.registerFactory(() => VisitorBloc(getAllVisitors: sl()));
   sl.registerFactory(() => LoginBloc(loginMethod: sl()));
   sl.registerFactory(() => AddUpdateVisitorBloc(addVisitor: sl(),
@@ -69,6 +70,7 @@ Future<void> init() async{
   //UseCase
   sl.registerLazySingleton(() => AddFees(sl()));
   sl.registerLazySingleton(() => AddDoctorData(sl()));
+  sl.registerLazySingleton(() => GetSickBasedOnUser(sl()));
   sl.registerLazySingleton(() => GetDoctorData(sl()));
   sl.registerLazySingleton(() => DeleteFeesData(sl()));
   sl.registerLazySingleton(() => GetFeesOfDay(sl()));

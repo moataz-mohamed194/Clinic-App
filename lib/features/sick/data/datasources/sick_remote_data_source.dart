@@ -13,6 +13,7 @@ import '../models/SickModel.dart';
 abstract class SickRemoteDataSource{
   Future<Unit> addSick(Sick sick);
   Future<Unit> updateSick(int id);
+  Future<List<SickModel>> getSickBasedOnUser();
   Future<List<SickModel>> getSick();
 }
 
@@ -85,5 +86,29 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
       throw OfflineException();
     }
   }
+
+  @override
+  Future<List<SickModel>> getSickBasedOnUser() async {
+    var tasksBox = await Hive.openBox<Person>('user');
+    String id =tasksBox.get(0)!.pk.toString();
+    print(id);
+    final response = await client.get(
+        Uri.parse(BASE_URL+'/users/get_all_booking_requisted/'+'$id')
+    );
+    print(response);
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode == 200){
+      final List decodeJson = json.decode(response.body) as List;
+      final List<SickModel> sickModels = decodeJson
+          .map<SickModel>((jsonSickModel) =>
+          SickModel.fromJson(jsonSickModel))
+          .toList();
+      return sickModels;
+    }else{
+      throw OfflineException();
+    }
+  }
+
 
 }
