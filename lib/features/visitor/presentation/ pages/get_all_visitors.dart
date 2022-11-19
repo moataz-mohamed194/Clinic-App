@@ -37,7 +37,7 @@ class GetAllVisitors extends StatelessWidget{
                     child: VisitorListWidget(visitor: state.visitors, typeOfLogin: typeOfLogin));
               }
               else if (state is ErrorVisitorssState) {
-                return MessageDisplayWidget(message: state.message, typeOfLogin: typeOfLogin);
+                return MessageDisplayWidget(message: state.message);
               }
               return LoadingWidget();
             },

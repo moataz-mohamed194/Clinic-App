@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MessageDisplayWidget extends StatelessWidget{
   final String message;
-  final String? typeOfLogin;
+  final bool? typeOfLogin;
 
   const MessageDisplayWidget({Key? key, required this.message, this.typeOfLogin}) : super(key: key);
 

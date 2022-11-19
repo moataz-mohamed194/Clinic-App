@@ -1,5 +1,3 @@
-import 'package:clinic/features/auth/presentation/%20pages/LoginPage.dart';
-import 'package:clinic/features/auth/presentation/%20pages/MainNursePage.dart';
 import 'package:clinic/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_bloc.dart';
 import 'package:clinic/features/visitor/presentation/bloc/add_update_visitor/add_update_visitor_bloc.dart';
@@ -9,11 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'core/App_Theme.dart';
+import 'features/auth/presentation/ pages/LoginPage.dart';
 import 'features/auth/presentation/ pages/MainDoctorPage.dart';
+import 'features/auth/presentation/ pages/MainNursePage.dart';
 import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
+import 'features/doctor/presentation/ pages/get_all_doctors.dart';
+import 'features/doctor/presentation/bloc/doctor_bloc.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
 import 'injection_container.dart' as di;
+
 void main() async{
   await Hive.initFlutter();
   Hive.registerAdapter(PersonAdapter());
@@ -32,10 +35,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // final batteryBox =
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_)=> di.sl<AddUpdateGetFeesBloc>()),
+          BlocProvider(create: (_)=> di.sl<AddGetDoctorBloc>()),
           BlocProvider(create: (_)=> di.sl<AddUpdateGetSickBloc>()),
           BlocProvider(create: (_)=> di.sl<VisitorBloc>()),
           BlocProvider(create: (_)=> di.sl<AddUpdateGetClinicBloc>()),
@@ -46,7 +49,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
-            // home:ChooseDatePage(isItDay: True,)
+            // home:GetDoctorDataPage()
             home:loggedData!.logged == false?LoginPage():
               loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
               loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):

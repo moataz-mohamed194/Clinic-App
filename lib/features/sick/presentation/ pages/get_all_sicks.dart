@@ -38,7 +38,7 @@ class GetAllSicksPage extends StatelessWidget{
                   child: SickListWidget(sick: state.sicks, typeOfLogin: typeOfLogin));
             }
             else if (state is ErrorSicksState) {
-              return MessageDisplayWidget(message: state.message, typeOfLogin: typeOfLogin);
+              return MessageDisplayWidget(message: state.message);
             }
             return LoadingWidget();
           },

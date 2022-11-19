@@ -1,9 +1,11 @@
+import 'package:clinic/features/doctor/presentation/%20pages/get_all_doctors.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../fees/presentation/ pages/choose_date_page.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
+import '../../../visitor/presentation/ pages/get_all_visitors.dart';
 
 class MainDoctorPage extends StatelessWidget{
   final String name;
@@ -34,10 +36,15 @@ class MainDoctorPage extends StatelessWidget{
             },
           ),
           ListTile(
-            title: const Text('The visitors'),
+            title: Text('The visitors'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetAllVisitors(typeOfLogin:'doctor')));
+            },
+          ),
+          ListTile(
+            title: Text('The Doctors'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetDoctorDataPage()));
             },
           ),
           ListTile(

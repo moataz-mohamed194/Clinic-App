@@ -8,6 +8,7 @@ import 'package:clinic/features/clinic/%20domain/usecases/get_all_clinic_today.d
 import 'package:clinic/features/clinic/%20domain/usecases/update_clinic_data.dart';
 import 'package:clinic/features/clinic/data/datasources/clinic_remote_data_source.dart';
 import 'package:clinic/features/clinic/data/repositories/clinic_repositories.dart';
+import 'package:clinic/features/doctor/%20domain/usecases/get_all_doctors.dart';
 import 'package:clinic/features/fees/%20domain/usecases/get_fees_of_day.dart';
 import 'package:clinic/features/fees/%20domain/usecases/get_fees_of_month.dart';
 import 'package:clinic/features/sick/%20domain/repositories/Sick_repositorie.dart';
@@ -30,6 +31,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/network/network_info.dart';
 import 'features/auth/presentation/bloc/login_bloc.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
+import 'features/doctor/ domain/repositories/DoctorRepository.dart';
+import 'features/doctor/ domain/usecases/add_doctor.dart';
+import 'features/doctor/data/datasources/doctor_remote_data_source.dart';
+import 'features/doctor/data/repositories/doctor_repositories.dart';
+import 'features/doctor/presentation/bloc/doctor_bloc.dart';
 import 'features/fees/ domain/repositories/FeedRepository.dart';
 import 'features/fees/ domain/usecases/add_fees.dart';
 import 'features/fees/ domain/usecases/fees_delete.dart';
@@ -49,6 +55,8 @@ Future<void> init() async{
   sl.registerFactory(() => AddUpdateGetFeesBloc(getFeesOfDay: sl(),
       getFeesOfMonth: sl(), addFees: sl(), updateFeesData: sl(),
       deleteFeesData: sl()));
+  sl.registerFactory(() => AddGetDoctorBloc(getDoctor: sl(),
+      addDoctor: sl()));
   sl.registerFactory(() => AddUpdateGetClinicBloc(getClinic: sl(),addClinic: sl(),
     updateClinic: sl(),));
   sl.registerFactory(() => AddUpdateGetSickBloc(getSick: sl(), addSick: sl(),
@@ -60,6 +68,8 @@ Future<void> init() async{
 
   //UseCase
   sl.registerLazySingleton(() => AddFees(sl()));
+  sl.registerLazySingleton(() => AddDoctorData(sl()));
+  sl.registerLazySingleton(() => GetDoctorData(sl()));
   sl.registerLazySingleton(() => DeleteFeesData(sl()));
   sl.registerLazySingleton(() => GetFeesOfDay(sl()));
   sl.registerLazySingleton(() => GetFeesOfMonth(sl()));
@@ -79,6 +89,8 @@ Future<void> init() async{
   //Repository
   sl.registerLazySingleton<FeesRepository>(() => FeesRepositoriesImpl(
       remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<DoctorRepository>(() => DoctorRepositoriesImpl(
+      remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<ClinicRepository>(() => ClinicRepositoriesImpl(
       remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<VisitorRepository>(() => VisitorRepositoriesImpl(
@@ -89,6 +101,8 @@ Future<void> init() async{
       remoteDataSource: sl(), networkInfo: sl()));
 
   //Datasources
+  sl.registerLazySingleton<DoctorRemoteDataSource>(() =>
+      DoctorRemoteDataSourceImple(client:sl()));
   sl.registerLazySingleton<FeesRemoteDataSource>(() =>
       FeesRemoteDataSourceImple(client:sl()));
   sl.registerLazySingleton<VisitorRemoteDataSource>(() =>
