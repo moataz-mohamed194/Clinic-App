@@ -14,6 +14,8 @@ import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
 import 'features/doctor/presentation/bloc/doctor_bloc.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
+import 'features/nurce/presentation/ pages/get_all_Nurse.dart';
+import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
 import 'features/sick/presentation/ pages/get_sicks_based_on_user.dart';
 import 'injection_container.dart' as di;
 
@@ -44,16 +46,17 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_)=> di.sl<AddUpdateGetClinicBloc>()),
           BlocProvider(create: (_)=> di.sl<AddUpdateVisitorBloc>()),
           BlocProvider(create: (_)=> di.sl<LoginBloc>()),
+          BlocProvider(create: (_)=> di.sl<AddGetNurseBloc>()),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
-            // home:GetSicksBasedOnUser()
-            home:loggedData!.logged == false?LoginPage():
-              loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
-              loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):
-                  MainUserPage(name:loggedData!.name.toString()),
+            home:GetNurseDataPage()
+            // home:loggedData!.logged == false?LoginPage():
+            //   loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
+            //   loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):
+            //       MainUserPage(name:loggedData!.name.toString()),
         )
     );
   }
