@@ -4,6 +4,7 @@ import 'package:clinic/features/sick/presentation/bloc/add_sick_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../ pages/add_report_of_sick.dart';
 import '../../ domain/entities/sick.dart';
 
 
@@ -27,6 +28,10 @@ class SickListWidget extends StatelessWidget{
               onPressed: () => _onUpdate(context, sick[index].id),):Text(''),
             dense: true,
             minVerticalPadding: 1.0,
+            onTap: typeOfLogin == 'doctor'?(){
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => AddReportOfSickPage(idOfSick: sick[index].id)));
+            }:null,
           );
         },
         separatorBuilder: (context, index) => Divider(thickness: 1),

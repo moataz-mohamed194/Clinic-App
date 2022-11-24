@@ -12,6 +12,7 @@ import '../models/SickModel.dart';
 
 abstract class SickRemoteDataSource{
   Future<Unit> addSick(Sick sick);
+  Future<Unit> addSickReport(int? id, String report);
   Future<Unit> updateSick(int id);
   Future<List<SickModel>> getSickBasedOnUser();
   Future<List<SickModel>> getSick();
@@ -106,6 +107,26 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
           .toList();
       return sickModels;
     }else{
+      throw OfflineException();
+    }
+  }
+
+  @override
+  Future<Unit> addSickReport(int? id, String report) async {
+
+    final body = {
+      'pk': id.toString(),
+      'doctor_report': report.toString()
+    };
+    try{
+      final response = await client.patch(Uri.parse(BASE_URL + '/doctor/add_report_for_sick/'),body: body);
+
+      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+        return Future.value(unit);
+      }else{
+        throw OfflineException();
+      }}
+    catch(e){
       throw OfflineException();
     }
   }

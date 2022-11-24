@@ -19,6 +19,16 @@ class AddSickEvent extends AddUpdateGetSickEvent{
 }
 
 
+class AddSickReportEvent extends AddUpdateGetSickEvent{
+  final int id;
+  final String report;
+  AddSickReportEvent({required this.id, required this.report});
+
+  @override
+  List<Object> get props => [id, report];
+}
+
+
 class UpdateSickEvent extends AddUpdateGetSickEvent{
   final int sickId;
 

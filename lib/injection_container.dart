@@ -50,6 +50,7 @@ import 'features/nurce/ domain/usecases/get_all_Nurse.dart';
 import 'features/nurce/data/datasources/Nurse_remote_data_source.dart';
 import 'features/nurce/data/repositories/Nurse_repositories.dart';
 import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
+import 'features/sick/ domain/usecases/add_sick_report.dart';
 import 'features/sick/data/repositories/sick_repositories.dart';
 import 'features/visitor/ domain/usecases/add_visitor_today.dart';
 import 'features/visitor/data/repositories/visitor_repositories.dart';
@@ -68,7 +69,7 @@ Future<void> init() async{
   sl.registerFactory(() => AddUpdateGetClinicBloc(getClinic: sl(),addClinic: sl(),
     updateClinic: sl(),));
   sl.registerFactory(() => AddUpdateGetSickBloc(getSick: sl(), addSick: sl(),
-      updateSick: sl(), getSickBasedOnUser: sl(), ));
+      updateSick: sl(), getSickBasedOnUser: sl(), addSickReport: sl(), ));
   sl.registerFactory(() => VisitorBloc(getAllVisitors: sl()));
   sl.registerFactory(() => LoginBloc(loginMethod: sl()));
   sl.registerFactory(() => AddUpdateVisitorBloc(addVisitor: sl(),
@@ -77,6 +78,7 @@ Future<void> init() async{
   //UseCase
   sl.registerLazySingleton(() => AddFees(sl()));
   sl.registerLazySingleton(() => AddDoctorData(sl()));
+  sl.registerLazySingleton(() => AddSickReport(sl()));
   sl.registerLazySingleton(() => AddNurseData(sl()));
   sl.registerLazySingleton(() => GetNurseData(sl()));
   sl.registerLazySingleton(() => GetSickBasedOnUser(sl()));

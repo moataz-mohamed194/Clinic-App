@@ -5,6 +5,7 @@ import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../fees/presentation/ pages/choose_date_page.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
+import '../../../sick/presentation/ pages/get_all_sicks.dart';
 import '../../../visitor/presentation/ pages/get_all_visitors.dart';
 
 class MainDoctorPage extends StatelessWidget{
@@ -32,7 +33,7 @@ class MainDoctorPage extends StatelessWidget{
           ListTile(
             title: const Text("Waiting for the doctor's examination"),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> AddSickPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetAllSicksPage(typeOfLogin:'doctor')));
             },
           ),
           ListTile(

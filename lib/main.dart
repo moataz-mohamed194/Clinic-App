@@ -52,11 +52,11 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
-            home:GetNurseDataPage()
-            // home:loggedData!.logged == false?LoginPage():
-            //   loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
-            //   loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):
-            //       MainUserPage(name:loggedData!.name.toString()),
+            // home:GetNurseDataPage()
+            home:loggedData!.logged == false?LoginPage():
+              loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
+              loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):
+                  MainUserPage(name:loggedData!.name.toString()),
         )
     );
   }

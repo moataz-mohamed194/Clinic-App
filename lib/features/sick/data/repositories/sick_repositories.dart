@@ -72,5 +72,20 @@ class SickRepositoriesImpl implements SickRepository{
     }
   }
 
+  @override
+  Future<Either<Failures, Unit>> addSickReport(int? id, String report) async {
+
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSource.addSickReport(id, report);
+        return Right(unit);
+      }on OfflineException{
+        return Left(OfflineFailures());
+      }
+    }else{
+      return Left(OfflineFailures());
+    }
+  }
+
 
 }

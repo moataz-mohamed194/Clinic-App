@@ -111,7 +111,6 @@ class FormSickWidget extends StatelessWidget{
             typeOfStatment: _typeOfStatementController.text.toString(),
             time:_dateController.text.toString()
         );
-        print(sick);
         BlocProvider.of<AddUpdateGetSickBloc>(context)
             .add(AddSickEvent(sick: sick));
       }
