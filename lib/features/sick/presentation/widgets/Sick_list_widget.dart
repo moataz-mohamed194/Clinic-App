@@ -27,9 +27,9 @@ class SickListWidget extends StatelessWidget{
             trailing: Column(
               children: [
 
-                typeOfLogin == 'doctor'?IconButton(icon: Icon(Icons.call_made),
+                typeOfLogin == 'doctor'?IconButton(icon: Icon(Icons.add ),
                   onPressed: () => _onUpdate(context, sick[index].id),)
-                    :typeOfLogin == 'nurse'?IconButton(icon: Icon(Icons.transit_enterexit),
+                    :typeOfLogin == 'nurse'?IconButton(icon: Icon(Icons.mobile_friendly),
                   onPressed: () => _onUpdateAsEntered(context, sick[index].id),):Text(''),
               ],
             ),
