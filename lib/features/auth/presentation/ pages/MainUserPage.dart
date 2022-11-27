@@ -1,3 +1,4 @@
+import 'package:clinic/features/user/presentation/pages/add_user.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/Logout.dart';
@@ -25,7 +26,21 @@ class MainUserPage extends StatelessWidget{
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Center(child: Text(name.toString()),),
+            child: Container(
+                child: Column(
+                children: [
+                Container(
+                    child:
+                IconButton(onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (_)=> AddUserPage(isItAdd: false)));
+
+                }, icon: Icon(Icons.edit),),
+                  alignment: Alignment.topRight,
+                ),
+                Center(child: Text(name.toString()),)
+              ],
+            ),),
+
           ),
           ListTile(
             title: const Text('Add medical re-examination'),

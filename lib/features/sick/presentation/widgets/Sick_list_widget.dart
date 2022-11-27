@@ -24,10 +24,17 @@ class SickListWidget extends StatelessWidget{
             title: Text(sick[index].name),
             subtitle: Text(sick[index].phoneNumber.toString()),
             contentPadding: EdgeInsets.symmetric(horizontal: 10),
-            trailing: typeOfLogin == 'doctor'?IconButton(icon: Icon(Icons.call_made),
-              onPressed: () => _onUpdate(context, sick[index].id),):Text(''),
+            trailing: Column(
+              children: [
+
+                typeOfLogin == 'doctor'?IconButton(icon: Icon(Icons.call_made),
+                  onPressed: () => _onUpdate(context, sick[index].id),)
+                    :typeOfLogin == 'nurse'?IconButton(icon: Icon(Icons.transit_enterexit),
+                  onPressed: () => _onUpdateAsEntered(context, sick[index].id),):Text(''),
+              ],
+            ),
             dense: true,
-            minVerticalPadding: 1.0,
+            minVerticalPadding: 2.0,
             onTap: typeOfLogin == 'doctor'?(){
               Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => AddReportOfSickPage(idOfSick: sick[index].id)));
@@ -43,6 +50,18 @@ class SickListWidget extends StatelessWidget{
           .add(UpdateSickEvent(sickId: sickId ));
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (_) => GetAllSicksPage()), (route) => false);
+    }
+    catch(e){
+      print(e);
+    }
+  }
+  _onUpdateAsEntered(BuildContext context,sickId) async {
+    try {
+      BlocProvider.of<AddUpdateGetSickBloc>(context)
+          .add(UpdateSickAsEnteredEvent(sickId: sickId ));
+      Navigator.of(context).pop();
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => GetAllSicksPage()));
     }
     catch(e){
       print(e);

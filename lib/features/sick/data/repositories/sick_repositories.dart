@@ -87,5 +87,19 @@ class SickRepositoriesImpl implements SickRepository{
     }
   }
 
+  @override
+  Future<Either<Failures, Unit>> updateSickAsEntered(int id) async {
+    if (await networkInfo.isConnected){
+      try{
+        await remoteDataSource.updateSickAsEntered(id);
+        return Right(unit);
+      }on OfflineException{
+        return Left(OfflineFailures());
+      }
+    }else{
+      return Left(OfflineFailures());
+    }
+  }
+
 
 }

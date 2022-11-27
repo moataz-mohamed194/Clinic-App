@@ -1,5 +1,6 @@
 import 'package:clinic/features/auth/presentation/bloc/login_bloc.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_bloc.dart';
+import 'package:clinic/features/user/presentation/bloc/user_bloc.dart';
 import 'package:clinic/features/visitor/presentation/bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import 'package:clinic/features/visitor/presentation/bloc/visitor/visitor_bloc.dart';
 import 'package:clinic/core/StrogeData/hive.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_)=> di.sl<AddUpdateVisitorBloc>()),
           BlocProvider(create: (_)=> di.sl<LoginBloc>()),
           BlocProvider(create: (_)=> di.sl<AddGetNurseBloc>()),
+          BlocProvider(create: (_)=> di.sl<AddUpdateUserBloc>()),
         ],
         child: MaterialApp(
             debugShowCheckedModeBanner: false,

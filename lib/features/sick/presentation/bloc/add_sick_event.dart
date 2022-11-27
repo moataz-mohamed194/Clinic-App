@@ -37,6 +37,16 @@ class UpdateSickEvent extends AddUpdateGetSickEvent{
   @override
   List<Object> get props => [sickId];
 }
+
+class UpdateSickAsEnteredEvent extends AddUpdateGetSickEvent{
+  final int sickId;
+
+  UpdateSickAsEnteredEvent({required this.sickId});
+
+  @override
+  List<Object> get props => [sickId];
+}
+
 class GetSickBasedOnUserEvent extends AddUpdateGetSickEvent{
 
 }

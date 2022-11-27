@@ -14,6 +14,7 @@ abstract class SickRemoteDataSource{
   Future<Unit> addSick(Sick sick);
   Future<Unit> addSickReport(int? id, String report);
   Future<Unit> updateSick(int id);
+  Future<Unit> updateSickAsEntered(int id);
   Future<List<SickModel>> getSickBasedOnUser();
   Future<List<SickModel>> getSick();
 }
@@ -82,6 +83,20 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
         Uri.parse(BASE_URL+'nurse/approve_booking/'), body: body
         );
     if (response.statusCode == 200){
+      return Future.value(unit);
+    }else{
+      throw OfflineException();
+    }
+  }
+
+  @override
+  Future<Unit> updateSickAsEntered(int id) async {
+
+
+    final response = await client.patch(
+        Uri.parse(BASE_URL+'/nurse/entered_sick/'+id.toString()+'/')
+    );
+    if (response.statusCode == 201|| response.body == '{"Results": "Success request"}'){
       return Future.value(unit);
     }else{
       throw OfflineException();

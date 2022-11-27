@@ -17,8 +17,11 @@ import 'package:clinic/features/sick/%20domain/usecases/add%20_sick.dart';
 import 'package:clinic/features/sick/%20domain/usecases/get_all_sicks.dart';
 import 'package:clinic/features/sick/%20domain/usecases/get_sicks_based_on_user.dart';
 import 'package:clinic/features/sick/%20domain/usecases/update_sick.dart';
+import 'package:clinic/features/sick/%20domain/usecases/update_sick_as_entered.dart';
 import 'package:clinic/features/sick/data/datasources/sick_remote_data_source.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_bloc.dart';
+import 'package:clinic/features/user/domain/usecases/add_user.dart';
+import 'package:clinic/features/user/domain/usecases/edit_user.dart';
 import 'package:clinic/features/visitor/%20domain/repositories/Visitor_repositorie.dart';
 import 'package:clinic/features/visitor/%20domain/usecases/get_all_visitor_today.dart';
 import 'package:clinic/features/visitor/%20domain/usecases/update_visitor_today.dart';
@@ -52,6 +55,10 @@ import 'features/nurce/data/repositories/Nurse_repositories.dart';
 import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
 import 'features/sick/ domain/usecases/add_sick_report.dart';
 import 'features/sick/data/repositories/sick_repositories.dart';
+import 'features/user/data/datasources/user_remote_data_source.dart';
+import 'features/user/data/repositories/user_repositories.dart';
+import 'features/user/domain/repositories/user_repositorie.dart';
+import 'features/user/presentation/bloc/user_bloc.dart';
 import 'features/visitor/ domain/usecases/add_visitor_today.dart';
 import 'features/visitor/data/repositories/visitor_repositories.dart';
 
@@ -65,11 +72,13 @@ Future<void> init() async{
       deleteFeesData: sl()));
   sl.registerFactory(() => AddGetDoctorBloc(getDoctor: sl(),
       addDoctor: sl()));
+  sl.registerFactory(() => AddUpdateUserBloc(addUser: sl(),
+      updateUser: sl()));
   sl.registerFactory(() => AddGetNurseBloc( addNurse: sl(), getNurse: sl()));
   sl.registerFactory(() => AddUpdateGetClinicBloc(getClinic: sl(),addClinic: sl(),
     updateClinic: sl(),));
   sl.registerFactory(() => AddUpdateGetSickBloc(getSick: sl(), addSick: sl(),
-      updateSick: sl(), getSickBasedOnUser: sl(), addSickReport: sl(), ));
+      updateSick: sl(), getSickBasedOnUser: sl(), addSickReport: sl(), updateSickAsEntered: sl(), ));
   sl.registerFactory(() => VisitorBloc(getAllVisitors: sl()));
   sl.registerFactory(() => LoginBloc(loginMethod: sl()));
   sl.registerFactory(() => AddUpdateVisitorBloc(addVisitor: sl(),
@@ -94,9 +103,12 @@ Future<void> init() async{
   sl.registerLazySingleton(() => UpdateVisitorToday(sl()));
   sl.registerLazySingleton(() => AddSick(sl()));
   sl.registerLazySingleton(() => UpdateSick(sl()));
+  sl.registerLazySingleton(() => UpdateSickAsEntered(sl()));
   sl.registerLazySingleton(() => GetAllSick(sl()));
   sl.registerLazySingleton(() => AddClinicData(sl()));
   sl.registerLazySingleton(() => UpdateClinicData(sl()));
+  sl.registerLazySingleton(() => AddUser(sl()));
+  sl.registerLazySingleton(() => UpdateUser(sl()));
 
 
   //Repository
@@ -114,6 +126,8 @@ Future<void> init() async{
       remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<LoginRepositorie>(() => LoginRepositoriesImpl(
       remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoriesImpl(
+      remoteDataSource: sl(), networkInfo: sl()));
 
   //Datasources
   sl.registerLazySingleton<DoctorRemoteDataSource>(() =>
@@ -130,6 +144,8 @@ Future<void> init() async{
       LoginRemoteDataSourceImple(client:sl()));
   sl.registerLazySingleton<ClinicRemoteDataSource>(() =>
       ClinicRemoteDataSourceImple(client:sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(() =>
+      UserRemoteDataSourceImple(client:sl()));
 
   //Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

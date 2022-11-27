@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../ domain/entities/login.dart';
+import '../../../user/presentation/pages/add_user.dart';
 
 class FormWidget extends StatelessWidget{
 
@@ -42,7 +43,18 @@ class FormWidget extends StatelessWidget{
               onPressed:()=> validateFormThenUpdateOrAddPost(context),
               icon: Icon(Icons.login),
               label: Text('Login')
-          )
+          ),
+          InkWell(
+            child: Text('Create Account',
+              style: TextStyle(color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),),
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => AddUserPage(isItAdd: true,)));
+
+            },
+          ),
         ],
       ),
     );

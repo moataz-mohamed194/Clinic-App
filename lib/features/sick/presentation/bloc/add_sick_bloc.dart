@@ -1,5 +1,6 @@
 import 'package:clinic/features/sick/%20domain/usecases/add_sick_report.dart';
 import 'package:clinic/features/sick/%20domain/usecases/get_all_sicks.dart';
+import 'package:clinic/features/sick/%20domain/usecases/update_sick_as_entered.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_event.dart';
 import 'package:clinic/features/sick/presentation/bloc/add_sick_state.dart';
 import 'package:dartz/dartz.dart';
@@ -16,6 +17,7 @@ import '../../../../core/string/messages.dart';
 class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickState>{
   final AddSick addSick;
   final UpdateSick updateSick;
+  final UpdateSickAsEntered updateSickAsEntered;
   final AddSickReport addSickReport;
   final GetAllSick getSick;
   final GetSickBasedOnUser getSickBasedOnUser;
@@ -24,6 +26,7 @@ class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickS
     required this.addSick,
     required this.updateSick,
     required this.addSickReport,
+    required this.updateSickAsEntered,
     required this.getSickBasedOnUser,
     required this.getSick}) : super(SickInitial()){
     on<AddUpdateGetSickEvent>((event, emit) async {
@@ -38,6 +41,10 @@ class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickS
       }else if(event is UpdateSickEvent){
         emit(LoadingSicksState());
         final failureOrDoneMessage = await updateSick(event.sickId);
+        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+      }else if(event is UpdateSickAsEnteredEvent){
+        emit(LoadingSicksState());
+        final failureOrDoneMessage = await updateSickAsEntered(event.sickId);
         emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
       }else if(event is GetSickEvent || event is RefreshSickEvent){
         emit(LoadingSicksState());

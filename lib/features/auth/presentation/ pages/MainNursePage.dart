@@ -31,7 +31,7 @@ class MainNursePage extends StatelessWidget{
           ListTile(
             title: const Text("Waiting for the doctor's examination"),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetAllSicksPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetAllSicksPage(typeOfLogin:'nurse')));
             },
           ),
           ListTile(
