@@ -198,7 +198,6 @@ class FormClinicWidget extends StatelessWidget{
           toTime: _toTimeController.text,
           timeOfVacation: _timeOfVacationsController.text,
         );
-        print(clinic);
         BlocProvider.of<AddUpdateGetClinicBloc>(context)
             .add(AddClinicEvent(clinic: clinic));
       }

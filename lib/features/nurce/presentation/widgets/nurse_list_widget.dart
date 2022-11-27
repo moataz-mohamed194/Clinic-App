@@ -1,4 +1,3 @@
-import 'package:clinic/features/doctor/%20domain/entities/Doctor.dart';
 import 'package:flutter/material.dart';
 
 import '../../ domain/entities/Nurse.dart';

@@ -31,7 +31,6 @@ class AddNewNursePage extends StatelessWidget{
             }
           },
           builder: (context, state){
-            print(state);
             if (state is LoadingNurseState){
               return LoadingWidget();
             }

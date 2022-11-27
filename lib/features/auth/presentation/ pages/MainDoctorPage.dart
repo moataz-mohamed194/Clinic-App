@@ -1,10 +1,8 @@
 import 'package:clinic/features/doctor/presentation/%20pages/get_all_doctors.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../fees/presentation/ pages/choose_date_page.dart';
-import '../../../sick/presentation/ pages/add_sick.dart';
 import '../../../sick/presentation/ pages/get_all_sicks.dart';
 import '../../../visitor/presentation/ pages/get_all_visitors.dart';
 

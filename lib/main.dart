@@ -14,9 +14,7 @@ import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
 import 'features/doctor/presentation/bloc/doctor_bloc.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
-import 'features/nurce/presentation/ pages/get_all_Nurse.dart';
 import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
-import 'features/sick/presentation/ pages/get_sicks_based_on_user.dart';
 import 'injection_container.dart' as di;
 
 void main() async{
@@ -26,14 +24,19 @@ void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   var tasksBox = await Hive.openBox<Person>('user');
-  Person? loggedData = tasksBox.get(0);
-  runApp(MyApp(loggedData: loggedData));
+
+    Person? loggedData = tasksBox.get(0);
+    if (loggedData == null){
+      runApp(MyApp());
+    }else{
+    runApp(MyApp(loggedData: loggedData));
+  }
 }
 
 class MyApp extends StatelessWidget {
   final Person? loggedData;
 
-  const MyApp({Key? key, required this.loggedData}) : super(key: key);
+  const MyApp({Key? key, this.loggedData}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -53,7 +56,7 @@ class MyApp extends StatelessWidget {
             theme: appTheme,
             title: 'Posts App',
             // home:GetNurseDataPage()
-            home:loggedData!.logged == false?LoginPage():
+            home:loggedData == null||loggedData!.logged == false?LoginPage():
               loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
               loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):
                   MainUserPage(name:loggedData!.name.toString()),

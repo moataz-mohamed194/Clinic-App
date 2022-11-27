@@ -107,7 +107,6 @@ class FormNurseWidget extends StatelessWidget{
           userName: _nameController.text,
           secondPhoneNumber: _secondPhoneNumberController.text
         );
-        print(nurse);
         BlocProvider.of<AddGetNurseBloc>(context)
             .add(AddNurseEvent(nurse: nurse));
       // }

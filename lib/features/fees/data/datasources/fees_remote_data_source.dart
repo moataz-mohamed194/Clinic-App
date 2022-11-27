@@ -42,14 +42,11 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
 
   @override
   Future<Unit> deleteFees(int id) async {
-    print(id.toString());
     final body = {
       'pk': id.toString()
     };
     try{
       final response = await client.delete(Uri.parse(BASE_URL + '/doctor/fees_update_delete_get/'),body: body);
-      print(response.body);
-      print(response.statusCode);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);

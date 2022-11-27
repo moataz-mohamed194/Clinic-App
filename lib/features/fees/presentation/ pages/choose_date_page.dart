@@ -33,7 +33,6 @@ class ChooseDatePage extends StatelessWidget{
                 controller: _dateController,
                 onChanged: (val) => print(val),
                 validator: (val) {
-                  print(val);
                   if(val == null){
                     return 'must choose day';
                   }

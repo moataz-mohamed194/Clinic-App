@@ -95,7 +95,6 @@ class FormDoctorWidget extends StatelessWidget{
           email: _emailController.text,
           name: _nameController.text
         );
-        print(doctor);
         BlocProvider.of<AddGetDoctorBloc>(context)
             .add(AddDoctorEvent(doctor: doctor));
       }

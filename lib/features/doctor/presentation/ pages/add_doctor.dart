@@ -31,7 +31,6 @@ class AddNewDoctorPage extends StatelessWidget{
             }
           },
           builder: (context, state){
-            print(state);
             if (state is LoadingDoctorState){
               return LoadingWidget();
             }

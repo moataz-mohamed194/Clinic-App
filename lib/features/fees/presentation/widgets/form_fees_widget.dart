@@ -117,7 +117,6 @@ class FormFeesWidget extends StatelessWidget{
                 dateLabelText:'Choose the date',
                 lastDate: DateTime(2100),
                 onChanged: (value) {
-                  print('==$value');
                   _dateController.text = '$value'.toString();
                 },
                 validator: (val) {
@@ -149,7 +148,6 @@ class FormFeesWidget extends StatelessWidget{
             type: _titleController.text,
             price: _priceController.text,
             time: _dateController.text);
-        print(fees);
         BlocProvider.of<AddUpdateGetFeesBloc>(context)
             .add(AddFeesEvent(fees: fees));
       }
@@ -169,7 +167,6 @@ class FormFeesWidget extends StatelessWidget{
             type: _titleController.text==''?this.feesData!.type:_titleController.text,
             price: _priceController.text==''?this.feesData!.price:_priceController.text,
             time: _dateController.text==''?this.feesData!.time:_dateController.text);
-        print(fees);
         BlocProvider.of<AddUpdateGetFeesBloc>(context)
             .add(UpdateFeesEvent(fees: fees));
       }
