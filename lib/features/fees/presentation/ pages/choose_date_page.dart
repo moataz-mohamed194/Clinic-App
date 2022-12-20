@@ -12,7 +12,6 @@ class ChooseDatePage extends StatelessWidget{
   ChooseDatePage({Key? key, required this.isItDay}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text('Choose the date'),),
       body: Form(

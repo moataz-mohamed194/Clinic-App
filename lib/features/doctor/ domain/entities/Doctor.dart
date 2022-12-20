@@ -16,7 +16,6 @@ class Doctor extends Equatable{
     this.pic});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [email, name, password,
     phoneNumber, description, pic];
 }

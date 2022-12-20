@@ -17,7 +17,6 @@ class Nurse extends Equatable{
       required this.description});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [userName, email, password, firstPhoneNumber,
     secondPhoneNumber, description];
 }

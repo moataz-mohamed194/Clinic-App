@@ -6,6 +6,7 @@ import 'package:clinic/features/visitor/presentation/bloc/visitor/visitor_bloc.d
 import 'package:clinic/core/StrogeData/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'core/App_Theme.dart';
 import 'features/auth/presentation/ pages/LoginPage.dart';
@@ -21,6 +22,10 @@ import 'injection_container.dart' as di;
 void main() async{
   await Hive.initFlutter();
   Hive.registerAdapter(PersonAdapter());
+  RequestConfiguration config = RequestConfiguration(
+      testDeviceIds: <String>['C9A7F9E228F8DC93C8418E719C763B33']
+  );
+  MobileAds.instance.updateRequestConfiguration(config);
 
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
