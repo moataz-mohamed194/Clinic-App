@@ -1,18 +1,15 @@
-# clinic
+# Clinic App
 
 A new Flutter project.
 
-## Getting Started
+# About App
+- Users can add detection date and know the time is available in the clinic.
+- Nurses can approve the patient request of detection date and add the visitor request.
+- Doctors can approve the visitor request, create the nurse account, calculate the fees and the income of day and the month and add or edit clinic data.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Clinic-App
-# Clinic-App
+##  Technologies used 
+- App built by flutter, dart and BLOC as state management.
+- Used http to get the data from the database and use MVC as design pattern.
+- Used internet_connection_checker to check if the device connected to the database.
+- Used hive to store if the user logged or not.
+- Used AdMob to add ads to my app
