@@ -6,16 +6,20 @@ class ClinicModel extends Clinic{
     required String fromTime,
     required String toTime,
     required String timeOfVacation,
+    required String? latitude,
+    required String? longitude,
     required int? id}) :
         super(addrees: addrees,
           note: note,
           fromTime: fromTime,
           toTime: toTime,
           id: id,
+          latitude: latitude,
+          longitude: longitude,
           timeOfVacation: timeOfVacation);
   factory ClinicModel.fromJson(Map<String, dynamic> json){
     return ClinicModel(id: json['id']?? '', note: json['note']?? '',
-        addrees: json['address']?? '', fromTime: json['from_time']?? '',
+        addrees: json['address']?? '', fromTime: json['from_time']?? '',latitude: json['latitude']?? '',longitude: json['longitude']?? '',
         toTime: json['to_time']?? '', timeOfVacation: json['time_of_vacation']?? '');
   }
 

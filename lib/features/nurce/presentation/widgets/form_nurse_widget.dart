@@ -109,10 +109,7 @@ class FormNurseWidget extends StatelessWidget{
         );
         BlocProvider.of<AddGetNurseBloc>(context)
             .add(AddNurseEvent(nurse: nurse));
-      // }
-      // catch (e){
-      //   print(e);
-      // }
+
 
 
     }

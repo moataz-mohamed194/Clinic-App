@@ -22,7 +22,7 @@ class FeesListWidget extends StatelessWidget{
       itemBuilder: (context, index){
         return ListTile(
           leading: Text('${index+1}'),
-          title: Text(fees[index].type.toString()),
+          title: Text("${fees[index].type}"),
           subtitle: Text('${fees[index].price.toString()}             ${fees[index].time.toString()}'),
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
           trailing: GestureDetector(

@@ -57,7 +57,6 @@ class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
             .toList();
         return doctorModels;
       }catch(e){
-        print(e);
         throw OfflineException();
 
       }

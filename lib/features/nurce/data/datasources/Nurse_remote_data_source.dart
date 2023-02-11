@@ -58,7 +58,6 @@ class NurseRemoteDataSourceImple extends NurseRemoteDataSource {
             .toList();
         return nurseModel;
       }catch(e){
-        print(e);
         throw OfflineException();
 
       }

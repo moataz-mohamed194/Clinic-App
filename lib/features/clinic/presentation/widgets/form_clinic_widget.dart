@@ -3,6 +3,7 @@ import 'package:clinic/features/clinic/presentation/bloc/actions_clinic_event.da
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../ pages/get_location.dart';
 import '../../ domain/entities/Clinic.dart';
 
 
@@ -173,7 +174,14 @@ class FormClinicWidget extends StatelessWidget{
             )
           ),
 
-
+          ElevatedButton.icon(
+              onPressed:(){
+                clinic!=null ?validateFormUpdateClinicToLocationPage(context,this.clinic) : validateFormAddClinicAndGoToLocationPage(context);
+                // validateFormAddClinicAndGoToLocationPage(context);
+              },
+              icon: Icon(Icons.location_on),
+              label: Text('Add Location')
+          ),
 
           ElevatedButton.icon(
               onPressed:()=> clinic!=null ?validateFormUpdateClinic(context,this.clinic) : validateFormAddClinic(context),
@@ -191,15 +199,43 @@ class FormClinicWidget extends StatelessWidget{
     if (isValid) {
       try {
         final clinic = Clinic(
-          id: 0,
-          addrees: _addressController.text,
-          note: _noteController.text,
-          fromTime: _fromTimesController.text,
-          toTime: _toTimeController.text,
-          timeOfVacation: _timeOfVacationsController.text,
+            id: 0,
+            addrees: _addressController.text,
+            note: _noteController.text,
+            fromTime: _fromTimesController.text,
+            toTime: _toTimeController.text,
+            timeOfVacation: _timeOfVacationsController.text,
+            latitude: null, longitude: null
         );
         BlocProvider.of<AddUpdateGetClinicBloc>(context)
             .add(AddClinicEvent(clinic: clinic));
+      }
+      catch (e){
+        print(e);
+      }
+
+
+    }
+  }
+
+  void validateFormAddClinicAndGoToLocationPage(BuildContext context) {
+    final isValid = _formKey.currentState!.validate();
+
+    if (isValid) {
+      try {
+        final clinic = Clinic(
+            id: 0,
+            addrees: _addressController.text,
+            note: _noteController.text,
+            fromTime: _fromTimesController.text,
+            toTime: _toTimeController.text,
+            timeOfVacation: _timeOfVacationsController.text,
+            latitude: null, longitude: null
+        );
+        BlocProvider.of<AddUpdateGetClinicBloc>(context)
+            .add(AddClinicEvent(clinic: clinic));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_)=> GetLocation(clinicData: clinic,isItUpdate: false,)));
       }
       catch (e){
         print(e);
@@ -215,15 +251,40 @@ class FormClinicWidget extends StatelessWidget{
     if (isValid) {
       try {
         final clinic = Clinic(
-          id: int.parse(oldClinic!.id.toString()),
-          addrees:_addressController.text==''?oldClinic!.addrees:_addressController.text,
-          note: _noteController.text==''?oldClinic!.note:_noteController.text,
-          fromTime: _fromTimesController.text==''?oldClinic!.fromTime:_fromTimesController.text,
-          toTime: _toTimeController.text==''?oldClinic!.toTime:_toTimeController.text,
-          timeOfVacation:_timeOfVacationsController.text==''?oldClinic!.timeOfVacation:_timeOfVacationsController.text,
+            id: int.parse(oldClinic!.id.toString()),
+            addrees:_addressController.text==''?oldClinic.addrees:_addressController.text,
+            note: _noteController.text==''?oldClinic.note:_noteController.text,
+            fromTime: _fromTimesController.text==''?oldClinic.fromTime:_fromTimesController.text,
+            toTime: _toTimeController.text==''?oldClinic.toTime:_toTimeController.text,
+            timeOfVacation:_timeOfVacationsController.text==''?oldClinic.timeOfVacation:_timeOfVacationsController.text,
+            latitude: oldClinic.latitude, longitude: oldClinic.longitude
         );
         BlocProvider.of<AddUpdateGetClinicBloc>(context)
             .add(UpdateClinicEvent(clinic: clinic));
+      }
+      catch (e){
+        print(e);
+      }
+
+
+    }
+  }
+  void validateFormUpdateClinicToLocationPage(BuildContext context, Clinic? oldClinic) {
+    final isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      try {
+        final clinic = Clinic(
+            id: int.parse(oldClinic!.id.toString()),
+            addrees:_addressController.text==''?oldClinic.addrees:_addressController.text,
+            note: _noteController.text==''?oldClinic.note:_noteController.text,
+            fromTime: _fromTimesController.text==''?oldClinic.fromTime:_fromTimesController.text,
+            toTime: _toTimeController.text==''?oldClinic.toTime:_toTimeController.text,
+            timeOfVacation:_timeOfVacationsController.text==''?oldClinic.timeOfVacation:_timeOfVacationsController.text,
+            latitude: oldClinic.latitude, longitude: oldClinic.longitude
+        );
+        Navigator.push(context,
+            MaterialPageRoute(builder: (_)=> GetLocation(clinicData: clinic,isItUpdate: true,)));
+
       }
       catch (e){
         print(e);

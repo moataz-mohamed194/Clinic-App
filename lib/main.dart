@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: appTheme,
             title: 'Posts App',
-            // home:GetNurseDataPage()
+            // home:GetLocation()
             home:loggedData == null||loggedData!.logged == false?LoginPage():
               loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
               loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):

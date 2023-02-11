@@ -48,6 +48,12 @@ dependencies:
   google_mobile_ads: ^2.3.0
   hive_generator:
   build_runner:
+  geolocator: ^9.0.2
+  location: ^4.4.0
+  google_maps_flutter: ^2.2.3
+  json_serializable: ^6.6.1
+  url_launcher: ^6.1.9
+#  location: ^4.4.0
 
 
 dev_dependencies:
@@ -68,7 +74,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/locations.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

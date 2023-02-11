@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../ pages/Add_New_Clinic_data.dart';
 import '../../ domain/entities/Clinic.dart';
 import '../../../../core/widgets/AdWidget.dart';
@@ -10,6 +10,16 @@ class ClinicListWidget extends StatelessWidget{
   final bool showAddAndEdit;
   const ClinicListWidget({Key? key, required this.clinic,
     required this.showAddAndEdit}) : super(key: key);
+
+  static Future<void> openMap(double latitude, double longitude) async {
+    String googleUrl =
+        "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";
+    Uri _url = Uri.parse(googleUrl);
+    // launchUrl(Uri.parse(googleUrl));
+    if (await canLaunchUrl(_url)) {
+      await launchUrl(_url);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -75,6 +85,9 @@ class ClinicListWidget extends StatelessWidget{
                   ],
                 ),
               ),
+              clinic[index].latitude != '' && clinic[index].longitude!='' ?TextButton(onPressed: (){
+                openMap(double.parse(clinic[index].latitude!), double.parse(clinic[index].longitude!));
+              }, child: Text('Location')):Container()
             ],
           );
 

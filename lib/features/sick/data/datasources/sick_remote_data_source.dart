@@ -62,7 +62,6 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
             .toList();
         return sickModels;
       }catch(e){
-        print(e);
         throw OfflineException();
 
       }

@@ -41,7 +41,7 @@ class AddUpdateGetClinicBloc extends Bloc<ClinicEvent, AddUpdateGetClinicState>{
 }
 
 
-AddUpdateGetClinicState _mapFailureOrPostsToStateForAdd(Either<Failures, Unit> either, String message) {
+AddUpdateGetClinicState  _mapFailureOrPostsToStateForAdd(Either<Failures, Unit> either, String message) {
   return either.fold(
         (failure) => ErrorClinicState(
         message: _mapFailureToMessage(failure)

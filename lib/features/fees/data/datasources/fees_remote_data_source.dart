@@ -35,7 +35,6 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
         throw OfflineException();
       }}
     catch(e){
-      print('add fees request: $e');
       throw OfflineException();
     }
   }
@@ -54,7 +53,6 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
         throw OfflineException();
       }}
     catch(e){
-      print(e);
       throw OfflineException();
     }
   }
@@ -74,7 +72,6 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
             .toList();
         return feesModels;
       }catch(e){
-        print(e);
         throw OfflineException();
 
       }
@@ -99,7 +96,6 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
             .toList();
         return feesModels;
       }catch(e){
-        print(e);
         throw OfflineException();
 
       }
@@ -124,7 +120,6 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
         throw OfflineException();
       }}
     catch(e){
-      print(e);
       throw OfflineException();
     }
   }

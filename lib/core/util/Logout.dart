@@ -9,8 +9,8 @@ class LogoutMethod{
     var tasksBox = await Hive.openBox<Person>('user');
     tasksBox.get(0)!.logged = false;
     tasksBox.get(0)!.save();
-    Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => MyApp(loggedData: tasksBox.get(0),)), (route) => false);
+    // Navigator.of(context).pushAndRemoveUntil(
+    //     MaterialPageRoute(builder: (_) => MyApp(loggedData: tasksBox.get(0),)), (route) => false);
 
   }
 }

@@ -21,7 +21,6 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
 
   @override
   Future<Unit> loginMethod(Login login) async {
-    print('login method');
     final body ={
       'email': login.email.toString(),
       'password': login.password.toString()
@@ -50,7 +49,6 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
         throw FailuresLoginException();
       }
     }catch(e){
-      print(e);
       throw OfflineException();
 
     }

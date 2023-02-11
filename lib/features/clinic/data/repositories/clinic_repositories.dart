@@ -20,6 +20,8 @@ class ClinicRepositoriesImpl implements ClinicRepository{
          addrees: clinic.addrees,
          note: clinic.note,
          fromTime: clinic.fromTime,
+         longitude: clinic.longitude,
+         latitude: clinic.latitude,
          toTime: clinic.toTime, timeOfVacation: clinic.timeOfVacation);
     if (await networkInfo.isConnected){
       try{

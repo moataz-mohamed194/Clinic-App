@@ -34,7 +34,6 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
             .toList();
         return clinicModels;
       }catch(e){
-        print(e);
         throw OfflineException();
 
       }
@@ -52,6 +51,8 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
       'time_of_vacation': clinic.timeOfVacation.toString(),
       'from_time': clinic.fromTime.toString(),
       'to_time': clinic.toTime.toString(),
+      'latitude': clinic.latitude.toString(),
+      'longitude': clinic.longitude.toString(),
     };
     try{
       final response = await client.post(Uri.parse(BASE_URL + '/doctor/model_of_clinic/'),body: body);
@@ -76,7 +77,9 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
       'time_of_vacation': clinic.timeOfVacation.toString(),
       'from_time': clinic.fromTime.toString(),
       'to_time': clinic.toTime.toString(),
-      'pk':clinic.id.toString()
+      'pk':clinic.id.toString(),
+      'latitude': clinic.latitude.toString(),
+      'longitude': clinic.longitude.toString(),
     };
     final response = await client.patch(
         Uri.parse(BASE_URL+'/doctor/edit_data_clinic/'), body: body

@@ -50,7 +50,6 @@ class UserRemoteDataSourceImple extends UserRemoteDataSource {
       }
     }
     catch(e){
-      print('Error: $e');
       throw OfflineException();
     }
   }

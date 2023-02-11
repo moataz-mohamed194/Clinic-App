@@ -7,6 +7,8 @@ class Clinic extends Equatable{
   final String fromTime;
   final String toTime;
   final String timeOfVacation;
+  final String? latitude;
+  final String? longitude;
 
   Clinic(
       {required this.id,
@@ -14,6 +16,8 @@ class Clinic extends Equatable{
        required this.note,
        required this.fromTime,
        required this.toTime,
+        required this.latitude,
+        required this.longitude,
        required this.timeOfVacation});
   @override
   List<Object?> get props => [id, addrees, note, fromTime, toTime, timeOfVacation];
