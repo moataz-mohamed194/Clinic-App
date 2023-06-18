@@ -27,7 +27,7 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
       'time': fees.time.toString()
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/doctor/add_fees/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlAddFees),body: body);
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
       }else{
@@ -45,7 +45,7 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
       'pk': id.toString()
     };
     try{
-      final response = await client.delete(Uri.parse(BASE_URL + '/doctor/fees_update_delete_get/'),body: body);
+      final response = await client.delete(Uri.parse(AppUrl.UrlFeesUpdateDeleteGet),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
@@ -60,7 +60,7 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
   @override
   Future<List<FeesModel>> getFeesDataOfDay(String day) async {
     final response = await client.get(
-        Uri.parse(BASE_URL+"/doctor/get_fees_of_day/"+'${day.toString()}'),
+        Uri.parse(AppUrl.UrlGetFeesOfDay(day.toString())),
         headers: {"Content-Type": "application/json", },
     );
     if (response.statusCode == 200){
@@ -84,7 +84,7 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
   Future<List<FeesModel>> getFeesDataOfMonth(String month) async {
 
     final response = await client.get(
-      Uri.parse(BASE_URL+"/doctor/get_fees_of_month/"+month.toString()),
+      Uri.parse(AppUrl.UrlGetFeesOfMonth(month.toString())),
       headers: {"Content-Type": "application/json", },
     );
     if (response.statusCode == 200){
@@ -113,7 +113,7 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
       'pk': fees.id.toString()
     };
     try{
-      final response = await client.patch(Uri.parse(BASE_URL + '/doctor/fees_update_delete_get/'),body: body);
+      final response = await client.patch(Uri.parse(AppUrl.UrlFeesUpdateDeleteGet),body: body);
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
       }else{

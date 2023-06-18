@@ -30,7 +30,7 @@ class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
       'pic':doctor.pic.toString()
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/doctor/model_of_doctor/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlModelOfClinic),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
@@ -45,7 +45,7 @@ class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
   @override
   Future<List<DoctorModel>> getAllDoctor() async {
     final response = await client.get(
-        Uri.parse(BASE_URL+"/doctor/model_of_doctor/"),
+        Uri.parse(AppUrl.UrlModelOfClinic),
         headers: {"Content-Type": "application/json"}
     );
     if (response.statusCode == 200){

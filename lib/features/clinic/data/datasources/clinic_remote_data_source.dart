@@ -22,7 +22,7 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
   @override
   Future<List<ClinicModel>> getAllClinic() async {
     final response = await client.get(
-        Uri.parse(BASE_URL+"/users/get_clinic_data/"),
+        Uri.parse(AppUrl.UrlGetClinicsData),
         headers: {"Content-Type": "application/json"}
     );
     if (response.statusCode == 200){
@@ -55,7 +55,7 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
       'longitude': clinic.longitude.toString(),
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/doctor/model_of_clinic/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlModelOfClinic),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
@@ -82,7 +82,7 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
       'longitude': clinic.longitude.toString(),
     };
     final response = await client.patch(
-        Uri.parse(BASE_URL+'/doctor/edit_data_clinic/'), body: body
+        Uri.parse(AppUrl.UrlEditDataClinic), body: body
     );
     if (response.statusCode == 200){
       return Future.value(unit);

@@ -27,7 +27,7 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
     };
     try{
       final response = await client.post(
-        Uri.parse(BASE_URL+'/users/login/'),
+        Uri.parse(AppUrl.UrlLogin),
         body: body
       );
       if (response.statusCode == 201 || response.statusCode == 200 ){

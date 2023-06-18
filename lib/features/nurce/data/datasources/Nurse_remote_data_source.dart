@@ -31,7 +31,7 @@ class NurseRemoteDataSourceImple extends NurseRemoteDataSource {
       'second_phone_number':nurse.secondPhoneNumber.toString()
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/doctor/add_nurse/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlAddNurse),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
@@ -46,7 +46,7 @@ class NurseRemoteDataSourceImple extends NurseRemoteDataSource {
   @override
   Future<List<NurseModel>> getAllNurse() async {
     final response = await client.get(
-        Uri.parse(BASE_URL+"/doctor/add_nurse/"),
+        Uri.parse(AppUrl.UrlAddNurse),
         headers: {"Content-Type": "application/json"}
     );
     if (response.statusCode == 200){

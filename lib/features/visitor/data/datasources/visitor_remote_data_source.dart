@@ -25,7 +25,7 @@ class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource{
   @override
   Future<List<VisitorModel>> getAllVisitor() async{
     final response = await client.get(
-      Uri.parse(BASE_URL+"/nurse/add_visitor/"),
+      Uri.parse(AppUrl.UrlAddVisitor),
       headers: {"Content-Type": "application/json"}
     );
     if (response.statusCode == 200){
@@ -51,7 +51,7 @@ class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource{
       'pk': tasksBox.get(0)!.pk.toString()
     };
     try{
-    final response = await client.post(Uri.parse(BASE_URL + '/nurse/add_visitor/'),body: body);
+    final response = await client.post(Uri.parse(AppUrl.UrlAddVisitor),body: body);
 
 
     if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
@@ -71,7 +71,7 @@ class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource{
       'pk': id.toString()
     };
     final response = await client.patch(
-      Uri.parse(BASE_URL + "/doctor/approve_visitor/"),body: body
+      Uri.parse(AppUrl.UrlApproveVisitor),body: body
     );
 
     if (response.statusCode == 200) {

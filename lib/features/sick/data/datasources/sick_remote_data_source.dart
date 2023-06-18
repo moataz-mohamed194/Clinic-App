@@ -34,7 +34,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
       'pk': tasksBox.get(0)!.pk.toString()
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/nurse/add_booking/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlAddBooking),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
@@ -50,7 +50,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
   Future<List<SickModel>> getSick() async {
 
     final response = await client.get(
-        Uri.parse(BASE_URL+"/nurse/add_booking/"),
+        Uri.parse(AppUrl.UrlAddBooking),
         headers: {"Content-Type": "application/json"}
     );
     if (response.statusCode == 200){
@@ -79,7 +79,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
       'user_pk':tasksBox.get(0)!.pk.toString()
     };
     final response = await client.patch(
-        Uri.parse(BASE_URL+'nurse/approve_booking/'), body: body
+        Uri.parse(AppUrl.UrlApproveVisitor), body: body
         );
     if (response.statusCode == 200){
       return Future.value(unit);
@@ -93,7 +93,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
 
 
     final response = await client.patch(
-        Uri.parse(BASE_URL+'/nurse/entered_sick/'+id.toString()+'/')
+        Uri.parse(AppUrl.UrlEnteredSick(id.toString()))
     );
     if (response.statusCode == 201|| response.body == '{"Results": "Success request"}'){
       return Future.value(unit);
@@ -107,7 +107,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
     var tasksBox = await Hive.openBox<Person>('user');
     String id =tasksBox.get(0)!.pk.toString();
     final response = await client.get(
-        Uri.parse(BASE_URL+'/users/get_all_booking_requisted/'+'$id')
+        Uri.parse(AppUrl.UrlGetAllBookingRequisted('$id'))
     );
     if (response.statusCode == 200){
       final List decodeJson = json.decode(response.body) as List;
@@ -129,7 +129,7 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
       'doctor_report': report.toString()
     };
     try{
-      final response = await client.patch(Uri.parse(BASE_URL + '/doctor/add_report_for_sick/'),body: body);
+      final response = await client.patch(Uri.parse(AppUrl.UrlAddReportForSick),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);

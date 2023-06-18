@@ -24,7 +24,7 @@ class UserRemoteDataSourceImple extends UserRemoteDataSource {
       'userName': user.userName.toString(),
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/users/add_account/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlAddAccount),body: body);
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
       }else{
@@ -42,7 +42,7 @@ class UserRemoteDataSourceImple extends UserRemoteDataSource {
       'userName': user.userName.toString(),
     };
     try{
-      final response = await client.post(Uri.parse(BASE_URL + '/users/update_account/'+id.toString()+'/'),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlUpdateAccount(id.toString())),body: body);
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
       }else{
