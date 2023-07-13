@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/message_display_widget.dart';
-import '../../../../injection_container.dart' as di;
+import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../bloc/doctor_bloc.dart';
 import '../bloc/doctor_event.dart';

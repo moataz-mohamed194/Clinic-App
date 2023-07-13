@@ -58,7 +58,7 @@ class AddReportOfSickPage extends StatelessWidget{
               child: TextFormField(
                 controller: _reportController,
                 validator: (val) => val!.isEmpty ? 'must add the name of sick' : null,
-                decoration: InputDecoration(hintText: 'Name'),
+                decoration: InputDecoration(hintText: 'Report'),
                 minLines: 2,
                 maxLines: 2,
               ),

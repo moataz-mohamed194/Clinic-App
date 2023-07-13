@@ -7,7 +7,7 @@ import '../bloc/Fees_bloc.dart';
 import '../bloc/Fees_state.dart';
 import '../widgets/Fees_list_widget.dart';
 import 'add_fees.dart';
-import '../../../../injection_container.dart' as di;
+import '../../../../core/injection/injection_container.dart' as di;
 
 class GetAllFeesPage extends StatelessWidget{
   final bool isItDay;

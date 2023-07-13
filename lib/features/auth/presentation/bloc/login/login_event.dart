@@ -1,7 +1,7 @@
-import 'package:equatable/equatable.dart';
-
-import '../../ domain/entities/login.dart';
-
+// import 'package:equatable/equatable.dart';
+//
+// import '../../ domain/entities/login.dart';
+part of 'login_bloc.dart';
 abstract class LoginEvent extends Equatable{
   const LoginEvent();
 

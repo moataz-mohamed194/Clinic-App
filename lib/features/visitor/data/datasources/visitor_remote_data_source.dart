@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import '../../../../core/StrogeData/hive.dart';
-import '../../../../core/string/basic.dart';
+import '../../../../core/string/url.dart';
 import '../models/visitor_model.dart';
 
 abstract class VisitorRemoteDataSource{

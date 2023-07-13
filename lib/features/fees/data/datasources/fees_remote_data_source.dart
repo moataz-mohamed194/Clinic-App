@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import '../../ domain/entities/Fees.dart';
 import '../../../../core/error/Exception.dart';
-import '../../../../core/string/basic.dart';
+import '../../../../core/string/url.dart';
 import '../models/FeesModel.dart';
 
 abstract class FeesRemoteDataSource{

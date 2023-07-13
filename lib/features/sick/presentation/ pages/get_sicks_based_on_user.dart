@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../injection_container.dart' as di;
+import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/message_display_widget.dart';
 import '../bloc/add_sick_bloc.dart';
@@ -31,7 +31,7 @@ class GetSicksBasedOnUser extends StatelessWidget{
                 else if (state is LoadedSicksState) {
                   return RefreshIndicator(
                       onRefresh: () => _onRefresh(context),
-                      child: SickListWidget(sick: state.sicks));
+                      child: sickListWidget(sick: state.sicks));
                 }
                 else if (state is ErrorSicksState) {
                   return MessageDisplayWidget(message: state.message);

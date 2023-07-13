@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import '../../ domain/entities/sick.dart';
 import '../../../../core/error/Exception.dart';
-import '../../../../core/string/basic.dart';
+import '../../../../core/string/url.dart';
 import '../models/SickModel.dart';
 
 abstract class SickRemoteDataSource{
@@ -75,11 +75,11 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource{
     var tasksBox = await Hive.openBox<Person>('user');
 
     final body ={
-      'row_pk': id,
+      'row_pk': id.toString(),
       'user_pk':tasksBox.get(0)!.pk.toString()
     };
     final response = await client.patch(
-        Uri.parse(AppUrl.UrlApproveVisitor), body: body
+        Uri.parse(AppUrl.UrlApproveBookingForSick), body: body
         );
     if (response.statusCode == 200){
       return Future.value(unit);

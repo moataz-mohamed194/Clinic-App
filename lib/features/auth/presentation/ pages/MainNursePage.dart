@@ -1,5 +1,6 @@
 import 'package:clinic/features/sick/presentation/%20pages/get_all_sicks.dart';
 import 'package:flutter/material.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
@@ -44,6 +45,28 @@ class MainNursePage extends StatelessWidget{
             title: const Text('Clinic data'),
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (_)=> GetClinicDataPage(showAddAndEdit:false)));
+            },
+          ),
+          ToggleSwitch(
+            initialLabelIndex: 0,
+            totalSwitches: 2,
+            activeBgColor: [Colors.greenAccent],
+            activeFgColor: Colors.white,
+            labels: ['aa','ww'],
+            onToggle: (index) {
+            //   if (AppLocalizations.of(context)!.isEnLocale) {
+            //     if (index == 0) {
+            //       context.read<LocaleCubit>().toEnglish();
+            //     } else {
+            //       context.read<LocaleCubit>().toArabic();
+            //     }
+            //   } else {
+            //     if (index == 1) {
+            //       context.read<LocaleCubit>().toEnglish();
+            //     } else {
+            //       context.read<LocaleCubit>().toArabic();
+            //     }
+            //   }
             },
           ),
           ListTile(

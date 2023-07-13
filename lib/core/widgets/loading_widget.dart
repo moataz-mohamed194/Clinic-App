@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import '../App_Theme.dart';
 
@@ -9,11 +10,7 @@ class LoadingWidget extends StatelessWidget{
         padding: EdgeInsets.symmetric(vertical: 20),
       child: Center(
         child: SizedBox(
-          height: 30,
-          width: 30,
-          child: CircularProgressIndicator(
-            color: secondaryColor,
-          ),
+          child: Lottie.asset('assets/json/loading.json'),
         ),
       ),
     );

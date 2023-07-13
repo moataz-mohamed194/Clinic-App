@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:clinic/core/string/basic.dart';
+import 'package:clinic/core/string/url.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 

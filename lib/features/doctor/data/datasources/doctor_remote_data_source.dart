@@ -4,7 +4,7 @@ import 'package:clinic/features/doctor/%20domain/entities/Doctor.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import '../../../../core/error/Exception.dart';
-import '../../../../core/string/basic.dart';
+import '../../../../core/string/url.dart';
 import '../models/DocotrModel.dart';
 
 abstract class DoctorRemoteDataSource{
@@ -30,7 +30,7 @@ class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
       'pic':doctor.pic.toString()
     };
     try{
-      final response = await client.post(Uri.parse(AppUrl.UrlModelOfClinic),body: body);
+      final response = await client.post(Uri.parse(AppUrl.UrlModelOfDoctor),body: body);
 
       if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
         return Future.value(unit);
@@ -45,7 +45,7 @@ class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
   @override
   Future<List<DoctorModel>> getAllDoctor() async {
     final response = await client.get(
-        Uri.parse(AppUrl.UrlModelOfClinic),
+        Uri.parse(AppUrl.UrlModelOfDoctor),
         headers: {"Content-Type": "application/json"}
     );
     if (response.statusCode == 200){

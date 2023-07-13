@@ -4,7 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import '../../ domain/entities/Nurse.dart';
 import '../../../../core/error/Exception.dart';
-import '../../../../core/string/basic.dart';
+import '../../../../core/string/url.dart';
 import '../models/NurseModel.dart';
 
 abstract class NurseRemoteDataSource{

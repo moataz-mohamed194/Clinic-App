@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '../../../../core/widgets/message_display_widget.dart';
-import '../../../../injection_container.dart' as di;
+import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/widgets/widget_app_bar.dart';
 import '../bloc/actions_clinic_bloc.dart';
 import '../bloc/actions_clinic_event.dart';
 import '../bloc/actions_clinic_state.dart';
@@ -79,7 +80,9 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Clinic Data')),
+      appBar: WidgetAppBar(context: context, title: 'Clinic Data', showHomeIcon:true),
+
+      // AppBar(title: Text('Clinic Data', style: TextStyle(color: Colors.black),),elevation: 0, backgroundColor: Colors.white,),
       body: _buildBody(),
       floatingActionButton: widget.showAddAndEdit == true
           ? _buildFloatingBtn(context)
@@ -118,7 +121,7 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (_)=> AddNewClinicDataPage(showAddAndEdit:widget.showAddAndEdit)));
       },
-      child: Icon(Icons.add),
+      child: Icon(Icons.add, color: Colors.white,),
     );
   }
 

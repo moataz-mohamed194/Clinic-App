@@ -4,7 +4,7 @@ import 'package:clinic/features/clinic/%20domain/entities/Clinic.dart';
 import 'package:clinic/features/clinic/data/models/ClinicModel.dart';
 import 'package:dartz/dartz.dart';
 import '../../../../core/error/Exception.dart';
-import '../../../../core/string/basic.dart';
+import '../../../../core/string/url.dart';
 
 abstract class ClinicRemoteDataSource{
   Future<List<ClinicModel>> getAllClinic();
