@@ -3,6 +3,10 @@ import 'package:clinic/features/visitor/presentation/bloc/add_update_visitor/add
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/string/app_color.dart';
+import '../../../../core/widgets/button_widget.dart';
+import '../../../../core/widgets/text_field_widget.dart';
+
 class FormVisitorWidget extends StatelessWidget{
 
   final _formKey = GlobalKey<FormState>();
@@ -12,35 +16,75 @@ class FormVisitorWidget extends StatelessWidget{
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: TextFormField(
-              controller: _titleController,
-              validator: (val) => val!.isEmpty ? 'must add the name of visitor' : null,
-              decoration: InputDecoration(hintText: 'Name'),
-              minLines: 2,
-              maxLines: 2,
-            ),
-          ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-          Padding(padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: TextFormField(
-              controller: _bodyController,
-              validator: (val) => val!.isEmpty ? 'must add the reason of visitor' : null,
-              decoration: InputDecoration(hintText: 'reason'),
-              minLines: 2,
-              maxLines: 2,
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 10,
+              ),
+              child: TextFieldWidget(
+                controler: _titleController,
+                keyboardType: TextInputType.text,
+                validatorTextField: (val) =>
+                val!.isEmpty ? 'must add the name of visitor' : null,
+                hintText: 'Name',
+              ),
             ),
-          ),
-          ElevatedButton.icon(
-              onPressed:()=> validateFormThenUpdateOrAddPost(context),
-              icon: Icon(Icons.add),
-              label: Text('Add Visitor')
-          )
-        ],
+            // Padding(padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            //   child: TextFormField(
+            //     controller: _titleController,
+            //     validator: (val) => val!.isEmpty ? 'must add the name of visitor' : null,
+            //     decoration: InputDecoration(hintText: 'Name'),
+            //     minLines: 2,
+            //     maxLines: 2,
+            //   ),
+            // ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 10,
+              ),
+              child: TextFieldWidget(
+                controler: _bodyController,
+                keyboardType: TextInputType.text,
+                validatorTextField: (val) =>
+                val!.isEmpty ? 'must add the reason of visitor' : null,
+                hintText: 'Reason',
+              ),
+            ),
+            // Padding(padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            //   child: TextFormField(
+            //     controller: _bodyController,
+            //     validator: (val) => val!.isEmpty ? 'must add the reason of visitor' : null,
+            //     decoration: InputDecoration(hintText: 'reason'),
+            //     minLines: 2,
+            //     maxLines: 2,
+            //   ),
+            // ),
+
+            ButtonWidget(
+              textColor: Colors.white,
+              boarderColor: Colors.transparent,
+              text: 'Add Visitor',
+              action: () {
+                validateFormThenUpdateOrAddPost(context);
+              },
+              backgroundColor: AppColors.mainColor,
+              marginHeight: 10,
+              marginWidth: 30,
+            ),
+
+            // ElevatedButton.icon(
+            //     onPressed:()=> validateFormThenUpdateOrAddPost(context),
+            //     icon: Icon(Icons.add),
+            //     label: Text('Add Visitor')
+            // )
+          ],
+        ),
       ),
     );
   }

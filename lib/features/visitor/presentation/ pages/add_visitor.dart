@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/util/snackbar_message.dart';
+import '../../../../core/widgets/general_app_bar.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import '../widgets/form_widget.dart';
@@ -9,7 +10,7 @@ class VisitorAddPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Visitor'),),
+      appBar: generalAppBar(context: context, title: 'Add Visitor',),
       body: _buildBody(context),
     );
   }

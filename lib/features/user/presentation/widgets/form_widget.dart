@@ -31,6 +31,13 @@ class FormUserWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Text(
+              'Register to Your Account',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             TextFieldWidget(
               controler: _userNameController,
               validatorTextField: (val) => this.isItAdd == false

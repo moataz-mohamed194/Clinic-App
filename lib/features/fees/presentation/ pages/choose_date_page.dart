@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
+import '../../../../core/widgets/general_app_bar.dart';
 import 'get_fees.dart';
 
 class ChooseDatePage extends StatelessWidget {
@@ -15,17 +16,19 @@ class ChooseDatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(onPressed: (){
-            Navigator.pop(context);
-          }, icon: Icon(Icons.arrow_back_ios_new_sharp, color: Colors.black,)),
-          title: Text(
-            'Choose the date',
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
+        appBar: generalAppBar(context: context, title: 'Choose the date',),
+
+        // AppBar(
+        //   leading: IconButton(onPressed: (){
+        //     Navigator.pop(context);
+        //   }, icon: Icon(Icons.arrow_back_ios_new_sharp, color: Colors.black,)),
+        //   title: Text(
+        //     'Choose the date',
+        //     style: TextStyle(color: Colors.black),
+        //   ),
+        //   backgroundColor: Colors.transparent,
+        //   elevation: 0,
+        // ),
         body: Form(
           key: _formKey,
           child: Column(

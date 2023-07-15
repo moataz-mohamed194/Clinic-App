@@ -24,6 +24,8 @@ import 'features/fees/presentation/ pages/choose_date_page.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
 import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
 import 'core/injection/injection_container.dart' as di;
+import 'features/sick/presentation/ pages/add_sick.dart';
+import 'features/visitor/presentation/ pages/add_visitor.dart';
 
 class MyApp extends StatelessWidget {
   final Person? loggedData;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/util/snackbar_message.dart';
+import '../../../../core/widgets/general_app_bar.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../bloc/doctor_bloc.dart';
 import '../bloc/doctor_state.dart';
@@ -11,12 +12,14 @@ class AddNewDoctorPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new, color: Colors.black,)),
-        title: Text('Add Doctor Data', style: TextStyle(color: Colors.black),),
-        backgroundColor: Colors.white,
-      ),
+      appBar:generalAppBar(context: context, title: 'Add Doctor Data',),
+
+    // AppBar(
+    //     elevation: 0,
+    //     leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new, color: Colors.black,)),
+    //     title: Text('Add Doctor Data', style: TextStyle(color: Colors.black),),
+    //     backgroundColor: Colors.white,
+    //   ),
       body: appBody(context),
     );
   }
