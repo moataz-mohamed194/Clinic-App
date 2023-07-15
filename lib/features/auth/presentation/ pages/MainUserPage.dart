@@ -1,10 +1,16 @@
 import 'package:clinic/features/user/presentation/pages/add_user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/string/app_color.dart';
+import '../../../../core/string/app_icons.dart';
 import '../../../../core/util/Logout.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
+import '../../../profile/presentation/page/profile.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
 import '../../../sick/presentation/ pages/get_sicks_based_on_user.dart';
+import '../bloc/bottom_cubit.dart';
 
 class MainUserPage extends StatelessWidget{
   final String name;
@@ -12,76 +18,58 @@ class MainUserPage extends StatelessWidget{
   const MainUserPage({Key? key, required this.name}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Welcome our clint'),),
-      drawer: _drawerBody(context, this.name.toString()),
-    );
-  }
-  _drawerBody(BuildContext context, String name){
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
+    List<Widget> _widgetOptions = <Widget>[
+      GetSicksBasedOnUser(),
+      GetClinicDataPage(showAddAndEdit: false),
+      Profile(typeOfLogin: 'user', name: name.toString())
+    ];
+    return BlocBuilder<BottomCubit, int>(builder: (context, state) {
+      return Scaffold(
+      // appBar: AppBar(title: Text('Welcome our clint'),),
+
+      body: Center(
+        child: _widgetOptions.elementAt(context.read<BottomCubit>().state),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              context.read<BottomCubit>().state == 0
+                  ? AppIcons.iconSelectedHome
+                  : AppIcons.iconUnSelectedHome,
+              height: 22.h,
             ),
-            child: Container(
-                child: Column(
-                children: [
-                Container(
-                    child:
-                IconButton(onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_)=> AddUserPage(isItAdd: false)));
-
-                }, icon: Icon(Icons.edit),),
-                  alignment: Alignment.topRight,
-                ),
-                Center(child: Text(name.toString()),)
-              ],
-            ),),
-
+            label: 'Home',
+            // backgroundColor: Colors.red,
           ),
-          ListTile(
-            title: const Text('Add medical re-examination'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> AddSickPage()));
-            },
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              context.read<BottomCubit>().state == 1
+                  ? AppIcons.iconSelectedClinic
+                  : AppIcons.iconUnSelectedClinic,
+              height: 22.h,
+            ),
+            label: 'Clinic',
+            // backgroundColor: Colors.purple,
           ),
-          ListTile(
-            title: const Text('Get medical re-examination added by me'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetSicksBasedOnUser()));
-            },
-          ),
-          ListTile(
-            title: const Text('My old requested'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          ListTile(
-            title: const Text('Clinic data'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetClinicDataPage(showAddAndEdit:false)));
-            },
-          ),
-          ListTile(
-            title: const Text('Your data'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          ListTile(
-            title: const Text('Logout'),
-            onTap: () {
-              LogoutMethod().logout(context: context);
-            },
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              context.read<BottomCubit>().state == 2
+                  ? AppIcons.iconSelectedAvatar
+                  : AppIcons.iconUnSelectedAvatar,
+              height: 22.h,
+            ),
+            label: 'Profile',
           ),
         ],
+        currentIndex: state,
+        selectedItemColor: AppColors.mainColor,
+        unselectedItemColor: Colors.grey.shade500,
+        showUnselectedLabels: true,
+        // useLegacyColorScheme: true,
+        onTap: context.read<BottomCubit>().changeCurrentPage,
       ),
-    );
+    );});
   }
 }

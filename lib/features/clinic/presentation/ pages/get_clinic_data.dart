@@ -82,7 +82,6 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
     return Scaffold(
       appBar: WidgetAppBar(context: context, title: 'Clinic Data', showHomeIcon:true),
 
-      // AppBar(title: Text('Clinic Data', style: TextStyle(color: Colors.black),),elevation: 0, backgroundColor: Colors.white,),
       body: _buildBody(),
       floatingActionButton: widget.showAddAndEdit == true
           ? _buildFloatingBtn(context)

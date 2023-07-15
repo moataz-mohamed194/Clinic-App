@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/message_display_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../core/widgets/widget_app_bar.dart';
 import '../bloc/doctor_bloc.dart';
 import '../bloc/doctor_event.dart';
 import '../bloc/doctor_state.dart';
@@ -14,23 +15,8 @@ class GetDoctorDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        title: Text(
-          'Doctor Data',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.black,
-          ),
-        ),
-      ),
+      appBar: WidgetAppBar(context: context, title: 'Doctor Data', showHomeIcon:true),
+
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),
     );

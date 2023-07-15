@@ -14,12 +14,6 @@ class AddNewDoctorPage extends StatelessWidget{
     return Scaffold(
       appBar:generalAppBar(context: context, title: 'Add Doctor Data',),
 
-    // AppBar(
-    //     elevation: 0,
-    //     leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new, color: Colors.black,)),
-    //     title: Text('Add Doctor Data', style: TextStyle(color: Colors.black),),
-    //     backgroundColor: Colors.white,
-    //   ),
       body: appBody(context),
     );
   }

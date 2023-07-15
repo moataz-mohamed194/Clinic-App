@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
+import '../../../../core/widgets/general_app_bar.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/message_display_widget.dart';
+import '../../../../core/widgets/widget_app_bar.dart';
 import '../bloc/add_sick_bloc.dart';
 import '../bloc/add_sick_event.dart';
 import '../bloc/add_sick_state.dart';
@@ -13,7 +15,8 @@ class GetSicksBasedOnUser extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Sick')),
+      appBar: WidgetAppBar(context: context, title: 'Sick', showHomeIcon:true),
+
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),
     );
@@ -49,7 +52,7 @@ class GetSicksBasedOnUser extends StatelessWidget{
       onPressed: () async {
         Navigator.push(context, MaterialPageRoute(builder: (_)=> AddSickPage()));
       },
-      child: Icon(Icons.add),
+      child: Icon(Icons.add, color: Colors.white,),
     );
   }
 

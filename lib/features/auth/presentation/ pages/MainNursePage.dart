@@ -80,70 +80,7 @@ class MainNursePage extends StatelessWidget{
         // useLegacyColorScheme: true,
         onTap: context.read<BottomCubit>().changeCurrentPage,
       ),
-      // drawer: _drawerBody(context, this.name.toString()),
     );
     });
-  }
-  _drawerBody(BuildContext context, String name){
-
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Center(child: Text(name.toString()),),
-          ),
-          ListTile(
-            title: const Text("Waiting for the doctor's examination"),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetAllSicksPage(typeOfLogin:'nurse')));
-            },
-          ),
-          ListTile(
-            title: const Text('The visitors'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetAllVisitors()));
-            },
-          ),
-          ListTile(
-            title: const Text('Clinic data'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (_)=> GetClinicDataPage(showAddAndEdit:false)));
-            },
-          ),
-          ToggleSwitch(
-            initialLabelIndex: 0,
-            totalSwitches: 2,
-            activeBgColor: [Colors.greenAccent],
-            activeFgColor: Colors.white,
-            labels: ['aa','ww'],
-            onToggle: (index) {
-            //   if (AppLocalizations.of(context)!.isEnLocale) {
-            //     if (index == 0) {
-            //       context.read<LocaleCubit>().toEnglish();
-            //     } else {
-            //       context.read<LocaleCubit>().toArabic();
-            //     }
-            //   } else {
-            //     if (index == 1) {
-            //       context.read<LocaleCubit>().toEnglish();
-            //     } else {
-            //       context.read<LocaleCubit>().toArabic();
-            //     }
-            //   }
-            },
-          ),
-          ListTile(
-            title: const Text('Logout'),
-            onTap: () {
-              LogoutMethod().logout(context: context);
-            },
-          ),
-        ],
-      ),
-    );
   }
 }

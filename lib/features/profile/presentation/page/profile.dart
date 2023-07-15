@@ -1,8 +1,12 @@
+import 'package:clinic/core/string/app_color.dart';
 import 'package:clinic/core/string/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
+import '../../../../core/locale/app_localizations.dart';
 import '../../../../core/string/app_images.dart';
+import '../../../../core/string/language.dart';
 import '../../../../core/util/Logout.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
 import '../../../doctor/presentation/ pages/get_all_doctors.dart';
@@ -110,8 +114,43 @@ class Profile extends StatelessWidget {
                     ),
                   )
                 : Container(),
-            typeOfLogin == 'doctor' || typeOfLogin == 'nurse'
-                ? Card(
+            Container(
+              // width: 100,
+              child: ToggleSwitch(
+                initialLabelIndex: 0,
+                totalSwitches: 2,
+                activeBgColor: [AppColors.mainColor],
+                activeFgColor: Colors.white,
+                labels: [
+                  AppLocalizations.of(context)!.translate(AppLanguage.english) ??
+                      '',
+                  AppLocalizations.of(context)!.translate(AppLanguage.arabic) ??
+                      ''
+                ],
+                onToggle: (index) {
+                  print('dddddd:$index');
+                  print(AppLocalizations.of(context)!.isEnLocale);
+                  //   if (AppLocalizations.of(context)!.isEnLocale) {
+                  //     if (index == 0) {
+                  //       context.read<LocaleCubit>().toEnglish();
+                  //     } else {
+                  //       context.read<LocaleCubit>().toArabic();
+                  //     }
+                  //   } else {
+                  //     if (index == 1) {
+                  //       context.read<LocaleCubit>().toEnglish();
+                  //     } else {
+                  //       context.read<LocaleCubit>().toArabic();
+                  //     }
+                  //   }
+                },
+              ),
+            ),
+
+            SizedBox(
+              height: 15,
+            ),
+            Card(
                     child: ListTile(
                       leading: Container(
                         child: Icon(
@@ -132,7 +171,6 @@ class Profile extends StatelessWidget {
                       // trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   )
-                : Container(),
           ],
         ),
       ),
