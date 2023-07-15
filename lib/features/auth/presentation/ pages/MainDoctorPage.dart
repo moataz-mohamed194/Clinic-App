@@ -37,26 +37,32 @@ class MainDoctorPage extends StatelessWidget {
           backgroundColor: Colors.white,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Image.asset(context.read<BottomCubit>().state == 0
-                  ? AppIcons.iconSelectedHome
-                  : AppIcons.iconUnSelectedHome,
-                height: 22.h,),
+              icon: Image.asset(
+                context.read<BottomCubit>().state == 0
+                    ? AppIcons.iconSelectedHome
+                    : AppIcons.iconUnSelectedHome,
+                height: 22.h,
+              ),
               label: 'Home',
               // backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(context.read<BottomCubit>().state == 1
-                  ? AppIcons.iconSelectedVisitor
-                  : AppIcons.iconUnSelectedVisitor,
-                height: 22.h,),
+              icon: Image.asset(
+                context.read<BottomCubit>().state == 1
+                    ? AppIcons.iconSelectedVisitor
+                    : AppIcons.iconUnSelectedVisitor,
+                height: 22.h,
+              ),
               label: 'Visitor',
               // backgroundColor: Colors.green,
             ),
             BottomNavigationBarItem(
-              icon: Image.asset(context.read<BottomCubit>().state == 2
-                  ? AppIcons.iconSelectedClinic
-                  : AppIcons.iconUnSelectedClinic,
-                height: 22.h,),
+              icon: Image.asset(
+                context.read<BottomCubit>().state == 2
+                    ? AppIcons.iconSelectedClinic
+                    : AppIcons.iconUnSelectedClinic,
+                height: 22.h,
+              ),
               label: 'Clinic',
               // backgroundColor: Colors.purple,
             ),
@@ -65,7 +71,7 @@ class MainDoctorPage extends StatelessWidget {
                 context.read<BottomCubit>().state == 3
                     ? AppIcons.iconSelectedAvatar
                     : AppIcons.iconUnSelectedAvatar,
-      height: 22.h,
+                height: 22.h,
               ),
               label: 'Profile',
             ),

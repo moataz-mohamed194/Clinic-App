@@ -12,7 +12,10 @@ class AddNewDoctorPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Doctor Data'),
+        elevation: 0,
+        leading: IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back_ios_new, color: Colors.black,)),
+        title: Text('Add Doctor Data', style: TextStyle(color: Colors.black),),
+        backgroundColor: Colors.white,
       ),
       body: appBody(context),
     );
