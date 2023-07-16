@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import '../widgets/Visitor_list_widget.dart';
 import '../../../../core/widgets/message_display_widget.dart';
 import 'add_visitor.dart';
@@ -14,13 +15,11 @@ class GetAllVisitors extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WidgetAppBar(context: context, title: 'Visitors', showHomeIcon:true),
+      appBar: WidgetAppBar(context: context, title: S.of(context).Visitors, showHomeIcon:true),
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),
     );
   }
-
-  AppBar _buildAppBar() => AppBar(title: Text('Visitors', style: TextStyle(color: Colors.black),),elevation: 0, backgroundColor: Colors.white,);
 
   Widget _buildBody(){
     return Padding(

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../visitor/presentation/bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import '../bloc/add_sick_bloc.dart';
 import '../bloc/add_sick_state.dart';
@@ -19,7 +20,7 @@ class AddReportOfSickPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add medical re-examination'),
+        title: Text(S.of(context).AddMedicalReExamination),
       ),
       body: appBody(context),
     );
@@ -58,7 +59,7 @@ class AddReportOfSickPage extends StatelessWidget{
               child: TextFormField(
                 controller: _reportController,
                 validator: (val) => val!.isEmpty ? 'must add the name of sick' : null,
-                decoration: InputDecoration(hintText: 'Report'),
+                decoration: InputDecoration(hintText: S.of(context).Report),
                 minLines: 2,
                 maxLines: 2,
               ),
@@ -66,7 +67,7 @@ class AddReportOfSickPage extends StatelessWidget{
             ElevatedButton.icon(
             onPressed:()=> validateFormAddReportPost(context, this.idOfSick??0),
             icon: Icon(Icons.add),
-            label: Text('Add sick')
+            label: Text(S.of(context).AddSick)
             )
                   ],
               ),

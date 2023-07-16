@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ domain/entities/Clinic.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../widgets/form_clinic_widget.dart';
 
 class AddNewClinicDataPage extends StatelessWidget{
@@ -16,7 +17,7 @@ class AddNewClinicDataPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(clinic!=null?'Update Clinic Data':'Add Clinic Data'),
+        title: Text(clinic!=null?S.of(context).UpdateClinicData:S.of(context).AddClinicData),
       ),
       body: appBody(context),
     );

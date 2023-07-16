@@ -10,6 +10,7 @@ import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/message_display_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import 'add_sick.dart';
 
 class GetAllSicksPage extends StatelessWidget {
@@ -20,7 +21,7 @@ class GetAllSicksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-      WidgetAppBar(context: context, title: 'Waiting for the doctor\'s examination', showHomeIcon:true),
+      WidgetAppBar(context: context, title: S.of(context).WaitingForTheDoctorsExamination, showHomeIcon:true),
 
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),

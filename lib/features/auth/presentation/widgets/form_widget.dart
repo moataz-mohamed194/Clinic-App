@@ -8,6 +8,7 @@ import '../../ domain/entities/login.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../user/presentation/pages/add_user.dart';
 import '../bloc/check_box_cubit.dart';
 import '../bloc/eyes_cubit.dart';
@@ -26,7 +27,7 @@ class FormWidget extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              'Login to Your Account',
+              S.of(context).LoginToYourAccount,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -35,9 +36,9 @@ class FormWidget extends StatelessWidget {
             TextFieldWidget(
               controler: _emailController,
               validatorTextField: (val) =>
-                  val!.isEmpty ? 'must add the email' : null,
+                  val!.isEmpty ? S.of(context).MustAddTheEmailOfUser : null,
               leftWidget: Icon(Icons.email_outlined),
-              hintText: 'Email',
+              hintText: S.of(context).Email,
             ),
             SizedBox(
               height: 20,
@@ -46,9 +47,9 @@ class FormWidget extends StatelessWidget {
               return TextFieldWidget(
                 controler: _passwordController,
                 validatorTextField: (val) =>
-                    val!.isEmpty ? 'must add the password' : null,
+                    val!.isEmpty ? S.of(context).MustAddThePassword : null,
                 leftWidget: Icon(Icons.lock_outlined),
-                hintText: 'password',
+                hintText: S.of(context).Password,
                 obscureText: state,
                 rightWidget: InkWell(
                   child: state == true
@@ -96,7 +97,7 @@ class FormWidget extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('Remember me'),
+                    Text(S.of(context).RememberMe),
                   ],
                 ),
               );
@@ -104,7 +105,7 @@ class FormWidget extends StatelessWidget {
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
-              text: 'Sign in',
+              text: S.of(context).SignIn,
               action: () {
                 validateFormThenUpdateOrAddPost(context);
               },
@@ -129,7 +130,7 @@ class FormWidget extends StatelessWidget {
         password: _passwordController.text.toString(),
       );
 
-      BlocProvider.of<LoginBloc>(context).add(LoginMethodEvent(login: login));
+      BlocProvider.of<LoginBloc>(context).add(LoginMethodEvent(login: login, stayLogin: context.read<CheckBoxCubit>().state));
     }
   }
 }

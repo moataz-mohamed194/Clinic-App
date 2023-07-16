@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/Nurse_bloc.dart';
 import '../bloc/Nurse_state.dart';
 import '../widgets/form_nurse_widget.dart';
@@ -12,7 +13,7 @@ class AddNewNursePage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Nurse Data'),
+        title: Text(S.of(context).AddNurseData),
       ),
       body: appBody(context),
     );

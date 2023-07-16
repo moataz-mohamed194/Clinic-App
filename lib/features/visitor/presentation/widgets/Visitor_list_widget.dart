@@ -8,14 +8,10 @@ import '../bloc/add_update_visitor/add_update_visitor_bloc.dart';
 
 visitorListWidget ({required List<Visitor> visitor,String? typeOfLogin}){
 
-  // const VisitorListWidget({Key? key, required this.visitor, this.typeOfLogin}) : super(key: key);
-  // @override
-  // Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       child: ListView.separated(
           itemCount: visitor.length,
-
           itemBuilder: (context, index){
             return Card(
               shape: RoundedRectangleBorder(
@@ -36,7 +32,7 @@ visitorListWidget ({required List<Visitor> visitor,String? typeOfLogin}){
                 title: Text(visitor[index].name),
                 subtitle: Text(visitor[index].reasonOfVisitor),
                 contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                trailing: typeOfLogin == 'doctor'?IconButton(icon: Icon(Icons.call_made), onPressed: () => _onUpdate(context, visitor[index].id),):Text(''),
+                trailing: typeOfLogin == 'Doctor'?IconButton(icon: Icon(Icons.call_made), onPressed: () => _onUpdate(context, visitor[index].id),):Text(''),
                 dense: true,
                 // tileColor:visitor[index].approved==false ?Colors.red:Colors.green,
                 minVerticalPadding: 1.0,

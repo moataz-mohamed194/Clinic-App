@@ -11,7 +11,7 @@ import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/error/Exception.dart';
 
 abstract class LoginRemoteDataSource{
-  Future<Unit> loginMethod(Login login);
+  Future<Unit> loginMethod(Login login, bool stayLogin);
 }
 
 class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
@@ -20,7 +20,7 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
   LoginRemoteDataSourceImple({required this.client});
 
   @override
-  Future<Unit> loginMethod(Login login) async {
+  Future<Unit> loginMethod(Login login, bool stayLogin) async {
     final body ={
       'email': login.email.toString(),
       'password': login.password.toString()
@@ -32,19 +32,37 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
       );
       if (response.statusCode == 201 || response.statusCode == 200 ){
           Map valueMap = json.decode(response.body);
-          var addData = await Hive.openBox<Person>('user');
-          var person = Person()
-            ..typeOfAccount = valueMap['typeOfAccount']
-            ..pk = valueMap['pk'].toString()
-            ..logged = true
-            ..name = valueMap['name'];
-        try{
-          addData.putAt(0, person);
+          if (stayLogin == true){
+            var addData = await Hive.openBox<Person>('user');
+            var person = Person()
+              ..typeOfAccount = valueMap['typeOfAccount']
+              ..pk = valueMap['pk'].toString()
+              ..logged = true
+              ..name = valueMap['name'];
+            try{
+              addData.putAt(0, person);
+              return Future.value(unit);
+            }catch(e){
+              addData.add(person);
+            }
+          }else{
+            // if (stayLogin == true){
+              var addData = await Hive.openBox<Person>('user');
+              var person = Person()
+                ..typeOfAccount = valueMap['typeOfAccount']
+                ..pk = valueMap['pk'].toString()
+                ..logged = false
+                ..name = valueMap['name'];
+              try{
+                addData.putAt(0, person);
+                return Future.value(unit);
+              }catch(e){
+                addData.add(person);
+              }
+            // }
+          }
           return Future.value(unit);
-        }catch(e){
-          addData.add(person);
-          return Future.value(unit);
-        }
+
       }else{
         throw FailuresLoginException();
       }

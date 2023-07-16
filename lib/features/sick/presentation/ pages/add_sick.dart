@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/general_app_bar.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../visitor/presentation/bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import '../widgets/form_widget.dart';
 
@@ -16,7 +17,7 @@ class AddSickPage extends StatelessWidget{
       // appBar: AppBar(
       //   title: Text('Add medical re-examination'),
       // ),
-      appBar: generalAppBar(context: context, title: 'Add medical re-examination',),
+      appBar: generalAppBar(context: context, title: S.of(context).AddMedicalReExamination,),
 
       body: appBody(context),
     );

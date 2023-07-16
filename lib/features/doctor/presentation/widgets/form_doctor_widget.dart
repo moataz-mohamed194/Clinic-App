@@ -4,6 +4,7 @@ import '../../ domain/entities/Doctor.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/doctor_bloc.dart';
 import '../bloc/doctor_event.dart';
 
@@ -33,8 +34,8 @@ class FormDoctorWidget extends StatelessWidget {
                 controler: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 validatorTextField: (val) =>
-                    val!.isEmpty ? 'must add the email of doctor' : null,
-                hintText: 'Doctor',
+                    val!.isEmpty ? S.of(context).MustAddTheEmailOfDoctor : null,
+                hintText: S.of(context).Doctor,
               ),
             ),
             Container(
@@ -45,8 +46,8 @@ class FormDoctorWidget extends StatelessWidget {
                 controler: _nameController,
                 keyboardType: TextInputType.name,
                 validatorTextField: (val) =>
-                    val!.isEmpty ? 'must add the name of doctor' : null,
-                hintText: 'Name',
+                    val!.isEmpty ? S.of(context).MustAddTheNameOfDoctor : null,
+                hintText: S.of(context).Name,
               ),
             ),
             Container(
@@ -57,11 +58,11 @@ class FormDoctorWidget extends StatelessWidget {
                 controler: _phoneNumberController,
                 keyboardType: TextInputType.number,
                 validatorTextField: (val) => val!.isEmpty
-                    ? 'must add the phone number'
+                    ? S.of(context).MustAddThePhoneNumber
                     : val.length > 11 || val.length < 11
-                        ? 'your number not right'
+                        ? S.of(context).YourNumberNotRight
                         : null,
-                hintText: 'Phone Number',
+                hintText: S.of(context).PhoneNumber,
               ),
             ),
             Container(
@@ -72,8 +73,8 @@ class FormDoctorWidget extends StatelessWidget {
                 controler: _descriptionController,
                 keyboardType: TextInputType.name,
                 validatorTextField: (val) =>
-                    val!.isEmpty ? 'must add the description' : null,
-                hintText: 'Description',
+                    val!.isEmpty ? S.of(context).MustAddTheDescription : null,
+                hintText: S.of(context).Description,
               ),
             ),
             Container(
@@ -84,17 +85,17 @@ class FormDoctorWidget extends StatelessWidget {
                 controler: _passwordController,
                 keyboardType: TextInputType.name,
                 validatorTextField: (val) => val!.isEmpty
-                    ? 'must add the password'
+                    ? S.of(context).MustAddThePassword
                     : val.length > 12
-                        ? 'your password must be longer than 12'
+                        ? S.of(context).YourPasswordMustBeLongerThan12
                         : null,
-                hintText: 'Password',
+                hintText: S.of(context).Password,
               ),
             ),
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
-              text: 'Add New Doctor',
+              text: S.of(context).AddNewDoctor,
               action: () {
                 validateFormAddDoctor(context);
               },

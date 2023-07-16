@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/message_display_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/Nurse_bloc.dart';
 import '../bloc/Nurse_event.dart';
 import '../bloc/Nurse_state.dart';
@@ -14,7 +15,7 @@ class GetNurseDataPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Nurse Data')),
+      appBar: AppBar(title: Text(S.of(context).NurseData)),
       body: _buildBody(),
       floatingActionButton:_buildFloatingBtn(context),
 

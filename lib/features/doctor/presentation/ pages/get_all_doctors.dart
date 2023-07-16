@@ -4,6 +4,7 @@ import '../../../../core/widgets/message_display_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/doctor_bloc.dart';
 import '../bloc/doctor_event.dart';
 import '../bloc/doctor_state.dart';
@@ -15,7 +16,7 @@ class GetDoctorDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      appBar: WidgetAppBar(context: context, title: 'Doctor Data', showHomeIcon:true),
+      appBar: WidgetAppBar(context: context, title: S.of(context).DoctorData, showHomeIcon:true),
 
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),

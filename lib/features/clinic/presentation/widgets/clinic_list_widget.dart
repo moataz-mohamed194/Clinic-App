@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../ pages/Add_New_Clinic_data.dart';
 import '../../ domain/entities/Clinic.dart';
 import '../../../../core/widgets/AdWidget.dart';
+import '../../../../generated/l10n.dart';
 
 
 class ClinicListWidget extends StatelessWidget{
@@ -44,25 +45,25 @@ class ClinicListWidget extends StatelessWidget{
                         child:Container(
                           child: Column(
                             children: [
-                              Text('Address: ${clinic[index].addrees.toString()}'),
+                              Text('${S.of(context).Address}: ${clinic[index].addrees.toString()}'),
                               Row(
                                 children: [
                                   Expanded(
                                       child:Text(
-                                          'From: ${clinic[index].fromTime.toString()}',
+                                          '${S.of(context).From}: ${clinic[index].fromTime.toString()}',
                                           textAlign:TextAlign.center
                                         )
                                       ),
                                   Expanded(
                                       child:Text(
-                                          'To: ${clinic[index].toTime.toString()}',
+                                          '${S.of(context).To}: ${clinic[index].toTime.toString()}',
                                           textAlign:TextAlign.center
                                       )
                                   )
                                 ],
                               ),
                               Text(
-                                'Time of vacation: ${clinic[index].timeOfVacation}',
+                                '${S.of(context).TimeOfVacation}: ${clinic[index].timeOfVacation}',
                                   softWrap: true
                               ),
                               Text(
@@ -87,7 +88,7 @@ class ClinicListWidget extends StatelessWidget{
               ),
               clinic[index].latitude != '' && clinic[index].longitude!='' ?TextButton(onPressed: (){
                 openMap(double.parse(clinic[index].latitude!), double.parse(clinic[index].longitude!));
-              }, child: Text('Location')):Container()
+              }, child: Text(S.of(context).Location)):Container()
             ],
           );
 

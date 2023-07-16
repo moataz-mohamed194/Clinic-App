@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/string/app_icons.dart';
 import '../../../../core/util/Logout.dart';
+import '../../../../generated/l10n.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../profile/presentation/page/profile.dart';
 import '../../../sick/presentation/ pages/add_sick.dart';
@@ -13,20 +15,18 @@ import '../../../sick/presentation/ pages/get_sicks_based_on_user.dart';
 import '../bloc/bottom_cubit.dart';
 
 class MainUserPage extends StatelessWidget{
-  final String name;
+  final Person data;
 
-  const MainUserPage({Key? key, required this.name}) : super(key: key);
+  const MainUserPage({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     List<Widget> _widgetOptions = <Widget>[
       GetSicksBasedOnUser(),
       GetClinicDataPage(showAddAndEdit: false),
-      Profile(typeOfLogin: 'user', name: name.toString())
+      Profile(data: data)
     ];
     return BlocBuilder<BottomCubit, int>(builder: (context, state) {
       return Scaffold(
-      // appBar: AppBar(title: Text('Welcome our clint'),),
-
       body: Center(
         child: _widgetOptions.elementAt(context.read<BottomCubit>().state),
       ),
@@ -40,7 +40,7 @@ class MainUserPage extends StatelessWidget{
                   : AppIcons.iconUnSelectedHome,
               height: 22.h,
             ),
-            label: 'Home',
+            label:  S.of(context).Home,
             // backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
@@ -50,7 +50,7 @@ class MainUserPage extends StatelessWidget{
                   : AppIcons.iconUnSelectedClinic,
               height: 22.h,
             ),
-            label: 'Clinic',
+            label:  S.of(context).Clinic,
             // backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
@@ -60,7 +60,7 @@ class MainUserPage extends StatelessWidget{
                   : AppIcons.iconUnSelectedAvatar,
               height: 22.h,
             ),
-            label: 'Profile',
+            label:  S.of(context).Profile,
           ),
         ],
         currentIndex: state,

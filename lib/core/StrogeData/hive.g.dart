@@ -20,13 +20,14 @@ class PersonAdapter extends TypeAdapter<Person> {
       ..name = fields[0] as String?
       ..pk = fields[1] as String?
       ..typeOfAccount = fields[2] as String?
-      ..logged = fields[3] as bool?;
+      ..logged = fields[3] as bool?
+      ..language = fields[4] as String?;
   }
 
   @override
   void write(BinaryWriter writer, Person obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -34,7 +35,9 @@ class PersonAdapter extends TypeAdapter<Person> {
       ..writeByte(2)
       ..write(obj.typeOfAccount)
       ..writeByte(3)
-      ..write(obj.logged);
+      ..write(obj.logged)
+      ..writeByte(4)
+      ..write(obj.language);
   }
 
   @override

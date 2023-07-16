@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../ domain/entities/Clinic.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/actions_clinic_bloc.dart';
 import '../bloc/actions_clinic_event.dart';
 
@@ -63,7 +64,7 @@ class _MapsSampleState extends State<GetLocation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Maps in Flutter'),
+        title: Text(S.of(context).MapsInFlutter),
         centerTitle: true,
       ),
       body: Stack(

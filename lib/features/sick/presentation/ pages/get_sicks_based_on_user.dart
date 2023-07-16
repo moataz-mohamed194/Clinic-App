@@ -5,6 +5,7 @@ import '../../../../core/widgets/general_app_bar.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/message_display_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/add_sick_bloc.dart';
 import '../bloc/add_sick_event.dart';
 import '../bloc/add_sick_state.dart';
@@ -15,7 +16,7 @@ class GetSicksBasedOnUser extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WidgetAppBar(context: context, title: 'Sick', showHomeIcon:true),
+      appBar: WidgetAppBar(context: context, title: S.of(context).Sick, showHomeIcon:true),
 
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),

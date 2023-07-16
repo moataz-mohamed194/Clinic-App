@@ -6,6 +6,7 @@ import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../../../auth/presentation/bloc/check_box_cubit.dart';
 import '../../../auth/presentation/bloc/eyes_cubit.dart';
 import '../../domain/entities/user.dart';
@@ -31,8 +32,7 @@ class FormUserWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Register to Your Account',
+            Text(S.of(context).RegisterToYourAccount,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -43,10 +43,10 @@ class FormUserWidget extends StatelessWidget {
               validatorTextField: (val) => this.isItAdd == false
                   ? null
                   : val!.isEmpty
-                      ? 'must add the name of user'
+                      ? S.of(context).MustAddTheNameOfUser
                       : null,
               leftWidget: Icon(Icons.person_outline_outlined),
-              hintText: 'User Name',
+              hintText: S.of(context).UserName,
             ),
             SizedBox(
               height: 10,
@@ -56,10 +56,10 @@ class FormUserWidget extends StatelessWidget {
               validatorTextField: (val) => this.isItAdd == false
                   ? null
                   : val!.isEmpty
-                      ? 'must add the email of user'
+                      ? S.of(context).MustAddTheEmailOfUser
                       : null,
               leftWidget: Icon(Icons.email_outlined),
-              hintText: 'Email',
+              hintText: S.of(context).Email,
             ),
             SizedBox(
               height: 10,
@@ -68,9 +68,9 @@ class FormUserWidget extends StatelessWidget {
               return TextFieldWidget(
                 controler: _passwordController,
                 validatorTextField: (val) =>
-                    val!.isEmpty ? 'must add the password' : null,
+                    val!.isEmpty ? S.of(context).MustAddThePassword : null,
                 leftWidget: Icon(Icons.lock_outlined),
-                hintText: 'password',
+                hintText: S.of(context).Password,
                 obscureText: state,
                 rightWidget: InkWell(
                   child: state == true
@@ -117,7 +117,7 @@ class FormUserWidget extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('Remember me'),
+                    Text(S.of(context).RememberMe),
                   ],
                 ),
               );
@@ -128,7 +128,7 @@ class FormUserWidget extends StatelessWidget {
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
-              text: isItAdd == true ? 'Sign up' : 'Update user',
+              text: isItAdd == true ? S.of(context).SignUp :S.of(context).UpdateUser ,
               action: () =>
                   validateFormThenUpdateOrAddPost(context, this.isItAdd),
               backgroundColor: AppColors.mainColor,

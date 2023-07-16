@@ -8,6 +8,7 @@ import '../../ domain/entities/sick.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/add_sick_bloc.dart';
 import '../bloc/add_sick_event.dart';
 
@@ -42,8 +43,8 @@ class FormSickWidget extends StatelessWidget{
                 controler: _titleController,
                 keyboardType: TextInputType.text,
                 validatorTextField: (val) =>
-                val!.isEmpty ? 'must add the name of sick' : null,
-                hintText: 'Name',
+                val!.isEmpty ? S.of(context).MustAddTheNameOfSick : null,
+                hintText: S.of(context).Name,
               ),
             ),
             Container(
@@ -54,9 +55,9 @@ class FormSickWidget extends StatelessWidget{
                 controler: _phoneNumberController,
                 keyboardType: TextInputType.number,
                 validatorTextField: (val) =>
-                val!.isEmpty ? 'must add the phone number' :
-                      val.length>11 || val.length<11?'your number not right': null,
-                hintText: 'Phone Number',
+                val!.isEmpty ? S.of(context).MustAddThePhoneNumber :
+                      val.length>11 || val.length<11?S.of(context).YourNumberNotRight: null,
+                hintText: S.of(context).PhoneNumber,
               ),
             ),
             Container(
@@ -66,7 +67,7 @@ class FormSickWidget extends StatelessWidget{
                 type: DateTimePickerType.date,
                 dateMask: 'yyyy-MM-dd',
                 decoration: InputDecoration(
-                    hintText: 'Date of Statement',
+                    hintText: S.of(context).DateOfStatement,
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(color: Colors.transparent),
@@ -84,14 +85,14 @@ class FormSickWidget extends StatelessWidget{
                 firstDate: DateTime(2000),
                 // decoration:InputDecoration(
                 //     hintText:'Date of Statement'),
-                dateLabelText:'Choose the date',
+                dateLabelText:S.of(context).ChooseTheDate,
                 lastDate: DateTime(2100),
                 onChanged: (value) {
                   _dateController.text = '$value'.toString();
                 },
                 validator: (val) {
                   if(val == null){
-                    return 'must choose date';
+                    return S.of(context).MustChooseDate;
                   }
                   return null;
                 },
@@ -120,7 +121,7 @@ class FormSickWidget extends StatelessWidget{
                 ),
 
                 resultWidth:MediaQuery.of(context).size.width,
-                placeholder: 'Type of Statement',
+                placeholder: S.of(context).TypeOfStatement,
 
               ),
             ),
@@ -132,7 +133,7 @@ class FormSickWidget extends StatelessWidget{
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
-              text: 'Add sick',
+              text: S.of(context).AddSick,
               action: () {
                 validateFormThenUpdateOrAddPost(context);
               },

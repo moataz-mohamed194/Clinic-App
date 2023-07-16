@@ -3,6 +3,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ domain/entities/Fees.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/Fees_bloc.dart';
 
 class FormFeesWidget extends StatelessWidget{
@@ -28,13 +29,13 @@ class FormFeesWidget extends StatelessWidget{
             child: this.feesData==null?
             TextFormField(
               controller: _titleController,
-              validator: (val) => val!.isEmpty ? 'must add the type of fees' : null,
-              decoration: InputDecoration(hintText: 'Type'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheTypeOfFees : null,
+              decoration: InputDecoration(hintText: S.of(context).Type),
             ):
             TextFormField(
               initialValue:this.feesData != null? this.feesData!.type:null,
-              validator: (val) => val!.isEmpty ? 'must add the type of fees' : null,
-              decoration: InputDecoration(hintText: 'Type'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheTypeOfFees : null,
+              decoration: InputDecoration(hintText: S.of(context).Type),
               onChanged: (e){
                 _titleController.text = e;
               },
@@ -50,35 +51,35 @@ class FormFeesWidget extends StatelessWidget{
               initialValue:this.feesData != null? this.feesData!.price:null,
               validator: (val) {
                 if (val!.isEmpty) {
-                  return 'must add the price of fees';
+                  return S.of(context).MustAddThePriceOfFees;
                 }else{
                   try{
                     int.parse(val);
                     return null;
                   }catch(e){
-                    return 'must be numbers';
+                    return S.of(context).MustBeNumbers;
                   }
                 }
                },
-              decoration: InputDecoration(hintText: 'price'),
+              decoration: InputDecoration(hintText: S.of(context).price),
             ):
             TextFormField(
               keyboardType: TextInputType.number,
               initialValue: this.feesData!.price,
               validator: (val) {
                 if (val!.isEmpty) {
-                  return 'must add the price of fees';
+                  return S.of(context).MustAddThePriceOfFees;
                 }else{
                   try{
                     int.parse(val);
                     return null;
                   }catch(e){
                     double.parse(val);
-                    return 'must be numbers';
+                    return S.of(context).MustBeNumbers;
                   }
                 }
               },
-              decoration: InputDecoration(hintText: 'price'),
+              decoration: InputDecoration(hintText: S.of(context).price),
               onChanged: (e){
                 _priceController.text = e;
               },
@@ -92,8 +93,8 @@ class FormFeesWidget extends StatelessWidget{
                 dateMask: 'dd-MM-yyyy',
                 firstDate: DateTime(2000),
                 decoration:InputDecoration(
-                  hintText:'Date'),
-                dateLabelText:'Choose the date',
+                  hintText:S.of(context).Date),
+                dateLabelText:S.of(context).ChooseTheDate,
                 lastDate: DateTime(2100),
                 // initialValue:'2022-05-10',
                 controller: _dateController,
@@ -102,7 +103,7 @@ class FormFeesWidget extends StatelessWidget{
                 },
                 validator: (val) {
                   if(val == null){
-                    return 'must choose date of fees';
+                    return S.of(context).MustChooseDateOfFees;
                   }
                   return null;
                 },
@@ -113,15 +114,15 @@ class FormFeesWidget extends StatelessWidget{
                 initialValue: this.feesData!.time,
                 firstDate: DateTime(2000),
                 decoration:InputDecoration(
-                    hintText:'Date'),
-                dateLabelText:'Choose the date',
+                    hintText:S.of(context).Date),
+                dateLabelText:S.of(context).ChooseTheDate,
                 lastDate: DateTime(2100),
                 onChanged: (value) {
                   _dateController.text = '$value'.toString();
                 },
                 validator: (val) {
                   if(val == null){
-                    return 'must choose date of fees';
+                    return S.of(context).MustChooseDateOfFees;
                   }
                   return null;
                 },
@@ -132,7 +133,7 @@ class FormFeesWidget extends StatelessWidget{
                 validateFormThenAddFees(context):
                 validateFormThenUpdateFees(context, this.feesData),
               icon: Icon(Icons.add),
-              label:this.feesData==null? Text('Add Fees'):Text('Update Fees')
+              label:this.feesData==null? Text(S.of(context).AddFees):Text(S.of(context).UpdateFees)
           )
         ],
       ),

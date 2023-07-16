@@ -5,6 +5,7 @@ import '../../../../core/string/app_icons.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import '../../../visitor/presentation/bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import '../bloc/user_bloc.dart';
 import '../bloc/user_state.dart';
@@ -67,7 +68,7 @@ class AddUserPage extends StatelessWidget {
                                 color: Colors.grey.shade300,
                               )),
                               Text(
-                                '    or continue with    ',
+                                '    ${S.of(context).OrContinueWith}    ',
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Expanded(
@@ -149,13 +150,11 @@ class AddUserPage extends StatelessWidget {
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                'Already have an account?',
+                              Text(S.of(context).AlreadyHaveAnAccount,
                                 style: TextStyle(color: Colors.grey),
                               ),
                               InkWell(
-                                child: Text(
-                                  'Sign in',
+                                child: Text(S.of(context).SignIn,
                                   style: TextStyle(
                                     color: AppColors.mainColor,
                                     // decoration: TextDecoration.underline,

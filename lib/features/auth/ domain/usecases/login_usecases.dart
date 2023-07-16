@@ -9,7 +9,7 @@ class LoginUseCases{
 
   LoginUseCases( this.repositorie);
 
-  Future<Either<Failures, Unit>> call(Login login) async{
-    return await repositorie.loginMethod(login);
+  Future<Either<Failures, Unit>> call(Login login, bool stayLogin) async{
+    return await repositorie.loginMethod(login, stayLogin);
   }
 }

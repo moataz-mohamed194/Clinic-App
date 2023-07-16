@@ -13,6 +13,7 @@ Future<void> init() async{
   sl.registerFactory(() => EyesCubit());
   sl.registerFactory(() => CheckBoxCubit());
   sl.registerFactory(() => BottomCubit());
+  sl.registerFactory(() => LocaleCubit(changeLanguageUseCase: sl(), cubitLanguage: 'en'));
 
   sl.registerFactory(() => AddUpdateUserBloc(addUser: sl(),
       updateUser: sl()));
@@ -30,6 +31,7 @@ Future<void> init() async{
   sl.registerLazySingleton(() => AddFees(sl()));
   sl.registerLazySingleton(() => AddDoctorData(sl()));
   sl.registerLazySingleton(() => AddSickReport(sl()));
+  sl.registerLazySingleton(() => ChangeLanguageUseCase(sl()));
   sl.registerLazySingleton(() => AddNurseData(sl()));
   sl.registerLazySingleton(() => GetNurseData(sl()));
   sl.registerLazySingleton(() => GetSickBasedOnUser(sl()));
@@ -56,6 +58,7 @@ Future<void> init() async{
   //Repository
   sl.registerLazySingleton<FeesRepository>(() => FeesRepositoriesImpl(
       remoteDataSource: sl(), networkInfo: sl()));
+  sl.registerLazySingleton<BaseLanguageRepository>(() => LanguageRepository(languageLocaleDataSource: sl()));
   sl.registerLazySingleton<DoctorRepository>(() => DoctorRepositoriesImpl(
       remoteDataSource: sl(), networkInfo: sl()));
   sl.registerLazySingleton<NurseRepository>(() => NurseRepositoriesImpl(
@@ -74,6 +77,9 @@ Future<void> init() async{
   //Datasources
   sl.registerLazySingleton<DoctorRemoteDataSource>(() =>
       DoctorRemoteDataSourceImple(client:sl()));
+  sl.registerLazySingleton<BaseLanguageLocaleDataSource>(() =>
+      LanguageLocaleDataSource(sharedPreferences: sl()));
+  
   sl.registerLazySingleton<NurseRemoteDataSource>(() =>
       NurseRemoteDataSourceImple(client:sl()));
   sl.registerLazySingleton<FeesRemoteDataSource>(() =>

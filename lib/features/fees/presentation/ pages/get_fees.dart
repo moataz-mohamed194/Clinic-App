@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/message_display_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/Fees_bloc.dart';
 import '../bloc/Fees_state.dart';
 import '../widgets/Fees_list_widget.dart';
@@ -17,7 +18,7 @@ class GetAllFeesPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Fees')),
+      appBar: AppBar(title: Text(S.of(context).Fees)),
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),
     );

@@ -19,5 +19,8 @@ class Person extends HiveObject {
   @HiveField(3)
   bool? logged;
 
+  @HiveField(4)
+  String? language;
+
 }
 

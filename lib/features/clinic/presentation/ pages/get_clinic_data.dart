@@ -5,6 +5,7 @@ import '../../../../core/widgets/message_display_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/actions_clinic_bloc.dart';
 import '../bloc/actions_clinic_event.dart';
 import '../bloc/actions_clinic_state.dart';
@@ -80,7 +81,7 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WidgetAppBar(context: context, title: 'Clinic Data', showHomeIcon:true),
+      appBar: WidgetAppBar(context: context, title: S.of(context).ClinicData, showHomeIcon:true),
 
       body: _buildBody(),
       floatingActionButton: widget.showAddAndEdit == true

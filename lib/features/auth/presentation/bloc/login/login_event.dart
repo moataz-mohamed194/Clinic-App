@@ -13,9 +13,10 @@ class RefreshLoginEvent extends LoginEvent {}
 
 class LoginMethodEvent extends LoginEvent{
   final Login login;
+  final bool stayLogin;
 
-  LoginMethodEvent({required this.login});
+  LoginMethodEvent( {required this.stayLogin,required this.login});
 
   @override
-  List<Object> get props => [login];
+  List<Object> get props => [login, stayLogin];
 }

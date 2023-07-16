@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/general_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import 'get_fees.dart';
 
 class ChooseDatePage extends StatelessWidget {
@@ -16,7 +17,7 @@ class ChooseDatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: generalAppBar(context: context, title: 'Choose the date',),
+        appBar: generalAppBar(context: context, title: S.of(context).ChooseTheDate,),
 
         // AppBar(
         //   leading: IconButton(onPressed: (){
@@ -39,7 +40,7 @@ class ChooseDatePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: DateTimePicker(
                     decoration: InputDecoration(
-                      hintText: 'Choose the date',
+                      hintText: S.of(context).ChooseTheDate,
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: BorderSide(color: Colors.transparent),
@@ -56,7 +57,7 @@ class ChooseDatePage extends StatelessWidget {
                     type: DateTimePickerType.date,
                     dateMask: 'dd/MM/yyyy',
                     firstDate: DateTime(2000),
-                    dateLabelText: 'Choose the date',
+                    dateLabelText: S.of(context).ChooseTheDate,
                     lastDate: DateTime(2100),
                     // initialValue:'2022-05-10',
                     // readOnly: true,
@@ -64,7 +65,7 @@ class ChooseDatePage extends StatelessWidget {
                     onChanged: (val) => print(val),
                     validator: (val) {
                       if (val == null) {
-                        return 'must choose day';
+                        return S.of(context).MustChooseDay;
                       }
                       return null;
                     },
@@ -73,7 +74,7 @@ class ChooseDatePage extends StatelessWidget {
               ButtonWidget(
                 textColor: Colors.white,
                 boarderColor: Colors.transparent,
-                text: 'Done',
+                text: S.of(context).Done,
                 action: () {
                   goToPages(context);
                 },

@@ -14,13 +14,13 @@ class LoginRepositoriesImpl extends LoginRepositorie{
   LoginRepositoriesImpl({required this.remoteDataSource,required this.networkInfo});
 
   @override
-  Future<Either<Failures, Unit>> loginMethod(Login login) async {
+  Future<Either<Failures, Unit>> loginMethod(Login login, bool stayLogin) async {
     final LoginMethod loginMethod = LoginMethod(
       email: login.email, password: login.password
     );
     if (await networkInfo.isConnected) {
       try {
-        await remoteDataSource.loginMethod(loginMethod);
+        await remoteDataSource.loginMethod(loginMethod, stayLogin);
         return Right(unit);
       }catch(e){
         return Left(FailuresLoginFailures());

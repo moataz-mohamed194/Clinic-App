@@ -8,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/App_Theme.dart';
-import 'core/locale/app_localizations_setup.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'core/injection/injection_container.dart';
+import 'generated/l10n.dart';
 import 'features/auth/presentation/ pages/LoginPage.dart';
 import 'features/auth/presentation/ pages/MainDoctorPage.dart';
 import 'features/auth/presentation/ pages/MainNursePage.dart';
@@ -24,6 +26,7 @@ import 'features/fees/presentation/ pages/choose_date_page.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
 import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
 import 'core/injection/injection_container.dart' as di;
+import 'features/profile/presentation/bloc/locale_cubit.dart';
 import 'features/sick/presentation/ pages/add_sick.dart';
 import 'features/visitor/presentation/ pages/add_visitor.dart';
 
@@ -48,31 +51,37 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_)=> di.sl<EyesCubit>()),
           BlocProvider(create: (_)=> di.sl<CheckBoxCubit>()),
           BlocProvider(create: (_)=> di.sl<BottomCubit>()),
-
+          BlocProvider(create: (_)=> di.sl<LocaleCubit>()),
         ],
-        child: MaterialApp(
+        child:
+    BlocProvider<LocaleCubit>(
+    create: (context) =>LocaleCubit(cubitLanguage: loggedData==null?'en':loggedData!.language??'ar', changeLanguageUseCase: sl()),
+    // di.sl<LocaleCubit>()..add(GetSickEvent()),
+       child: BlocBuilder<LocaleCubit, String>(builder: (context, state) {
+       return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: appTheme,
+          locale: Locale(state),
           title: 'Posts App',
-          // home:GetLocation()
-
-
+          localizationsDelegates: [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
           home: ScreenUtilInit(
               designSize: const Size(360, 690),
               minTextAdapt: true,
               splitScreenMode: true,
               builder: (context, widget) =>loggedData == null||loggedData!.logged == false?LoginPage():
-              loggedData!.typeOfAccount == 'Nurse'?MainNursePage(name:loggedData!.name.toString()):
-              loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(name:loggedData!.name.toString()):
-              MainUserPage(name:loggedData!.name.toString()),
+              loggedData!.typeOfAccount == 'Nurse'?MainNursePage(data:loggedData!):
+              loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(data:loggedData!):
+              MainUserPage(data:loggedData!),
           ),
-          // home:
-          supportedLocales: AppLocalizationsSetup.supportedLocales,
-          localeResolutionCallback:
-          AppLocalizationsSetup.localeResolutionCallback,
-          localizationsDelegates:
-          AppLocalizationsSetup.localizationsDelegates,
-        )
+          // localeResolutionCallback:
+          // AppLocalizationsSetup.localeResolutionCallback,
+        );}))
     );
   }
 }

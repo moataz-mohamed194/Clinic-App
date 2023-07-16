@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/string/app_icons.dart';
 import '../../../../core/util/Logout.dart';
+import '../../../../generated/l10n.dart';
 import '../../../clinic/presentation/ pages/get_clinic_data.dart';
 import '../../../profile/presentation/page/profile.dart';
 import '../../../visitor/presentation/ pages/get_all_visitors.dart';
 import '../bloc/bottom_cubit.dart';
 
 class MainNursePage extends StatelessWidget{
-  final String name;
+  final Person data;
 
-    MainNursePage({Key? key,required this.name}) : super(key: key);
+    MainNursePage({Key? key,required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class MainNursePage extends StatelessWidget{
       GetAllSicksPage(typeOfLogin: 'nurse'),
       GetAllVisitors(typeOfLogin: 'nurse'),
       GetClinicDataPage(showAddAndEdit: false),
-      Profile(typeOfLogin: 'nurse', name: name.toString())
+      Profile(data: data)
     ];
     return BlocBuilder<BottomCubit, int>(builder: (context, state) {
       return Scaffold(
@@ -40,7 +42,7 @@ class MainNursePage extends StatelessWidget{
                   : AppIcons.iconUnSelectedHome,
               height: 22.h,
             ),
-            label: 'Home',
+            label:  S.of(context).Home,
             // backgroundColor: Colors.red,
           ),
           BottomNavigationBarItem(
@@ -50,7 +52,7 @@ class MainNursePage extends StatelessWidget{
                   : AppIcons.iconUnSelectedVisitor,
               height: 22.h,
             ),
-            label: 'Visitor',
+            label:  S.of(context).Visitor,
             // backgroundColor: Colors.green,
           ),
           BottomNavigationBarItem(
@@ -60,7 +62,7 @@ class MainNursePage extends StatelessWidget{
                   : AppIcons.iconUnSelectedClinic,
               height: 22.h,
             ),
-            label: 'Clinic',
+            label:  S.of(context).Clinic,
             // backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
@@ -70,7 +72,7 @@ class MainNursePage extends StatelessWidget{
                   : AppIcons.iconUnSelectedAvatar,
               height: 22.h,
             ),
-            label: 'Profile',
+            label:  S.of(context).Profile,
           ),
         ],
         currentIndex: state,

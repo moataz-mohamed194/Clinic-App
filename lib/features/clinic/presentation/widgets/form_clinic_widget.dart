@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../ pages/get_location.dart';
 import '../../ domain/entities/Clinic.dart';
+import '../../../../generated/l10n.dart';
 
 
 class FormClinicWidget extends StatelessWidget{
@@ -30,8 +31,8 @@ class FormClinicWidget extends StatelessWidget{
             child: this.clinic?.addrees != null?
             TextFormField(
 
-              validator: (val) => val!.isEmpty ? 'must add the address of clinic' : null,
-              decoration: InputDecoration(hintText: 'Address'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheAddressOfClinic : null,
+              decoration: InputDecoration(hintText: S.of(context).Address),
               initialValue:this.clinic?.addrees != null?clinic?.addrees:'',
               onChanged: (e){
                 _addressController.text = e;
@@ -41,8 +42,8 @@ class FormClinicWidget extends StatelessWidget{
             TextFormField(
               controller: _addressController,
 
-              validator: (val) => val!.isEmpty ? 'must add the address of clinic' : null,
-              decoration: InputDecoration(hintText: 'Address'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheAddressOfClinic: null,
+              decoration: InputDecoration(hintText: S.of(context).Address),
 
 
             ),
@@ -52,7 +53,7 @@ class FormClinicWidget extends StatelessWidget{
             child: this.clinic?.note !=null ?
             TextFormField(
               // controller: _noteController,
-              decoration: InputDecoration(hintText: 'Note'),
+              decoration: InputDecoration(hintText: S.of(context).Note),
               initialValue:this.clinic?.note != null?clinic?.note:'',
               onChanged: (e){
                 _noteController.text = e;
@@ -61,7 +62,7 @@ class FormClinicWidget extends StatelessWidget{
             ):
             TextFormField(
               controller: _noteController,
-              decoration: InputDecoration(hintText: 'Note'),
+              decoration: InputDecoration(hintText: S.of(context).Note),
               // initialValue:this.clinic?.note != null?'00'
 
             ),
@@ -71,8 +72,8 @@ class FormClinicWidget extends StatelessWidget{
             child:this.clinic?.timeOfVacation != null?
             TextFormField(
               // controller: _timeOfVacationsController,
-              validator: (val) => val!.isEmpty ? 'must add the days of vacations' : null,
-              decoration: InputDecoration(hintText: 'time of vacation'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheDaysOfVacations : null,
+              decoration: InputDecoration(hintText: S.of(context).TimeOfVacation),
                 initialValue:this.clinic?.timeOfVacation != null?this.clinic?.timeOfVacation:'',
               onChanged: (e){
                 _timeOfVacationsController.text = e;
@@ -80,8 +81,8 @@ class FormClinicWidget extends StatelessWidget{
             ):
             TextFormField(
               controller: _timeOfVacationsController,
-              validator: (val) => val!.isEmpty ? 'must add the days of vacations' : null,
-              decoration: InputDecoration(hintText: 'time of vacation'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheDaysOfVacations : null,
+              decoration: InputDecoration(hintText: S.of(context).TimeOfVacation),
               // initialValue:this.clinic?.timeOfVacation != null?'00':''
 
             ),
@@ -95,8 +96,8 @@ class FormClinicWidget extends StatelessWidget{
               initialValue: this.clinic!.fromTime,
               firstDate: DateTime(2000),
               decoration:InputDecoration(
-                  hintText:'Date'),
-              dateLabelText:'Choose the date',
+                  hintText:S.of(context).Date),
+              dateLabelText:S.of(context).ChooseTheDate,
               lastDate: DateTime(2100),
               onChanged: (value) {
                 if(clinic!.fromTime != '$value'){
@@ -107,7 +108,7 @@ class FormClinicWidget extends StatelessWidget{
               },
               validator: (val) {
                 if(val == null){
-                  return 'must choose date of fees';
+                  return S.of(context).MustChooseDateOfFees;
                 }
                 return null;
               },
@@ -116,7 +117,7 @@ class FormClinicWidget extends StatelessWidget{
               type: DateTimePickerType.time,
               firstDate: DateTime(2000),
               decoration:InputDecoration(
-                hintText:'Start time'),
+                hintText:S.of(context).StartTime),
               lastDate: DateTime(2100),
               controller: _fromTimesController,
               onChanged: (value) {
@@ -124,7 +125,7 @@ class FormClinicWidget extends StatelessWidget{
               },
               validator: (val) {
                 if(val == null){
-                  return 'must add the Start time of clinic';
+                  return S.of(context).MustAddTheStartTimeOfClinic;
                 }
                 return null;
               },
@@ -138,8 +139,8 @@ class FormClinicWidget extends StatelessWidget{
                 initialValue: this.clinic!.toTime,
                 firstDate: DateTime(2000),
                 decoration:InputDecoration(
-                  hintText:'Date'),
-                dateLabelText:'Choose the date',
+                  hintText:S.of(context).Date),
+                dateLabelText:S.of(context).ChooseTheDate,
                 lastDate: DateTime(2100),
                 onChanged: (value) {
                   if(clinic!.toTime != '$value'){
@@ -150,7 +151,7 @@ class FormClinicWidget extends StatelessWidget{
                 },
                 validator: (val) {
                   if(val == null){
-                    return 'must choose time';
+                    return S.of(context).MustChooseTime;
                   }
                   return null;
                 },
@@ -159,7 +160,7 @@ class FormClinicWidget extends StatelessWidget{
               type: DateTimePickerType.time,
               firstDate: DateTime(2000),
               decoration:InputDecoration(
-                  hintText:'End time'),
+                  hintText:S.of(context).EndTime),
               lastDate: DateTime(2100),
               controller: _toTimeController,
               onChanged: (value) {
@@ -167,7 +168,7 @@ class FormClinicWidget extends StatelessWidget{
               },
               validator: (val) {
                 if(val == null){
-                  return 'must add the end time of clinic';
+                  return S.of(context).MustAddTheEndTimeOfClinic;
                 }
                 return null;
               },
@@ -180,13 +181,13 @@ class FormClinicWidget extends StatelessWidget{
                 // validateFormAddClinicAndGoToLocationPage(context);
               },
               icon: Icon(Icons.location_on),
-              label: Text('Add Location')
+              label: Text(S.of(context).AddLocation)
           ),
 
           ElevatedButton.icon(
               onPressed:()=> clinic!=null ?validateFormUpdateClinic(context,this.clinic) : validateFormAddClinic(context),
               icon: Icon(Icons.add),
-              label: Text(clinic!=null?'Update Clinic Data':'Add New Clinic')
+              label: Text(clinic!=null?S.of(context).UpdateClinicData:S.of(context).AddNewClinic)
           )
         ],
       ),

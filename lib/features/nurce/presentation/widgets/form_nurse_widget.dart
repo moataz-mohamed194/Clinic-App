@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ domain/entities/Nurse.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/Nurse_bloc.dart';
 import '../bloc/Nurse_event.dart';
 
@@ -27,8 +28,8 @@ class FormNurseWidget extends StatelessWidget{
             child:TextFormField(
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
-              validator: (val) => val!.isEmpty ? 'must add the email of Nurse' : null,
-              decoration: InputDecoration(hintText: 'Nurse Email'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheEmailOfNurse : null,
+              decoration: InputDecoration(hintText: S.of(context).Email),
             ),
           ),
           Padding(
@@ -36,8 +37,8 @@ class FormNurseWidget extends StatelessWidget{
             child:TextFormField(
               controller: _nameController,
               keyboardType: TextInputType.name,
-              decoration: InputDecoration(hintText: 'Name'),
-              validator: (val) => val!.isEmpty ? 'must add the name of Nurse' : null,
+              decoration: InputDecoration(hintText: S.of(context).Name),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheNameOfNurse: null,
             ),
           ),
           Padding(
@@ -45,9 +46,9 @@ class FormNurseWidget extends StatelessWidget{
             child:TextFormField(
               keyboardType: TextInputType.number,
               controller: _firstPhoneNumberController,
-              validator: (val) => val!.isEmpty ? 'must add the phone number' :
-              val.length>11 || val.length<11?'your number not right': null,
-              decoration: InputDecoration(hintText: 'phone number'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddThePhoneNumber :
+              val.length>11 || val.length<11?S.of(context).YourNumberNotRight: null,
+              decoration: InputDecoration(hintText: S.of(context).PhoneNumber),
             ),
           ),
           Padding(
@@ -56,8 +57,8 @@ class FormNurseWidget extends StatelessWidget{
               keyboardType: TextInputType.number,
               controller: _secondPhoneNumberController,
               validator: (val) => val!.isEmpty ? null :
-              val.length>11 || val.length<11?'your number not right': null,
-              decoration: InputDecoration(hintText: 'phone number'),
+              val.length>11 || val.length<11?S.of(context).YourNumberNotRight: null,
+              decoration: InputDecoration(hintText: S.of(context).PhoneNumber),
             ),
           ),
           Padding(
@@ -65,9 +66,9 @@ class FormNurseWidget extends StatelessWidget{
             child:TextFormField(
               keyboardType: TextInputType.name,
               controller: _descriptionController,
-              validator: (val) => val!.isEmpty ? 'must add the description' :
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheDescription :
                null,
-              decoration: InputDecoration(hintText: 'Description'),
+              decoration: InputDecoration(hintText: S.of(context).Description),
             ),
           ),
           Padding(
@@ -75,9 +76,9 @@ class FormNurseWidget extends StatelessWidget{
             child:TextFormField(
               keyboardType: TextInputType.name,
               controller: _passwordController,
-              validator: (val) => val!.isEmpty ? 'must add the password' :
-              val.length<12 ?'your password must be longer than 12': null,
-              decoration: InputDecoration(hintText: 'Password'),
+              validator: (val) => val!.isEmpty ? S.of(context).MustAddThePassword :
+              val.length<12 ?S.of(context).YourPasswordMustBeLongerThan12: null,
+              decoration: InputDecoration(hintText: S.of(context).Password),
 
             ),
           ),
@@ -87,7 +88,7 @@ class FormNurseWidget extends StatelessWidget{
           ElevatedButton.icon(
               onPressed:()=> validateFormAddNurse(context),
               icon: Icon(Icons.add),
-              label: Text('Add New Nurse')
+              label: Text(S.of(context).AddNewNurse)
           )
         ],
       ),

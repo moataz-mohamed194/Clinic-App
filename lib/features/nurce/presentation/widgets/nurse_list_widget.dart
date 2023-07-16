@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../ domain/entities/Nurse.dart';
+import '../../../../generated/l10n.dart';
 
 
 class NurseListWidget extends StatelessWidget{
@@ -32,21 +33,21 @@ class NurseListWidget extends StatelessWidget{
                           Column(
                             children: [
                               Text(
-                                      'Email: ${nurse[index].email.toString()}',
+                                      '${S.of(context).Email}: ${nurse[index].email.toString()}',
                                       textAlign:TextAlign.center
                                     ),
                               Text(
-                                      'First Phone Number: ${nurse[index].firstPhoneNumber.toString()}',
+                                      '${S.of(context).FirstPhoneNumber}: ${nurse[index].firstPhoneNumber.toString()}',
                                       textAlign:TextAlign.center
                                   ),
                               Text(
-                                      'Second Phone Number: ${nurse[index].secondPhoneNumber.toString()}',
+                                      '${S.of(context).SecondPhoneNumber}: ${nurse[index].secondPhoneNumber.toString()}',
                                       textAlign:TextAlign.center
                                   )
                             ],
                           ),
                           Text(
-                            'Description: ${nurse[index].description}',
+                            '${S.of(context).Description}: ${nurse[index].description}',
                               softWrap: true
                           ),
                         ],

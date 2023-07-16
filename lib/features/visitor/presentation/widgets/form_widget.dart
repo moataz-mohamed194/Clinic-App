@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
+import '../../../../generated/l10n.dart';
 
 class FormVisitorWidget extends StatelessWidget{
 
@@ -31,19 +32,10 @@ class FormVisitorWidget extends StatelessWidget{
                 controler: _titleController,
                 keyboardType: TextInputType.text,
                 validatorTextField: (val) =>
-                val!.isEmpty ? 'must add the name of visitor' : null,
-                hintText: 'Name',
+                val!.isEmpty ? S.of(context).MustAddTheNameOfVisitor : null,
+                hintText: S.of(context).Name,
               ),
             ),
-            // Padding(padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            //   child: TextFormField(
-            //     controller: _titleController,
-            //     validator: (val) => val!.isEmpty ? 'must add the name of visitor' : null,
-            //     decoration: InputDecoration(hintText: 'Name'),
-            //     minLines: 2,
-            //     maxLines: 2,
-            //   ),
-            // ),
             Container(
               padding: EdgeInsets.symmetric(
                 vertical: 10,
@@ -52,24 +44,15 @@ class FormVisitorWidget extends StatelessWidget{
                 controler: _bodyController,
                 keyboardType: TextInputType.text,
                 validatorTextField: (val) =>
-                val!.isEmpty ? 'must add the reason of visitor' : null,
+                val!.isEmpty ? S.of(context).MustAddTheReasonOfVisitor : null,
                 hintText: 'Reason',
               ),
             ),
-            // Padding(padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            //   child: TextFormField(
-            //     controller: _bodyController,
-            //     validator: (val) => val!.isEmpty ? 'must add the reason of visitor' : null,
-            //     decoration: InputDecoration(hintText: 'reason'),
-            //     minLines: 2,
-            //     maxLines: 2,
-            //   ),
-            // ),
 
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
-              text: 'Add Visitor',
+              text: S.of(context).AddVisitor,
               action: () {
                 validateFormThenUpdateOrAddPost(context);
               },
@@ -78,11 +61,6 @@ class FormVisitorWidget extends StatelessWidget{
               marginWidth: 30,
             ),
 
-            // ElevatedButton.icon(
-            //     onPressed:()=> validateFormThenUpdateOrAddPost(context),
-            //     icon: Icon(Icons.add),
-            //     label: Text('Add Visitor')
-            // )
           ],
         ),
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../ domain/entities/Fees.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/Fees_bloc.dart';
 import '../bloc/Fees_state.dart';
 import '../widgets/form_fees_widget.dart';
@@ -16,7 +17,7 @@ class AddFeesPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:this.feesData==null? Text('Add The Fees of Clinic'):Text('Update The Fees of Clinic'),
+        title:this.feesData==null? Text(S.of(context).AddTheFeesOfClinic):Text(S.of(context).UpdateTheFeesOfClinic),
       ),
       body: appBody(context),
     );

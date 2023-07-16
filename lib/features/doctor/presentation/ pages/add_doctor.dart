@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/general_app_bar.dart';
 import '../../../../core/widgets/loading_widget.dart';
+import '../../../../generated/l10n.dart';
 import '../bloc/doctor_bloc.dart';
 import '../bloc/doctor_state.dart';
 import '../widgets/form_doctor_widget.dart';
@@ -12,7 +13,7 @@ class AddNewDoctorPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:generalAppBar(context: context, title: 'Add Doctor Data',),
+      appBar:generalAppBar(context: context, title: S.of(context).AddDoctorData,),
 
       body: appBody(context),
     );

@@ -9,6 +9,7 @@ import '../../../../core/string/app_color.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
+import '../../../../generated/l10n.dart';
 import '../../../user/presentation/pages/add_user.dart';
 import '../bloc/login/login_bloc.dart';
 import '../widgets/form_widget.dart';
@@ -48,25 +49,25 @@ class LoginPage extends StatelessWidget {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (_) => MainNursePage(
-                                    name: tasksBox.get(0)!.name.toString())),
+                                    data: tasksBox.get(0)!)),
                             (route) => false);
                       } else if (tasksBox.get(0)!.typeOfAccount == 'Doctor') {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (_) => MainDoctorPage(
-                                    name: tasksBox.get(0)!.name.toString())),
+                                    data: tasksBox.get(0)!)),
                             (route) => false);
                       } else if (tasksBox.get(0)!.typeOfAccount == 'User') {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (_) => MainUserPage(
-                                    name: tasksBox.get(0)!.name.toString())),
+                                    data: tasksBox.get(0)!)),
                             (route) => false);
                       } else {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                                 builder: (_) => MainUserPage(
-                                    name: tasksBox.get(0)!.name.toString())),
+                                    data: tasksBox.get(0)!)),
                             (route) => false);
                       }
                     } else if (state is ErrorLoginState) {
@@ -94,7 +95,7 @@ class LoginPage extends StatelessWidget {
                               color: Colors.grey.shade300,
                             )),
                             Text(
-                              '    or continue with    ',
+                              '    ${S.of(context).OrContinueWith}    ',
                               style: TextStyle(color: Colors.grey),
                             ),
                             Expanded(
@@ -180,13 +181,11 @@ class LoginPage extends StatelessWidget {
                           // crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Don\'t have account',
+                            Text(S.of(context).DonnotHaveAccount,
                               style: TextStyle(color: Colors.grey),
                             ),
                             InkWell(
-                              child: Text(
-                                'Create Account',
+                              child: Text(S.of(context).CreateAccount,
                                 style: TextStyle(
                                   color: AppColors.mainColor,
                                   // decoration: TextDecoration.underline,

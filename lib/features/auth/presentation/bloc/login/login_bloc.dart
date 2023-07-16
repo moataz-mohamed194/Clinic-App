@@ -20,7 +20,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState>{
     on<LoginEvent>((event, emit) async {
       if (event is LoginMethodEvent){
         emit(LoadingLoginState());
-        final failureOrDoneMessage = await loginMethod(event.login);
+        final failureOrDoneMessage = await loginMethod(event.login, event.stayLogin);
         emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, LOGIN_SUCCESS_MESSAGE));
       }
     });

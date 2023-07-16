@@ -32,7 +32,7 @@ sickListWidget({required List<Sick> sick, String? typeOfLogin}) {
 
             title: Text(sick[index].name),
             dense: true,
-            onTap: typeOfLogin == 'doctor'
+            onTap: typeOfLogin == 'Doctor'
                 ? () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (_) =>
@@ -43,7 +43,7 @@ sickListWidget({required List<Sick> sick, String? typeOfLogin}) {
             subtitle: Text(sick[index].phoneNumber.toString()),
             trailing: Column(
               children: [
-                typeOfLogin == 'doctor'
+                typeOfLogin == 'Doctor'
                     ? IconButton(
                         icon: Icon(Icons.add),
                         onPressed: () => _onUpdate(context, sick[index].id),
