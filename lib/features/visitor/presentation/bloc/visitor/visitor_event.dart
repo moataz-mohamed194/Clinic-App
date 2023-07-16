@@ -7,8 +7,6 @@ abstract class VisitorEvent extends Equatable {
   List<Object> get props => [];
 }
 
-
-
 class GetAllVisitorsEvent extends VisitorEvent {}
 
 class RefreshVisitorsEvent extends VisitorEvent {}

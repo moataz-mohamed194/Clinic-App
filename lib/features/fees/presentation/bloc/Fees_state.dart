@@ -2,8 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../ domain/entities/Fees.dart';
 
-
-abstract class AddUpdateGetFeesState extends Equatable{
+abstract class AddUpdateGetFeesState extends Equatable {
   const AddUpdateGetFeesState();
 
   @override
@@ -13,7 +12,6 @@ abstract class AddUpdateGetFeesState extends Equatable{
 class FeesInitial extends AddUpdateGetFeesState {}
 
 class LoadingFeesState extends AddUpdateGetFeesState {}
-
 
 class LoadedFeesState extends AddUpdateGetFeesState {
   final List<Fees> fees;
@@ -27,15 +25,13 @@ class LoadedFeesState extends AddUpdateGetFeesState {
 class ErrorFeesState extends AddUpdateGetFeesState {
   final String message;
 
-
   ErrorFeesState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-
-class MessageAddUpdateGetFeesState extends AddUpdateGetFeesState{
+class MessageAddUpdateGetFeesState extends AddUpdateGetFeesState {
   final String message;
 
   MessageAddUpdateGetFeesState({required this.message});

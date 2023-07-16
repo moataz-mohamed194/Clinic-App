@@ -7,7 +7,6 @@ import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/string/app_images.dart';
-import '../../../../core/string/language.dart';
 import '../../../../core/util/Logout.dart';
 import '../../../../core/widgets/widget_app_bar.dart';
 import '../../../../generated/l10n.dart';
@@ -16,7 +15,6 @@ import '../../../fees/presentation/ pages/choose_date_page.dart';
 import '../bloc/locale_cubit.dart';
 
 class Profile extends StatelessWidget {
-  // final String? typeOfLogin;
   final Person? data;
 
   const Profile({Key? key, required this.data}) : super(key: key);
@@ -26,14 +24,12 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: WidgetAppBar(
           context: context, title: S.of(context).Profile, showHomeIcon: true),
-      // _buildAppBar(),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 15),
         padding: EdgeInsets.only(top: 25),
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 50,
@@ -53,7 +49,6 @@ class Profile extends StatelessWidget {
               height: 15,
             ),
             Container(
-              // width: 100,
               child: ToggleSwitch(
                 initialLabelIndex: data!.language == 'en' ? 0 : 1,
                 totalSwitches: 2,
@@ -69,7 +64,6 @@ class Profile extends StatelessWidget {
                 },
               ),
             ),
-
             SizedBox(
               height: 15,
             ),
@@ -159,7 +153,6 @@ class Profile extends StatelessWidget {
                   S.of(context).Logout,
                   style: TextStyle(color: Colors.red),
                 ),
-                // trailing: Icon(Icons.arrow_forward_ios),
               ),
             )
           ],

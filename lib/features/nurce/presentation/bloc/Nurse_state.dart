@@ -1,10 +1,8 @@
-
 import 'package:equatable/equatable.dart';
 
 import '../../ domain/entities/Nurse.dart';
 
-
-abstract class AddGetNurseState extends Equatable{
+abstract class AddGetNurseState extends Equatable {
   const AddGetNurseState();
 
   @override
@@ -14,7 +12,6 @@ abstract class AddGetNurseState extends Equatable{
 class NurseInitial extends AddGetNurseState {}
 
 class LoadingNurseState extends AddGetNurseState {}
-
 
 class LoadedNurseState extends AddGetNurseState {
   final List<Nurse> nurse;
@@ -28,15 +25,13 @@ class LoadedNurseState extends AddGetNurseState {
 class ErrorNurseState extends AddGetNurseState {
   final String message;
 
-
   ErrorNurseState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-
-class MessageAddGetNurseState extends AddGetNurseState{
+class MessageAddGetNurseState extends AddGetNurseState {
   final String message;
 
   MessageAddGetNurseState({required this.message});

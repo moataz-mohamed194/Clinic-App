@@ -1,18 +1,13 @@
-import 'package:clinic/core/string/app_icons.dart';
 import 'package:clinic/features/auth/presentation/bloc/login/login_bloc.dart';
-// import 'package:clinic/features/auth/presentation/bloc/login_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../ domain/entities/login.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
 import '../../../../generated/l10n.dart';
-import '../../../user/presentation/pages/add_user.dart';
 import '../bloc/check_box_cubit.dart';
 import '../bloc/eyes_cubit.dart';
-// import '../bloc/login/login_event.dart';
 
 class FormWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -64,7 +59,6 @@ class FormWidget extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-
             BlocBuilder<CheckBoxCubit, bool>(builder: (context, state) {
               return InkWell(
                 onTap: () {
@@ -89,7 +83,6 @@ class FormWidget extends StatelessWidget {
                             )
                           : Icon(
                               null,
-                              // size: 30.0,
                             ),
                       height: 25,
                       width: 25,
@@ -113,7 +106,6 @@ class FormWidget extends StatelessWidget {
               marginHeight: 10,
               marginWidth: 0,
             ),
-            // ),
           ],
         ),
       ),
@@ -124,13 +116,13 @@ class FormWidget extends StatelessWidget {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
-      // try {
       final login = Login(
         email: _emailController.text.toString(),
         password: _passwordController.text.toString(),
       );
 
-      BlocProvider.of<LoginBloc>(context).add(LoginMethodEvent(login: login, stayLogin: context.read<CheckBoxCubit>().state));
+      BlocProvider.of<LoginBloc>(context).add(LoginMethodEvent(
+          login: login, stayLogin: context.read<CheckBoxCubit>().state));
     }
   }
 }

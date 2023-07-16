@@ -8,98 +8,99 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/Exception.dart';
 
-class SickRepositoriesImpl implements SickRepository{
+class SickRepositoriesImpl implements SickRepository {
   final SickRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  SickRepositoriesImpl({required this.remoteDataSource,required this.networkInfo});
+  SickRepositoriesImpl(
+      {required this.remoteDataSource, required this.networkInfo});
   @override
   Future<Either<Failures, Unit>> addSick(Sick sick) async {
-    final SickModel sickModel = SickModel(id: sick.id,
-        phoneNumber: sick.phoneNumber, name: sick.name, pk: sick.pk,
+    final SickModel sickModel = SickModel(
+        id: sick.id,
+        phoneNumber: sick.phoneNumber,
+        name: sick.name,
+        pk: sick.pk,
         typeOfStatment: sick.typeOfStatment);
-      if (await networkInfo.isConnected) {
-        try {
-          await remoteDataSource.addSick(sickModel);
-          return Right(unit);
-        }on OfflineException{
-          return Left(OfflineFailures());
-        }
-      }else{
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSource.addSick(sickModel);
+        return Right(unit);
+      } on OfflineException {
         return Left(OfflineFailures());
       }
+    } else {
+      return Left(OfflineFailures());
+    }
   }
 
   @override
   Future<Either<Failures, List<Sick>>> getAllSick() async {
-    if (await networkInfo.isConnected){
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         final currentSick = await remoteDataSource.getSick();
         return Right(currentSick);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, Unit>> updateSick(int id) async {
-    if (await networkInfo.isConnected){
-      try{
-      await remoteDataSource.updateSick(id);
-      return Right(unit);
-      }on OfflineException{
+    if (await networkInfo.isConnected) {
+      try {
+        await remoteDataSource.updateSick(id);
+        return Right(unit);
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, List<Sick>>> getSickBasedOnUser() async {
-    if (await networkInfo.isConnected){
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         final currentSick = await remoteDataSource.getSickBasedOnUser();
         return Right(currentSick);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, Unit>> addSickReport(int? id, String report) async {
-
     if (await networkInfo.isConnected) {
       try {
         await remoteDataSource.addSickReport(id, report);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, Unit>> updateSickAsEntered(int id) async {
-    if (await networkInfo.isConnected){
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         await remoteDataSource.updateSickAsEntered(id);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
-
-
 }

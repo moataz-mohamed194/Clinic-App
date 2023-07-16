@@ -1,4 +1,3 @@
-
 import 'package:clinic/core/error/failures.dart';
 
 import 'package:clinic/features/doctor/%20domain/entities/Doctor.dart';
@@ -15,8 +14,8 @@ class DoctorRepositoriesImpl implements DoctorRepository {
   final DoctorRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  DoctorRepositoriesImpl({required this.remoteDataSource,
-    required this.networkInfo});
+  DoctorRepositoriesImpl(
+      {required this.remoteDataSource, required this.networkInfo});
 
   @override
   Future<Either<Failures, Unit>> addDoctorData(Doctor doctor) async {
@@ -26,30 +25,29 @@ class DoctorRepositoriesImpl implements DoctorRepository {
         password: doctor.password.toString(),
         phoneNumber: doctor.phoneNumber,
         description: doctor.description.toString(),
-        pic: doctor.pic.toString()
-    );
-    if (await networkInfo.isConnected){
-      try{
+        pic: doctor.pic.toString());
+    if (await networkInfo.isConnected) {
+      try {
         await remoteDataSource.addDoctor(doctorModel);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else {
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, List<Doctor>>> getDoctorData() async {
-    if(await networkInfo.isConnected) {
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         final currentDoctor = await remoteDataSource.getAllDoctor();
         return Right(currentDoctor);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }

@@ -4,33 +4,33 @@ import '../../../../core/error/Exception.dart';
 import '../../../../core/string/url.dart';
 import '../../domain/entities/user.dart';
 
-abstract class UserRemoteDataSource{
+abstract class UserRemoteDataSource {
   Future<Unit> addUser(User user);
   Future<Unit> updateUser(int id, User user);
- 
 }
 
 class UserRemoteDataSourceImple extends UserRemoteDataSource {
   final http.Client client;
 
-  UserRemoteDataSourceImple({ required this.client});
+  UserRemoteDataSourceImple({required this.client});
 
   @override
   Future<Unit> addUser(User user) async {
-
     final body = {
       'email': user.email.toString(),
       'password': user.password.toString(),
       'userName': user.userName.toString(),
     };
-    try{
-      final response = await client.post(Uri.parse(AppUrl.UrlAddAccount),body: body);
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+    try {
+      final response =
+          await client.post(Uri.parse(AppUrl.UrlAddAccount), body: body);
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
+      } else {
         throw OfflineException();
-      }}
-    catch(e){
+      }
+    } catch (e) {
       throw OfflineException();
     }
   }
@@ -41,15 +41,16 @@ class UserRemoteDataSourceImple extends UserRemoteDataSource {
       'email': user.email.toString(),
       'userName': user.userName.toString(),
     };
-    try{
-      final response = await client.post(Uri.parse(AppUrl.UrlUpdateAccount(id.toString())),body: body);
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+    try {
+      final response = await client
+          .post(Uri.parse(AppUrl.UrlUpdateAccount(id.toString())), body: body);
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
+      } else {
         throw OfflineException();
       }
-    }
-    catch(e){
+    } catch (e) {
       throw OfflineException();
     }
   }

@@ -13,38 +13,41 @@ import '../../../../core/string/messages.dart';
 import 'Fees_event.dart';
 import 'Fees_state.dart';
 
-class AddUpdateGetFeesBloc extends Bloc<FeesEvent, AddUpdateGetFeesState>{
+class AddUpdateGetFeesBloc extends Bloc<FeesEvent, AddUpdateGetFeesState> {
   final AddFees addFees;
   final UpdateFeesData updateFeesData;
   final GetFeesOfDay getFeesOfDay;
   final GetFeesOfMonth getFeesOfMonth;
   final DeleteFeesData deleteFeesData;
 
-  AddUpdateGetFeesBloc({
-    required this.getFeesOfDay,
-    required this.getFeesOfMonth,
-    required this.addFees,
-    required this.updateFeesData,
-    required this.deleteFeesData
-    }) : super(FeesInitial()){
+  AddUpdateGetFeesBloc(
+      {required this.getFeesOfDay,
+      required this.getFeesOfMonth,
+      required this.addFees,
+      required this.updateFeesData,
+      required this.deleteFeesData})
+      : super(FeesInitial()) {
     on<FeesEvent>((event, emit) async {
-      if (event is AddFeesEvent){
+      if (event is AddFeesEvent) {
         emit(LoadingFeesState());
         final failureOrDoneMessage = await addFees(event.fees);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
-      }else if(event is UpdateFeesEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
+      } else if (event is UpdateFeesEvent) {
         emit(LoadingFeesState());
         final failureOrDoneMessage = await updateFeesData(event.fees);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
-      }else if(event is DeleteFeesEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+      } else if (event is DeleteFeesEvent) {
         emit(LoadingFeesState());
         final failureOrDoneMessage = await deleteFeesData(event.feesId);
-        emit(_mapFailureOrPostsToStateForAdd (failureOrDoneMessage, DELETE_SUCCESS_MESSAGE));
-      }else if(event is GetFeesOfDayEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, DELETE_SUCCESS_MESSAGE));
+      } else if (event is GetFeesOfDayEvent) {
         emit(LoadingFeesState());
         final failureOrDoneMessage = await getFeesOfDay(event.day);
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
-      }else if(event is GetFeesOfMonthEvent){
+      } else if (event is GetFeesOfMonthEvent) {
         emit(LoadingFeesState());
         final failureOrDoneMessage = await getFeesOfMonth(event.month);
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
@@ -53,25 +56,21 @@ class AddUpdateGetFeesBloc extends Bloc<FeesEvent, AddUpdateGetFeesState>{
   }
 }
 
-
-AddUpdateGetFeesState _mapFailureOrPostsToStateForAdd(Either<Failures, Unit> either, String message) {
+AddUpdateGetFeesState _mapFailureOrPostsToStateForAdd(
+    Either<Failures, Unit> either, String message) {
   return either.fold(
-        (failure) => ErrorFeesState(
-        message: _mapFailureToMessage(failure)
-    ),
-        (_) => MessageAddUpdateGetFeesState(
+    (failure) => ErrorFeesState(message: _mapFailureToMessage(failure)),
+    (_) => MessageAddUpdateGetFeesState(
       message: message,
     ),
   );
 }
 
-
-AddUpdateGetFeesState _mapFailureOrPostsToStateForGet(Either<Failures, List<Fees>> either) {
+AddUpdateGetFeesState _mapFailureOrPostsToStateForGet(
+    Either<Failures, List<Fees>> either) {
   return either.fold(
-        (failure) => ErrorFeesState(message: _mapFailureToMessage(failure)),
-        (fees) => LoadedFeesState(
-            fees: fees
-    ),
+    (failure) => ErrorFeesState(message: _mapFailureToMessage(failure)),
+    (fees) => LoadedFeesState(fees: fees),
   );
 }
 

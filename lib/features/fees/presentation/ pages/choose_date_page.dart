@@ -17,19 +17,10 @@ class ChooseDatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: generalAppBar(context: context, title: S.of(context).ChooseTheDate,),
-
-        // AppBar(
-        //   leading: IconButton(onPressed: (){
-        //     Navigator.pop(context);
-        //   }, icon: Icon(Icons.arrow_back_ios_new_sharp, color: Colors.black,)),
-        //   title: Text(
-        //     'Choose the date',
-        //     style: TextStyle(color: Colors.black),
-        //   ),
-        //   backgroundColor: Colors.transparent,
-        //   elevation: 0,
-        // ),
+        appBar: generalAppBar(
+          context: context,
+          title: S.of(context).ChooseTheDate,
+        ),
         body: Form(
           key: _formKey,
           child: Column(
@@ -40,7 +31,7 @@ class ChooseDatePage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: DateTimePicker(
                     decoration: InputDecoration(
-                      hintText: S.of(context).ChooseTheDate,
+                        hintText: S.of(context).ChooseTheDate,
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           borderSide: BorderSide(color: Colors.transparent),
@@ -59,8 +50,6 @@ class ChooseDatePage extends StatelessWidget {
                     firstDate: DateTime(2000),
                     dateLabelText: S.of(context).ChooseTheDate,
                     lastDate: DateTime(2100),
-                    // initialValue:'2022-05-10',
-                    // readOnly: true,
                     controller: _dateController,
                     onChanged: (val) => print(val),
                     validator: (val) {

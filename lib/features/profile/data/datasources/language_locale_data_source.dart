@@ -6,7 +6,6 @@ import '../../../../core/error/Exception.dart';
 
 abstract class BaseLanguageLocaleDataSource {
   Future<String> changeLanguage({required String languageCode});
-
 }
 
 class LanguageLocaleDataSource implements BaseLanguageLocaleDataSource {
@@ -17,7 +16,6 @@ class LanguageLocaleDataSource implements BaseLanguageLocaleDataSource {
   @override
   Future<String> changeLanguage({required String languageCode}) async {
     try {
-      // await sharedPreferences.setString(AppStrings.locale, languageCode);
       var addData = await Hive.openBox<Person>('user');
 
       Person? valueFromTheBox = addData.getAt(0); // "stringText"
@@ -35,11 +33,8 @@ class LanguageLocaleDataSource implements BaseLanguageLocaleDataSource {
       print('data hive language:${addData.values.first.language}');
       print('data hive name:${addData.values.first.name}');
       return Future.value(languageCode);
-
-    }catch(e){
+    } catch (e) {
       throw OfflineException();
-
     }
   }
-
 }

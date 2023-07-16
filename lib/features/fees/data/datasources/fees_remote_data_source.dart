@@ -6,12 +6,12 @@ import '../../../../core/error/Exception.dart';
 import '../../../../core/string/url.dart';
 import '../models/FeesModel.dart';
 
-abstract class FeesRemoteDataSource{
+abstract class FeesRemoteDataSource {
   Future<List<FeesModel>> getFeesDataOfDay(String day);
   Future<List<FeesModel>> getFeesDataOfMonth(String month);
   Future<Unit> updateFees(Fees fees);
   Future<Unit> deleteFees(int id);
-  Future <Unit> addFeesData(Fees fees);
+  Future<Unit> addFeesData(Fees fees);
 }
 
 class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
@@ -26,33 +26,34 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
       'type': fees.type.toString(),
       'time': fees.time.toString()
     };
-    try{
-      final response = await client.post(Uri.parse(AppUrl.UrlAddFees),body: body);
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+    try {
+      final response =
+          await client.post(Uri.parse(AppUrl.UrlAddFees), body: body);
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
-
+      } else {
         throw OfflineException();
-      }}
-    catch(e){
+      }
+    } catch (e) {
       throw OfflineException();
     }
   }
 
   @override
   Future<Unit> deleteFees(int id) async {
-    final body = {
-      'pk': id.toString()
-    };
-    try{
-      final response = await client.delete(Uri.parse(AppUrl.UrlFeesUpdateDeleteGet),body: body);
+    final body = {'pk': id.toString()};
+    try {
+      final response = await client
+          .delete(Uri.parse(AppUrl.UrlFeesUpdateDeleteGet), body: body);
 
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
+      } else {
         throw OfflineException();
-      }}
-    catch(e){
+      }
+    } catch (e) {
       throw OfflineException();
     }
   }
@@ -60,46 +61,47 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
   @override
   Future<List<FeesModel>> getFeesDataOfDay(String day) async {
     final response = await client.get(
-        Uri.parse(AppUrl.UrlGetFeesOfDay(day.toString())),
-        headers: {"Content-Type": "application/json", },
+      Uri.parse(AppUrl.UrlGetFeesOfDay(day.toString())),
+      headers: {
+        "Content-Type": "application/json",
+      },
     );
-    if (response.statusCode == 200){
+    if (response.statusCode == 200) {
       try {
         final List decodeJson = json.decode(response.body) as List;
         final List<FeesModel> feesModels = decodeJson
-            .map<FeesModel>((jsonClinicModel) =>
-            FeesModel.fromJson(jsonClinicModel))
+            .map<FeesModel>(
+                (jsonClinicModel) => FeesModel.fromJson(jsonClinicModel))
             .toList();
         return feesModels;
-      }catch(e){
+      } catch (e) {
         throw OfflineException();
-
       }
-    }else{
+    } else {
       throw OfflineException();
     }
   }
 
   @override
   Future<List<FeesModel>> getFeesDataOfMonth(String month) async {
-
     final response = await client.get(
       Uri.parse(AppUrl.UrlGetFeesOfMonth(month.toString())),
-      headers: {"Content-Type": "application/json", },
+      headers: {
+        "Content-Type": "application/json",
+      },
     );
-    if (response.statusCode == 200){
+    if (response.statusCode == 200) {
       try {
         final List decodeJson = json.decode(response.body) as List;
         final List<FeesModel> feesModels = decodeJson
-            .map<FeesModel>((jsonClinicModel) =>
-            FeesModel.fromJson(jsonClinicModel))
+            .map<FeesModel>(
+                (jsonClinicModel) => FeesModel.fromJson(jsonClinicModel))
             .toList();
         return feesModels;
-      }catch(e){
+      } catch (e) {
         throw OfflineException();
-
       }
-    }else{
+    } else {
       throw OfflineException();
     }
   }
@@ -112,14 +114,16 @@ class FeesRemoteDataSourceImple extends FeesRemoteDataSource {
       'time': fees.time.toString(),
       'pk': fees.id.toString()
     };
-    try{
-      final response = await client.patch(Uri.parse(AppUrl.UrlFeesUpdateDeleteGet),body: body);
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+    try {
+      final response = await client
+          .patch(Uri.parse(AppUrl.UrlFeesUpdateDeleteGet), body: body);
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
+      } else {
         throw OfflineException();
-      }}
-    catch(e){
+      }
+    } catch (e) {
       throw OfflineException();
     }
   }

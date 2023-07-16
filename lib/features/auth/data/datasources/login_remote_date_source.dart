@@ -10,66 +10,59 @@ import '../../ domain/entities/login.dart';
 import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/error/Exception.dart';
 
-abstract class LoginRemoteDataSource{
+abstract class LoginRemoteDataSource {
   Future<Unit> loginMethod(Login login, bool stayLogin);
 }
 
-class LoginRemoteDataSourceImple extends LoginRemoteDataSource{
+class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
   final http.Client client;
 
   LoginRemoteDataSourceImple({required this.client});
 
   @override
   Future<Unit> loginMethod(Login login, bool stayLogin) async {
-    final body ={
+    final body = {
       'email': login.email.toString(),
       'password': login.password.toString()
     };
-    try{
-      final response = await client.post(
-        Uri.parse(AppUrl.UrlLogin),
-        body: body
-      );
-      if (response.statusCode == 201 || response.statusCode == 200 ){
-          Map valueMap = json.decode(response.body);
-          if (stayLogin == true){
-            var addData = await Hive.openBox<Person>('user');
-            var person = Person()
-              ..typeOfAccount = valueMap['typeOfAccount']
-              ..pk = valueMap['pk'].toString()
-              ..logged = true
-              ..name = valueMap['name'];
-            try{
-              addData.putAt(0, person);
-              return Future.value(unit);
-            }catch(e){
-              addData.add(person);
-            }
-          }else{
-            // if (stayLogin == true){
-              var addData = await Hive.openBox<Person>('user');
-              var person = Person()
-                ..typeOfAccount = valueMap['typeOfAccount']
-                ..pk = valueMap['pk'].toString()
-                ..logged = false
-                ..name = valueMap['name'];
-              try{
-                addData.putAt(0, person);
-                return Future.value(unit);
-              }catch(e){
-                addData.add(person);
-              }
-            // }
+    try {
+      final response =
+          await client.post(Uri.parse(AppUrl.UrlLogin), body: body);
+      if (response.statusCode == 201 || response.statusCode == 200) {
+        Map valueMap = json.decode(response.body);
+        if (stayLogin == true) {
+          var addData = await Hive.openBox<Person>('user');
+          var person = Person()
+            ..typeOfAccount = valueMap['typeOfAccount']
+            ..pk = valueMap['pk'].toString()
+            ..logged = true
+            ..name = valueMap['name'];
+          try {
+            addData.putAt(0, person);
+            return Future.value(unit);
+          } catch (e) {
+            addData.add(person);
           }
-          return Future.value(unit);
-
-      }else{
+        } else {
+          var addData = await Hive.openBox<Person>('user');
+          var person = Person()
+            ..typeOfAccount = valueMap['typeOfAccount']
+            ..pk = valueMap['pk'].toString()
+            ..logged = false
+            ..name = valueMap['name'];
+          try {
+            addData.putAt(0, person);
+            return Future.value(unit);
+          } catch (e) {
+            addData.add(person);
+          }
+        }
+        return Future.value(unit);
+      } else {
         throw FailuresLoginException();
       }
-    }catch(e){
+    } catch (e) {
       throw OfflineException();
-
     }
   }
-
 }

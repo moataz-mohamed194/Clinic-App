@@ -8,9 +8,8 @@ abstract class FeesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddFeesEvent extends FeesEvent{
+class AddFeesEvent extends FeesEvent {
   final Fees fees;
-
 
   AddFeesEvent({required this.fees});
 
@@ -18,8 +17,7 @@ class AddFeesEvent extends FeesEvent{
   List<Object> get props => [fees];
 }
 
-
-class UpdateFeesEvent extends FeesEvent{
+class UpdateFeesEvent extends FeesEvent {
   final Fees fees;
 
   UpdateFeesEvent({required this.fees});
@@ -28,7 +26,7 @@ class UpdateFeesEvent extends FeesEvent{
   List<Object> get props => [fees];
 }
 
-class DeleteFeesEvent extends FeesEvent{
+class DeleteFeesEvent extends FeesEvent {
   final int feesId;
 
   DeleteFeesEvent({required this.feesId});
@@ -37,8 +35,7 @@ class DeleteFeesEvent extends FeesEvent{
   List<Object> get props => [feesId];
 }
 
-
-class GetFeesOfDayEvent extends FeesEvent{
+class GetFeesOfDayEvent extends FeesEvent {
   final String day;
 
   GetFeesOfDayEvent({required this.day});
@@ -47,8 +44,7 @@ class GetFeesOfDayEvent extends FeesEvent{
   List<Object> get props => [day];
 }
 
-
-class GetFeesOfMonthEvent extends FeesEvent{
+class GetFeesOfMonthEvent extends FeesEvent {
   final String month;
 
   GetFeesOfMonthEvent({required this.month});
@@ -56,6 +52,5 @@ class GetFeesOfMonthEvent extends FeesEvent{
   @override
   List<Object> get props => [month];
 }
-
 
 class RefreshFeesEvent extends FeesEvent {}

@@ -3,12 +3,12 @@ import 'package:dartz/dartz.dart';
 import '../entities/user.dart';
 import '../repositories/user_repositorie.dart';
 
-class AddUser{
+class AddUser {
   final UserRepository repository;
 
   AddUser(this.repository);
 
-  Future<Either<Failures, Unit>> call(User user) async{
+  Future<Either<Failures, Unit>> call(User user) async {
     return await repository.addUser(user);
   }
 }

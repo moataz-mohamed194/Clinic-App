@@ -8,8 +8,7 @@ import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/text_field_widget.dart';
 import '../../../../generated/l10n.dart';
 
-class FormVisitorWidget extends StatelessWidget{
-
+class FormVisitorWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _bodyController = TextEditingController();
@@ -23,7 +22,6 @@ class FormVisitorWidget extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             Container(
               padding: EdgeInsets.symmetric(
                 vertical: 10,
@@ -32,7 +30,7 @@ class FormVisitorWidget extends StatelessWidget{
                 controler: _titleController,
                 keyboardType: TextInputType.text,
                 validatorTextField: (val) =>
-                val!.isEmpty ? S.of(context).MustAddTheNameOfVisitor : null,
+                    val!.isEmpty ? S.of(context).MustAddTheNameOfVisitor : null,
                 hintText: S.of(context).Name,
               ),
             ),
@@ -43,12 +41,12 @@ class FormVisitorWidget extends StatelessWidget{
               child: TextFieldWidget(
                 controler: _bodyController,
                 keyboardType: TextInputType.text,
-                validatorTextField: (val) =>
-                val!.isEmpty ? S.of(context).MustAddTheReasonOfVisitor : null,
+                validatorTextField: (val) => val!.isEmpty
+                    ? S.of(context).MustAddTheReasonOfVisitor
+                    : null,
                 hintText: 'Reason',
               ),
             ),
-
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
@@ -60,7 +58,6 @@ class FormVisitorWidget extends StatelessWidget{
               marginHeight: 10,
               marginWidth: 30,
             ),
-
           ],
         ),
       ),
@@ -83,12 +80,9 @@ class FormVisitorWidget extends StatelessWidget{
             time: '${now.year}-${now.month}-${now.day}');
         BlocProvider.of<AddUpdateVisitorBloc>(context)
             .add(AddVisitorEvent(visitor: visitor));
-      }
-      catch (e){
+      } catch (e) {
         print(e);
       }
-
-
     }
   }
 }

@@ -4,12 +4,12 @@ import '../../../../core/error/failures.dart';
 import '../entities/Fees.dart';
 import '../repositories/FeedRepository.dart';
 
-class GetFeesOfDay{
+class GetFeesOfDay {
   final FeesRepository repository;
 
   GetFeesOfDay(this.repository);
 
-  Future<Either<Failures, List<Fees>>> call(String day) async{
+  Future<Either<Failures, List<Fees>>> call(String day) async {
     return await repository.getFeesDataOfDay(day);
   }
 }

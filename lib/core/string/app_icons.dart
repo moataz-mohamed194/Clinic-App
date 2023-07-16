@@ -1,4 +1,4 @@
-class AppIcons{
+class AppIcons {
   static const String iconAppleLogo = 'assets/icons/apple-logo.png';
   static const String iconUnSelectedAvatar = 'assets/icons/unavatar.png';
   static const String iconSelectedAvatar = 'assets/icons/avatar.png';
@@ -13,7 +13,7 @@ class AppIcons{
   static const String iconHistory = 'assets/icons/history.png';
   static const String iconHourGlass = 'assets/icons/hourglass.png';
   static const String iconHourGlass2 = 'assets/icons/hourglass-2.png';
-  static const String iconMan    = 'assets/icons/man.png';
+  static const String iconMan = 'assets/icons/man.png';
   static const String iconGoogle = 'assets/icons/search.png';
   static const String iconSubscription = 'assets/icons/subscription-model.png';
   static const String iconSelectedVisitor = 'assets/icons/visitor.png';
@@ -26,6 +26,4 @@ class AppIcons{
   static const String iconSelectedClinic = 'assets/icons/clinic.png';
   static const String iconUnSelectedClinic = 'assets/icons/unclinic.png';
   static const String iconDoctor2 = 'assets/icons/doctor-2.png';
-
-
 }

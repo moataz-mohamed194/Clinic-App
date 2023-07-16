@@ -18,7 +18,7 @@ class TextFieldWidget extends StatelessWidget {
       {this.rightWidget,
       this.obscureText,
       this.oldData,
-        this.leftWidget,
+      this.leftWidget,
       this.keyboardType,
       required this.hintText,
       this.controler,
@@ -36,17 +36,15 @@ class TextFieldWidget extends StatelessWidget {
             decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
-
-                  borderSide: BorderSide(color:  AppColors.mainColor),
+                  borderSide: BorderSide(color: AppColors.mainColor),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
-
-                  borderSide: BorderSide(color:Colors.transparent),
+                  borderSide: BorderSide(color: Colors.transparent),
                 ),
                 suffixIcon: rightWidget,
                 filled: true,
-                prefixIcon:leftWidget,
+                prefixIcon: leftWidget,
                 fillColor: Colors.grey.shade200,
                 hintText: hintText,
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 15.sp)),

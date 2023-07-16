@@ -47,8 +47,7 @@ class ButtonWidget extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               text,
-              style:
-              textStyle??TextStyle(color: textColor  , fontSize: 15.sp),
+              style: textStyle ?? TextStyle(color: textColor, fontSize: 15.sp),
             ),
           )),
     );

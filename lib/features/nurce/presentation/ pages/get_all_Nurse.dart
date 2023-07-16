@@ -10,46 +10,44 @@ import '../bloc/Nurse_state.dart';
 import '../widgets/nurse_list_widget.dart';
 import 'add_Nurse.dart';
 
-class GetNurseDataPage extends StatelessWidget{
-
+class GetNurseDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(S.of(context).NurseData)),
       body: _buildBody(),
-      floatingActionButton:_buildFloatingBtn(context),
-
+      floatingActionButton: _buildFloatingBtn(context),
     );
   }
-  Widget _buildBody(){
+
+  Widget _buildBody() {
     return Padding(
         padding: EdgeInsets.only(top: 10),
         child: BlocProvider<AddGetNurseBloc>(
             create: (context) => di.sl<AddGetNurseBloc>()..add(GetNurseEvent()),
-            child:  BlocBuilder<AddGetNurseBloc, AddGetNurseState>(
+            child: BlocBuilder<AddGetNurseBloc, AddGetNurseState>(
               builder: (context, state) {
-                if (state is LoadingNurseState){
+                if (state is LoadingNurseState) {
                   return LoadingWidget();
-                }else if (state is LoadedNurseState) {
+                } else if (state is LoadedNurseState) {
                   return RefreshIndicator(
                       onRefresh: () => _onRefresh(context),
-                      child: NurseListWidget( nurse: state.nurse,));
+                      child: NurseListWidget(
+                        nurse: state.nurse,
+                      ));
                 } else if (state is ErrorNurseState) {
                   return MessageDisplayWidget(message: state.message);
                 }
                 return LoadingWidget();
               },
-            )
-        )
-    );
+            )));
   }
-
 
   Widget _buildFloatingBtn(BuildContext context) {
     return FloatingActionButton(
       onPressed: () async {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (_)=> AddNewNursePage()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => AddNewNursePage()));
       },
       child: Icon(Icons.add),
     );
@@ -58,8 +56,7 @@ class GetNurseDataPage extends StatelessWidget{
   _onRefresh(BuildContext context) async {
     try {
       BlocProvider.of<AddGetNurseBloc>(context)..add(GetNurseEvent());
-    }
-    catch(e){
+    } catch (e) {
       print(e);
     }
   }

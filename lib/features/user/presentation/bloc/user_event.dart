@@ -1,15 +1,14 @@
 import 'package:equatable/equatable.dart';
 import '../../domain/entities/user.dart';
 
-
-abstract class AddUpdateUserEvent extends Equatable{
+abstract class AddUpdateUserEvent extends Equatable {
   const AddUpdateUserEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class AddUserEvent extends AddUpdateUserEvent{
+class AddUserEvent extends AddUpdateUserEvent {
   final User user;
 
   AddUserEvent({required this.user});
@@ -18,8 +17,7 @@ class AddUserEvent extends AddUpdateUserEvent{
   List<Object> get props => [user];
 }
 
-
-class UpdateUserEvent extends AddUpdateUserEvent{
+class UpdateUserEvent extends AddUpdateUserEvent {
   final int userId;
   final User user;
   UpdateUserEvent({required this.userId, required this.user});
@@ -27,4 +25,3 @@ class UpdateUserEvent extends AddUpdateUserEvent{
   @override
   List<Object> get props => [userId, user];
 }
-

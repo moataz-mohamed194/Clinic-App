@@ -14,7 +14,8 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/string/failures.dart';
 import '../../../../core/string/messages.dart';
 
-class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickState>{
+class AddUpdateGetSickBloc
+    extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickState> {
   final AddSick addSick;
   final UpdateSick updateSick;
   final UpdateSickAsEntered updateSickAsEntered;
@@ -22,60 +23,65 @@ class AddUpdateGetSickBloc extends Bloc<AddUpdateGetSickEvent, AddUpdateGetSickS
   final GetAllSick getSick;
   final GetSickBasedOnUser getSickBasedOnUser;
 
-  AddUpdateGetSickBloc({
-    required this.addSick,
-    required this.updateSick,
-    required this.addSickReport,
-    required this.updateSickAsEntered,
-    required this.getSickBasedOnUser,
-    required this.getSick}) : super(SickInitial()){
+  AddUpdateGetSickBloc(
+      {required this.addSick,
+      required this.updateSick,
+      required this.addSickReport,
+      required this.updateSickAsEntered,
+      required this.getSickBasedOnUser,
+      required this.getSick})
+      : super(SickInitial()) {
     on<AddUpdateGetSickEvent>((event, emit) async {
-      if (event is AddSickEvent){
+      if (event is AddSickEvent) {
         emit(LoadingSicksState());
         final failureOrDoneMessage = await addSick(event.sick);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
-      }else if (event is AddSickReportEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
+      } else if (event is AddSickReportEvent) {
         emit(LoadingSicksState());
-        final failureOrDoneMessage = await addSickReport(event.id, event.report);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
-      }else if(event is UpdateSickEvent){
+        final failureOrDoneMessage =
+            await addSickReport(event.id, event.report);
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
+      } else if (event is UpdateSickEvent) {
         emit(LoadingSicksState());
         final failureOrDoneMessage = await updateSick(event.sickId);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
-      }else if(event is UpdateSickAsEnteredEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+      } else if (event is UpdateSickAsEnteredEvent) {
         emit(LoadingSicksState());
         final failureOrDoneMessage = await updateSickAsEntered(event.sickId);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
-      }else if(event is GetSickEvent || event is RefreshSickEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+      } else if (event is GetSickEvent || event is RefreshSickEvent) {
         emit(LoadingSicksState());
         final failureOrDoneMessage = await getSick();
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
-      }else if(event is GetSickBasedOnUserEvent || event is RefreshSickEvent){
+      } else if (event is GetSickBasedOnUserEvent ||
+          event is RefreshSickEvent) {
         emit(LoadingSicksState());
         final failureOrDoneMessage = await getSickBasedOnUser();
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
       }
     });
   }
-
 }
 
-
-AddUpdateGetSickState _mapFailureOrPostsToStateForAdd(Either<Failures, Unit> either, String message) {
+AddUpdateGetSickState _mapFailureOrPostsToStateForAdd(
+    Either<Failures, Unit> either, String message) {
   return either.fold(
-        (failure) => ErrorSicksState(
-        message: _mapFailureToMessage(failure)
-    ),
-        (_) => MessageAddUpdateGetSickState(
+    (failure) => ErrorSicksState(message: _mapFailureToMessage(failure)),
+    (_) => MessageAddUpdateGetSickState(
       message: message,
     ),
   );
 }
 
-AddUpdateGetSickState _mapFailureOrPostsToStateForGet(Either<Failures, List<Sick>> either) {
+AddUpdateGetSickState _mapFailureOrPostsToStateForGet(
+    Either<Failures, List<Sick>> either) {
   return either.fold(
-        (failure) => ErrorSicksState(message: _mapFailureToMessage(failure)),
-        (sicks) => LoadedSicksState(
+    (failure) => ErrorSicksState(message: _mapFailureToMessage(failure)),
+    (sicks) => LoadedSicksState(
       sicks: sicks,
     ),
   );

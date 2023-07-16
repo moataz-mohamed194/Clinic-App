@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 import '../../ domain/entities/Nurse.dart';
@@ -10,7 +9,7 @@ abstract class NurseEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddNurseEvent extends NurseEvent{
+class AddNurseEvent extends NurseEvent {
   final Nurse nurse;
 
   AddNurseEvent({required this.nurse});
@@ -19,9 +18,6 @@ class AddNurseEvent extends NurseEvent{
   List<Object> get props => [nurse];
 }
 
-
-
-class GetNurseEvent extends NurseEvent{}
-
+class GetNurseEvent extends NurseEvent {}
 
 class RefreshNurseEvent extends NurseEvent {}

@@ -1,4 +1,3 @@
-
 import 'package:clinic/features/clinic/%20domain/usecases/add_clinic_today.dart';
 import 'package:clinic/features/clinic/%20domain/usecases/update_clinic_data.dart';
 import 'package:clinic/features/clinic/presentation/bloc/actions_clinic_event.dart';
@@ -12,26 +11,29 @@ import '../../../../core/string/failures.dart';
 import '../../../../core/string/messages.dart';
 import 'actions_clinic_state.dart';
 
-class AddUpdateGetClinicBloc extends Bloc<ClinicEvent, AddUpdateGetClinicState>{
+class AddUpdateGetClinicBloc
+    extends Bloc<ClinicEvent, AddUpdateGetClinicState> {
   final AddClinicData addClinic;
   final UpdateClinicData updateClinic;
   final GetClinicData getClinic;
 
-  AddUpdateGetClinicBloc({
-    required this.addClinic,
-    required this.updateClinic,
-    required this.getClinic}) : super(ClinicInitial()){
+  AddUpdateGetClinicBloc(
+      {required this.addClinic,
+      required this.updateClinic,
+      required this.getClinic})
+      : super(ClinicInitial()) {
     on<ClinicEvent>((event, emit) async {
-      if (event is AddClinicEvent){
+      if (event is AddClinicEvent) {
         emit(LoadingClinicState());
         final failureOrDoneMessage = await addClinic(event.clinic);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
-      }else if(event is UpdateClinicEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
+      } else if (event is UpdateClinicEvent) {
         emit(LoadingClinicState());
         final failureOrDoneMessage = await updateClinic(event.clinic);
-        // final failureOrDoneMessage = await updateClinic(event.clinicId);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
-      }else if(event is GetClinicEvent || event is RefreshClinicEvent){
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+      } else if (event is GetClinicEvent || event is RefreshClinicEvent) {
         emit(LoadingClinicState());
         final failureOrDoneMessage = await getClinic();
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
@@ -40,22 +42,21 @@ class AddUpdateGetClinicBloc extends Bloc<ClinicEvent, AddUpdateGetClinicState>{
   }
 }
 
-
-AddUpdateGetClinicState  _mapFailureOrPostsToStateForAdd(Either<Failures, Unit> either, String message) {
+AddUpdateGetClinicState _mapFailureOrPostsToStateForAdd(
+    Either<Failures, Unit> either, String message) {
   return either.fold(
-        (failure) => ErrorClinicState(
-        message: _mapFailureToMessage(failure)
-    ),
-        (_) => MessageAddUpdateGetClinicState(
+    (failure) => ErrorClinicState(message: _mapFailureToMessage(failure)),
+    (_) => MessageAddUpdateGetClinicState(
       message: message,
     ),
   );
 }
 
-AddUpdateGetClinicState _mapFailureOrPostsToStateForGet(Either<Failures, List<Clinic>> either) {
+AddUpdateGetClinicState _mapFailureOrPostsToStateForGet(
+    Either<Failures, List<Clinic>> either) {
   return either.fold(
-        (failure) => ErrorClinicState(message: _mapFailureToMessage(failure)),
-        (clinic) => LoadedClinicState(
+    (failure) => ErrorClinicState(message: _mapFailureToMessage(failure)),
+    (clinic) => LoadedClinicState(
       clinic: clinic,
     ),
   );

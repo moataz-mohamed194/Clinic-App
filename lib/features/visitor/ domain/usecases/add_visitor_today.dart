@@ -4,12 +4,12 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
 
-class AddVisitorToday{
+class AddVisitorToday {
   final VisitorRepository repository;
 
   AddVisitorToday(this.repository);
 
-  Future<Either<Failures, Unit>> call(Visitor visitor) async{
+  Future<Either<Failures, Unit>> call(Visitor visitor) async {
     return await repository.addVisitor(visitor);
   }
 }

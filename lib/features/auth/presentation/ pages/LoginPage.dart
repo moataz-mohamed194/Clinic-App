@@ -27,7 +27,6 @@ class LoginPage extends StatelessWidget {
 
   Widget _body(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).size.height,
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Column(
@@ -48,26 +47,26 @@ class LoginPage extends StatelessWidget {
                       if (tasksBox.get(0)!.typeOfAccount == 'Nurse') {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (_) => MainNursePage(
-                                    data: tasksBox.get(0)!)),
+                                builder: (_) =>
+                                    MainNursePage(data: tasksBox.get(0)!)),
                             (route) => false);
                       } else if (tasksBox.get(0)!.typeOfAccount == 'Doctor') {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (_) => MainDoctorPage(
-                                    data: tasksBox.get(0)!)),
+                                builder: (_) =>
+                                    MainDoctorPage(data: tasksBox.get(0)!)),
                             (route) => false);
                       } else if (tasksBox.get(0)!.typeOfAccount == 'User') {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (_) => MainUserPage(
-                                    data: tasksBox.get(0)!)),
+                                builder: (_) =>
+                                    MainUserPage(data: tasksBox.get(0)!)),
                             (route) => false);
                       } else {
                         Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (_) => MainUserPage(
-                                    data: tasksBox.get(0)!)),
+                                builder: (_) =>
+                                    MainUserPage(data: tasksBox.get(0)!)),
                             (route) => false);
                       }
                     } else if (state is ErrorLoginState) {
@@ -110,85 +109,88 @@ class LoginPage extends StatelessWidget {
                           height: 15,
                         ),
                         Container(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  height: 60,
-                                  // width: 10,//double.minPositive,
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.0,
-                                        style: BorderStyle.solid), //Border.all
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: 60,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.0,
+                                          style:
+                                              BorderStyle.solid), //Border.all
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: Image(
+                                      image: AssetImage(AppIcons.iconFaceBook),
+                                      width: 10,
                                     ),
                                   ),
-                                  child: Image(
-                                    image: AssetImage(AppIcons.iconFaceBook),
-                                    width: 10,
-                                  ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  height: 60,
-                                  width: 40,
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.0,
-                                        style: BorderStyle.solid), //Border.all
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
+                                Expanded(
+                                  child: Container(
+                                    height: 60,
+                                    width: 40,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.0,
+                                          style:
+                                              BorderStyle.solid), //Border.all
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
                                     ),
+                                    child: Image.asset(AppIcons.iconGoogle),
                                   ),
-                                  child: Image.asset(AppIcons.iconGoogle),
                                 ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  height: 60,
-                                  width: 40,
-                                  margin: EdgeInsets.symmetric(horizontal: 10),
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.shade300,
-                                        width: 1.0,
-                                        style: BorderStyle.solid), //Border.all
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(10),
+                                Expanded(
+                                  child: Container(
+                                    height: 60,
+                                    width: 40,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 1.0,
+                                          style:
+                                              BorderStyle.solid), //Border.all
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
                                     ),
+                                    child: Image.asset(AppIcons.iconAppleLogo),
                                   ),
-                                  child: Image.asset(AppIcons.iconAppleLogo),
                                 ),
-                              ),
-                            ],
-                          ),
-
-                            margin:EdgeInsets.symmetric(horizontal: 20)
-                        ),
+                              ],
+                            ),
+                            margin: EdgeInsets.symmetric(horizontal: 20)),
                         SizedBox(
                           height: 15,
                         ),
                         Row(
-                          // crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(S.of(context).DonnotHaveAccount,
+                            Text(
+                              S.of(context).DonnotHaveAccount,
                               style: TextStyle(color: Colors.grey),
                             ),
                             InkWell(
-                              child: Text(S.of(context).CreateAccount,
+                              child: Text(
+                                S.of(context).CreateAccount,
                                 style: TextStyle(
                                   color: AppColors.mainColor,
-                                  // decoration: TextDecoration.underline,
                                 ),
                               ),
                               onTap: () {

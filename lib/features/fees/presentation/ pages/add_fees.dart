@@ -9,7 +9,7 @@ import '../bloc/Fees_bloc.dart';
 import '../bloc/Fees_state.dart';
 import '../widgets/form_fees_widget.dart';
 
-class AddFeesPage extends StatelessWidget{
+class AddFeesPage extends StatelessWidget {
   final Fees? feesData;
 
   const AddFeesPage({Key? key, this.feesData}) : super(key: key);
@@ -17,36 +17,37 @@ class AddFeesPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:this.feesData==null? Text(S.of(context).AddTheFeesOfClinic):Text(S.of(context).UpdateTheFeesOfClinic),
+        title: this.feesData == null
+            ? Text(S.of(context).AddTheFeesOfClinic)
+            : Text(S.of(context).UpdateTheFeesOfClinic),
       ),
       body: appBody(context),
     );
   }
-  Widget appBody(BuildContext context){
+
+  Widget appBody(BuildContext context) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(10),
-        child:
-        BlocConsumer<AddUpdateGetFeesBloc, AddUpdateGetFeesState>(
-          listener: (context, state){
-            if (state is MessageAddUpdateGetFeesState){
-              SnackBarMessage().showSuccesSnackBar(message: state.message, context: context);
+        child: BlocConsumer<AddUpdateGetFeesBloc, AddUpdateGetFeesState>(
+          listener: (context, state) {
+            if (state is MessageAddUpdateGetFeesState) {
+              SnackBarMessage()
+                  .showSuccesSnackBar(message: state.message, context: context);
               Navigator.pop(context);
-            }else if (state is ErrorFeesState){
-              SnackBarMessage().showErrorSnackBar(message: state.message, context: context);
+            } else if (state is ErrorFeesState) {
+              SnackBarMessage()
+                  .showErrorSnackBar(message: state.message, context: context);
             }
           },
-          builder: (context, state){
-            if (state is LoadingFeesState){
+          builder: (context, state) {
+            if (state is LoadingFeesState) {
               return LoadingWidget();
             }
-        return FormFeesWidget(feesData: this.feesData);
-
+            return FormFeesWidget(feesData: this.feesData);
           },
-
         ),
       ),
     );
   }
-
 }

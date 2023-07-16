@@ -1,6 +1,4 @@
 import 'package:clinic/features/auth/%20domain/usecases/login_usecases.dart';
-// import 'package:clinic/features/auth/presentation/bloc/login_event.dart';
-// import 'package:clinic/features/auth/presentation/bloc/login_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,27 +9,27 @@ import '../../../../../core/string/failures.dart';
 import '../../../../../core/string/messages.dart';
 part 'login_event.dart';
 part 'login_state.dart';
-class LoginBloc extends Bloc<LoginEvent, LoginState>{
+
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginUseCases loginMethod;
 
-  LoginBloc({
-    required this.loginMethod
-  }) : super(LoginInitial()){
+  LoginBloc({required this.loginMethod}) : super(LoginInitial()) {
     on<LoginEvent>((event, emit) async {
-      if (event is LoginMethodEvent){
+      if (event is LoginMethodEvent) {
         emit(LoadingLoginState());
-        final failureOrDoneMessage = await loginMethod(event.login, event.stayLogin);
-        emit(_mapFailureOrPostsToStateForAdd(failureOrDoneMessage, LOGIN_SUCCESS_MESSAGE));
+        final failureOrDoneMessage =
+            await loginMethod(event.login, event.stayLogin);
+        emit(_mapFailureOrPostsToStateForAdd(
+            failureOrDoneMessage, LOGIN_SUCCESS_MESSAGE));
       }
     });
   }
 
-  LoginState _mapFailureOrPostsToStateForAdd(Either<Failures, Unit> either, String message) {
+  LoginState _mapFailureOrPostsToStateForAdd(
+      Either<Failures, Unit> either, String message) {
     return either.fold(
-          (failure) => ErrorLoginState(
-          message: _mapFailureToMessage(failure)
-      ),
-          (_) => MessageLoginState(
+      (failure) => ErrorLoginState(message: _mapFailureToMessage(failure)),
+      (_) => MessageLoginState(
         message: message,
       ),
     );

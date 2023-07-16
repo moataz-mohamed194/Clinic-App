@@ -6,45 +6,39 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/Exception.dart';
 import '../../../../core/string/url.dart';
 
-abstract class ClinicRemoteDataSource{
+abstract class ClinicRemoteDataSource {
   Future<List<ClinicModel>> getAllClinic();
   Future<Unit> updateClinic(Clinic clinic);
-  // Future<Unit> updateClinic(int id);
-  Future <Unit> addClinic(Clinic clinic);
+  Future<Unit> addClinic(Clinic clinic);
 }
 
-
-class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
+class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource {
   final http.Client client;
 
   ClinicRemoteDataSourceImple({required this.client});
 
   @override
   Future<List<ClinicModel>> getAllClinic() async {
-    final response = await client.get(
-        Uri.parse(AppUrl.UrlGetClinicsData),
-        headers: {"Content-Type": "application/json"}
-    );
-    if (response.statusCode == 200){
+    final response = await client.get(Uri.parse(AppUrl.UrlGetClinicsData),
+        headers: {"Content-Type": "application/json"});
+    if (response.statusCode == 200) {
       try {
         final List decodeJson = json.decode(response.body) as List;
         final List<ClinicModel> clinicModels = decodeJson
-            .map<ClinicModel>((jsonClinicModel) =>
-            ClinicModel.fromJson(jsonClinicModel))
+            .map<ClinicModel>(
+                (jsonClinicModel) => ClinicModel.fromJson(jsonClinicModel))
             .toList();
         return clinicModels;
-      }catch(e){
+      } catch (e) {
         throw OfflineException();
-
       }
-    }else{
+    } else {
       throw OfflineException();
     }
   }
 
   @override
   Future<Unit> addClinic(Clinic clinic) async {
-
     final body = {
       'address': clinic.addrees.toString(),
       'note': clinic.note.toString(),
@@ -54,41 +48,39 @@ class ClinicRemoteDataSourceImple extends ClinicRemoteDataSource{
       'latitude': clinic.latitude.toString(),
       'longitude': clinic.longitude.toString(),
     };
-    try{
-      final response = await client.post(Uri.parse(AppUrl.UrlModelOfClinic),body: body);
+    try {
+      final response =
+          await client.post(Uri.parse(AppUrl.UrlModelOfClinic), body: body);
 
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
+      } else {
         throw OfflineException();
-      }}
-    catch(e){
+      }
+    } catch (e) {
       throw OfflineException();
     }
   }
 
   @override
   Future<Unit> updateClinic(Clinic clinic) async {
-  // Future<Unit> updateClinic(int id) async {
-
-    final body ={
+    final body = {
       'address': clinic.addrees.toString(),
       'note': clinic.note.toString(),
       'time_of_vacation': clinic.timeOfVacation.toString(),
       'from_time': clinic.fromTime.toString(),
       'to_time': clinic.toTime.toString(),
-      'pk':clinic.id.toString(),
+      'pk': clinic.id.toString(),
       'latitude': clinic.latitude.toString(),
       'longitude': clinic.longitude.toString(),
     };
-    final response = await client.patch(
-        Uri.parse(AppUrl.UrlEditDataClinic), body: body
-    );
-    if (response.statusCode == 200){
+    final response =
+        await client.patch(Uri.parse(AppUrl.UrlEditDataClinic), body: body);
+    if (response.statusCode == 200) {
       return Future.value(unit);
-    }else{
+    } else {
       throw OfflineException();
     }
   }
-
 }

@@ -32,7 +32,8 @@ class FormUserWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(S.of(context).RegisterToYourAccount,
+            Text(
+              S.of(context).RegisterToYourAccount,
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
@@ -109,7 +110,6 @@ class FormUserWidget extends StatelessWidget {
                             )
                           : Icon(
                               null,
-                              // size: 30.0,
                             ),
                       height: 25,
                       width: 25,
@@ -128,7 +128,9 @@ class FormUserWidget extends StatelessWidget {
             ButtonWidget(
               textColor: Colors.white,
               boarderColor: Colors.transparent,
-              text: isItAdd == true ? S.of(context).SignUp :S.of(context).UpdateUser ,
+              text: isItAdd == true
+                  ? S.of(context).SignUp
+                  : S.of(context).UpdateUser,
               action: () =>
                   validateFormThenUpdateOrAddPost(context, this.isItAdd),
               backgroundColor: AppColors.mainColor,

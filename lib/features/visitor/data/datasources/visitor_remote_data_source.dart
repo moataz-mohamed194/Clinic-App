@@ -9,70 +9,62 @@ import '../../../../core/StrogeData/hive.dart';
 import '../../../../core/string/url.dart';
 import '../models/visitor_model.dart';
 
-abstract class VisitorRemoteDataSource{
+abstract class VisitorRemoteDataSource {
   Future<List<VisitorModel>> getAllVisitor();
   Future<Unit> updateVisitor(int id);
-  Future <Unit> addVisitor(Visitor visitor);
+  Future<Unit> addVisitor(Visitor visitor);
 }
 
-
-class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource{
-
+class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource {
   final http.Client client;
 
   VisitorRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<VisitorModel>> getAllVisitor() async{
-    final response = await client.get(
-      Uri.parse(AppUrl.UrlAddVisitor),
-      headers: {"Content-Type": "application/json"}
-    );
-    if (response.statusCode == 200){
+  Future<List<VisitorModel>> getAllVisitor() async {
+    final response = await client.get(Uri.parse(AppUrl.UrlAddVisitor),
+        headers: {"Content-Type": "application/json"});
+    if (response.statusCode == 200) {
       final List decodeJson = json.decode(response.body) as List;
       final List<VisitorModel> visitorModels = decodeJson
-          .map<VisitorModel>((jsonVisitorModel) => VisitorModel.fromJson(jsonVisitorModel))
+          .map<VisitorModel>(
+              (jsonVisitorModel) => VisitorModel.fromJson(jsonVisitorModel))
           .toList();
       return visitorModels;
-    }else{
+    } else {
       throw OfflineException();
     }
   }
 
-
   @override
-  Future<Unit> addVisitor(Visitor visitor) async{
+  Future<Unit> addVisitor(Visitor visitor) async {
     var tasksBox = await Hive.openBox<Person>('user');
 
     final body = {
       'name': visitor.name.toString(),
       'reason_of_visitor': visitor.reasonOfVisitor.toString(),
-
       'pk': tasksBox.get(0)!.pk.toString()
     };
-    try{
-    final response = await client.post(Uri.parse(AppUrl.UrlAddVisitor),body: body);
+    try {
+      final response =
+          await client.post(Uri.parse(AppUrl.UrlAddVisitor), body: body);
 
-
-    if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
-      return Future.value(unit);
-    }else{
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
+        return Future.value(unit);
+      } else {
+        throw OfflineException();
+      }
+    } catch (e) {
       throw OfflineException();
-    }}
-        catch(e){
-      throw OfflineException();
-        }
+    }
   }
 
-
   @override
-  Future<Unit> updateVisitor(int id) async{
-    final body = {
-      'pk': id.toString()
-    };
-    final response = await client.patch(
-      Uri.parse(AppUrl.UrlApproveVisitor),body: body
-    );
+  Future<Unit> updateVisitor(int id) async {
+    final body = {'pk': id.toString()};
+    final response =
+        await client.patch(Uri.parse(AppUrl.UrlApproveVisitor), body: body);
 
     if (response.statusCode == 200) {
       return Future.value(unit);
@@ -80,5 +72,4 @@ class VisitorRemoteDataSourceImpl implements VisitorRemoteDataSource{
       throw OfflineException();
     }
   }
-  
 }

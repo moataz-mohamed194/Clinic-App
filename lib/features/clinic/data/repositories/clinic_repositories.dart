@@ -7,61 +7,61 @@ import '../../../../core/error/Exception.dart';
 import '../../../../core/network/network_info.dart';
 import '../datasources/clinic_remote_data_source.dart';
 
-class ClinicRepositoriesImpl implements ClinicRepository{
+class ClinicRepositoriesImpl implements ClinicRepository {
   final ClinicRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  ClinicRepositoriesImpl({required this.remoteDataSource,
-    required this.networkInfo});
+  ClinicRepositoriesImpl(
+      {required this.remoteDataSource, required this.networkInfo});
 
   @override
   Future<Either<Failures, Unit>> addClinicData(Clinic clinic) async {
-    final ClinicModel clinicModel = ClinicModel(id: clinic.id,
-         addrees: clinic.addrees,
-         note: clinic.note,
-         fromTime: clinic.fromTime,
-         longitude: clinic.longitude,
-         latitude: clinic.latitude,
-         toTime: clinic.toTime, timeOfVacation: clinic.timeOfVacation);
-    if (await networkInfo.isConnected){
-      try{
+    final ClinicModel clinicModel = ClinicModel(
+        id: clinic.id,
+        addrees: clinic.addrees,
+        note: clinic.note,
+        fromTime: clinic.fromTime,
+        longitude: clinic.longitude,
+        latitude: clinic.latitude,
+        toTime: clinic.toTime,
+        timeOfVacation: clinic.timeOfVacation);
+    if (await networkInfo.isConnected) {
+      try {
         await remoteDataSource.addClinic(clinicModel);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else {
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, List<Clinic>>> getClinicData() async {
-    if(await networkInfo.isConnected) {
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         final currentClinic = await remoteDataSource.getAllClinic();
         return Right(currentClinic);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, Unit>> updateClinic(Clinic clinic) async {
-    if (await networkInfo.isConnected){
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         await remoteDataSource.updateClinic(clinic);
-        // await remoteDataSource.updateClinic(id);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else {
+    } else {
       return Left(OfflineFailures());
     }
   }
-
 }

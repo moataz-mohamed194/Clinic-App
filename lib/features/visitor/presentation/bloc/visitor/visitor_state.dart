@@ -2,10 +2,11 @@ part of 'visitor_bloc.dart';
 
 abstract class VisitorState extends Equatable {
   const VisitorState();
-  
+
   @override
   List<Object> get props => [];
 }
+
 class VisitorInitial extends VisitorState {}
 
 class LoadingVisitorsState extends VisitorState {}

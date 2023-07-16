@@ -1,12 +1,11 @@
 part of 'login_bloc.dart';
 
-abstract class LoginState extends Equatable{
+abstract class LoginState extends Equatable {
   const LoginState();
 
   @override
   List<Object> get props => [];
 }
-
 
 class LoginInitial extends LoginState {}
 
@@ -26,15 +25,13 @@ class LoadedLoginState extends LoginState {
 class ErrorLoginState extends LoginState {
   final String message;
 
-
   ErrorLoginState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-
-class MessageLoginState extends LoginState{
+class MessageLoginState extends LoginState {
   final String message;
 
   MessageLoginState({required this.message});

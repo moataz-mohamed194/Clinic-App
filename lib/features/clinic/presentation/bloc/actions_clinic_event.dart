@@ -9,7 +9,7 @@ abstract class ClinicEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddClinicEvent extends ClinicEvent{
+class AddClinicEvent extends ClinicEvent {
   final Clinic clinic;
 
   AddClinicEvent({required this.clinic});
@@ -18,20 +18,15 @@ class AddClinicEvent extends ClinicEvent{
   List<Object> get props => [clinic];
 }
 
-
-class UpdateClinicEvent extends ClinicEvent{
+class UpdateClinicEvent extends ClinicEvent {
   final Clinic clinic;
 
   UpdateClinicEvent({required this.clinic});
-  // UpdateClinicEvent({required this.clinicId});
 
   @override
-  // List<Object> get props => [clinicId, clinic];
   List<Object> get props => [clinic];
 }
 
-
-class GetClinicEvent extends ClinicEvent{}
-
+class GetClinicEvent extends ClinicEvent {}
 
 class RefreshClinicEvent extends ClinicEvent {}

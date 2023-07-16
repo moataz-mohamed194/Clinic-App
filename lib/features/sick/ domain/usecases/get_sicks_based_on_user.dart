@@ -4,13 +4,12 @@ import 'package:dartz/dartz.dart';
 
 import '../entities/sick.dart';
 
-class GetSickBasedOnUser{
+class GetSickBasedOnUser {
   final SickRepository repository;
 
-  GetSickBasedOnUser( this.repository);
+  GetSickBasedOnUser(this.repository);
 
-
-  Future<Either<Failures,List<Sick>>> call() async{
+  Future<Either<Failures, List<Sick>>> call() async {
     return await repository.getSickBasedOnUser();
   }
 }

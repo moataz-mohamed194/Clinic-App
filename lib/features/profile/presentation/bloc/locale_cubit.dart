@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../domain/usecases/change_language_use_case.dart';
 
-
 class LocaleCubit extends Cubit<String> {
   final ChangeLanguageUseCase changeLanguageUseCase;
   final String cubitLanguage;
-  LocaleCubit( {required this.cubitLanguage,required this.changeLanguageUseCase}) : super(cubitLanguage);
+  LocaleCubit(
+      {required this.cubitLanguage, required this.changeLanguageUseCase})
+      : super(cubitLanguage);
   String currentLanguageCode = 'en';
 
   Future<void> _changeLanguage(String languageCode) async {

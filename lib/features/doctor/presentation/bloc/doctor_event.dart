@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 import '../../ domain/entities/Doctor.dart';
@@ -10,7 +9,7 @@ abstract class DoctorEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddDoctorEvent extends DoctorEvent{
+class AddDoctorEvent extends DoctorEvent {
   final Doctor doctor;
 
   AddDoctorEvent({required this.doctor});
@@ -19,9 +18,6 @@ class AddDoctorEvent extends DoctorEvent{
   List<Object> get props => [doctor];
 }
 
-
-
-class GetDoctorEvent extends DoctorEvent{}
-
+class GetDoctorEvent extends DoctorEvent {}
 
 class RefreshDoctorEvent extends DoctorEvent {}

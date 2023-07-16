@@ -21,11 +21,10 @@ class MainDoctorPage extends StatelessWidget {
       GetAllSicksPage(typeOfLogin: 'Doctor'),
       GetAllVisitors(typeOfLogin: 'Doctor'),
       GetClinicDataPage(showAddAndEdit: true),
-      Profile( data: data)
+      Profile(data: data)
     ];
     return BlocBuilder<BottomCubit, int>(builder: (context, state) {
       return Scaffold(
-        // appBar: AppBar(title: Text('Welcome Doctor'),),
         body: Center(
           child: _widgetOptions.elementAt(context.read<BottomCubit>().state),
         ),
@@ -40,7 +39,6 @@ class MainDoctorPage extends StatelessWidget {
                 height: 22.h,
               ),
               label: S.of(context).Home,
-              // backgroundColor: Colors.red,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
@@ -49,8 +47,7 @@ class MainDoctorPage extends StatelessWidget {
                     : AppIcons.iconUnSelectedVisitor,
                 height: 22.h,
               ),
-              label:  S.of(context).Visitor,
-              // backgroundColor: Colors.green,
+              label: S.of(context).Visitor,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
@@ -59,8 +56,7 @@ class MainDoctorPage extends StatelessWidget {
                     : AppIcons.iconUnSelectedClinic,
                 height: 22.h,
               ),
-              label:  S.of(context).Clinic,
-              // backgroundColor: Colors.purple,
+              label: S.of(context).Clinic,
             ),
             BottomNavigationBarItem(
               icon: Image.asset(
@@ -69,18 +65,16 @@ class MainDoctorPage extends StatelessWidget {
                     : AppIcons.iconUnSelectedAvatar,
                 height: 22.h,
               ),
-              label:  S.of(context).Profile,
+              label: S.of(context).Profile,
             ),
           ],
           currentIndex: state,
           selectedItemColor: AppColors.mainColor,
           unselectedItemColor: Colors.grey.shade500,
           showUnselectedLabels: true,
-          // useLegacyColorScheme: true,
           onTap: context.read<BottomCubit>().changeCurrentPage,
         ),
       );
     });
   }
-
 }

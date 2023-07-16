@@ -3,12 +3,12 @@ import 'package:dartz/dartz.dart';
 
 import '../repositories/Sick_repositorie.dart';
 
-class AddSickReport{
+class AddSickReport {
   final SickRepository repository;
 
   AddSickReport(this.repository);
 
-  Future<Either<Failures, Unit>> call(int id, String report) async{
+  Future<Either<Failures, Unit>> call(int id, String report) async {
     return await repository.addSickReport(id, report);
   }
 }

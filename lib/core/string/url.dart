@@ -18,12 +18,13 @@ class AppUrl {
   static String UrlUpdateAccount(String id) {
     return BASE_URL + '/users/update_account/' + id + '/';
   }
+
   static String UrlGetAllBookingRequisted(String id) {
-    return BASE_URL+'/users/get_all_booking_requisted/'+'$id';
+    return BASE_URL + '/users/get_all_booking_requisted/' + '$id';
   }
 
   static String UrlEnteredSick(String id) {
-    return BASE_URL+'/nurse/entered_sick/'+id+'/';
+    return BASE_URL + '/nurse/entered_sick/' + id + '/';
   }
 
   static String UrlGetFeesOfDay(String day) {

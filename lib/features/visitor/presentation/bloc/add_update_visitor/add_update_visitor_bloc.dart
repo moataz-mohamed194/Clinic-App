@@ -12,47 +12,48 @@ import '../../../../../core/string/failures.dart';
 part 'add_update_visitor_event.dart';
 part 'add_update_visitor_state.dart';
 
-class AddUpdateVisitorBloc extends Bloc<AddUpdateVisitorEvent, AddUpdateVisitorState> {
+class AddUpdateVisitorBloc
+    extends Bloc<AddUpdateVisitorEvent, AddUpdateVisitorState> {
   final AddVisitorToday addVisitor;
   final UpdateVisitorToday updateVisitor;
-  AddUpdateVisitorBloc({
-    required this.addVisitor,
-    required this.updateVisitor
-  }) : super(AddUpdateVisitorInitial()) {
-    on<AddUpdateVisitorEvent>((event, emit) async{
-      if (event is AddVisitorEvent){
+  AddUpdateVisitorBloc({required this.addVisitor, required this.updateVisitor})
+      : super(AddUpdateVisitorInitial()) {
+    on<AddUpdateVisitorEvent>((event, emit) async {
+      if (event is AddVisitorEvent) {
         emit(LoadingAddUpdateVisitorState());
         final failureOrDoneMessage = await addVisitor(event.visitor);
 
-        emit(_mapFailureOrPostsToState(failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
-      }else if (event is UpdateVisitorEvent){
+        emit(_mapFailureOrPostsToState(
+            failureOrDoneMessage, ADD_SUCCESS_MESSAGE));
+      } else if (event is UpdateVisitorEvent) {
         emit(LoadingAddUpdateVisitorState());
         final failureOrDoneMessage = await updateVisitor(event.visitorId);
 
-        emit(_mapFailureOrPostsToState(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+        emit(_mapFailureOrPostsToState(
+            failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
       }
     });
   }
 }
 
-  AddUpdateVisitorState _mapFailureOrPostsToState(Either<Failures, Unit> either, String message) {
-    return either.fold(
-      (failure) => ErrorAddUpdateVisitorState(
-        message: _mapFailureToMessage(failure)
-        ),
-      (_) => MessageAddUpdateVisitorState(
-         message: message,
-      ),
-    );
-  }
+AddUpdateVisitorState _mapFailureOrPostsToState(
+    Either<Failures, Unit> either, String message) {
+  return either.fold(
+    (failure) =>
+        ErrorAddUpdateVisitorState(message: _mapFailureToMessage(failure)),
+    (_) => MessageAddUpdateVisitorState(
+      message: message,
+    ),
+  );
+}
 
-  String _mapFailureToMessage(Failures failure) {
-    switch (failure.runtimeType) {
-      case OfflineFailures:
-        return SERVER_FAILURE_MESSAGE;
-      case OfflineFailures:
-        return OFFLINE_FAILURE_MESSAGE;
-      default:
-        return "Unexpected Error , Please try again later .";
-    }
+String _mapFailureToMessage(Failures failure) {
+  switch (failure.runtimeType) {
+    case OfflineFailures:
+      return SERVER_FAILURE_MESSAGE;
+    case OfflineFailures:
+      return OFFLINE_FAILURE_MESSAGE;
+    default:
+      return "Unexpected Error , Please try again later .";
   }
+}

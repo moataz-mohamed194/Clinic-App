@@ -29,7 +29,6 @@ sickListWidget({required List<Sick> sick, String? typeOfLogin}) {
               width: 30.w,
               height: MediaQuery.of(context).size.height,
             ),
-
             title: Text(sick[index].name),
             dense: true,
             onTap: typeOfLogin == 'Doctor'
@@ -80,11 +79,7 @@ _onUpdateAsEntered(BuildContext context, sickId) async {
   try {
     BlocProvider.of<AddUpdateGetSickBloc>(context)
         .add(UpdateSickAsEnteredEvent(sickId: sickId));
-    // Navigator.of(context).pop();
-    // Navigator.of(context).push(
-    //     MaterialPageRoute(builder: (_) => GetAllSicksPage()));
   } catch (e) {
     print(e);
   }
-  // }
 }

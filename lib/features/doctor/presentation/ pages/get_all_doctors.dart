@@ -16,8 +16,10 @@ class GetDoctorDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      appBar: WidgetAppBar(context: context, title: S.of(context).DoctorData, showHomeIcon:true),
-
+      appBar: WidgetAppBar(
+          context: context,
+          title: S.of(context).DoctorData,
+          showHomeIcon: true),
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),
     );
@@ -53,7 +55,10 @@ class GetDoctorDataPage extends StatelessWidget {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => AddNewDoctorPage()));
       },
-      child: Icon(Icons.add, color: Colors.white,),
+      child: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
     );
   }
 

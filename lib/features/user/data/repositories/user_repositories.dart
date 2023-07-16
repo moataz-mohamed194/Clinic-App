@@ -1,4 +1,3 @@
-
 import 'package:clinic/core/error/failures.dart';
 
 import 'package:clinic/features/user/domain/entities/user.dart';
@@ -26,10 +25,10 @@ class UserRepositoriesImpl implements UserRepository {
       try {
         await remoteDataSource.addUser(userModel);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }
@@ -42,10 +41,10 @@ class UserRepositoriesImpl implements UserRepository {
       try {
         await remoteDataSource.updateUser(id, userModel);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }

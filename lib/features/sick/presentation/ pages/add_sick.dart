@@ -10,46 +10,39 @@ import '../../../../generated/l10n.dart';
 import '../../../visitor/presentation/bloc/add_update_visitor/add_update_visitor_bloc.dart';
 import '../widgets/form_widget.dart';
 
-class AddSickPage extends StatelessWidget{
+class AddSickPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Add medical re-examination'),
-      // ),
-      appBar: generalAppBar(context: context, title: S.of(context).AddMedicalReExamination,),
-
+      appBar: generalAppBar(
+        context: context,
+        title: S.of(context).AddMedicalReExamination,
+      ),
       body: appBody(context),
     );
   }
-  Widget appBody(BuildContext context){
+
+  Widget appBody(BuildContext context) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(10),
         child: BlocConsumer<AddUpdateGetSickBloc, AddUpdateGetSickState>(
-        listener: (context, state){
-            if (state is MessageAddUpdateGetSickState){
-
-              SnackBarMessage().showSuccesSnackBar(message: state.message, context: context);
-              // Navigator.of(context).pushAndRemoveUntil(
-              // MaterialPageRoute(builder: (_) => GetAllSicksPage()), (route) => false);
+          listener: (context, state) {
+            if (state is MessageAddUpdateGetSickState) {
+              SnackBarMessage()
+                  .showSuccesSnackBar(message: state.message, context: context);
               Navigator.pop(context);
-            }else if (state is ErrorSicksState){
-
-            SnackBarMessage().showErrorSnackBar(message: state.message, context: context);
-            // Navigator.of(context).pushAndRemoveUntil(
-            //     MaterialPageRoute(builder: (_) => GetAllVisitors()), (route) => false);
-
+            } else if (state is ErrorSicksState) {
+              SnackBarMessage()
+                  .showErrorSnackBar(message: state.message, context: context);
             }
           },
-          builder: (context, state){
-            if (state is LoadingAddUpdateVisitorState){
-            return LoadingWidget();
+          builder: (context, state) {
+            if (state is LoadingAddUpdateVisitorState) {
+              return LoadingWidget();
             }
             return FormSickWidget();
-
-            },
-
+          },
         ),
       ),
     );

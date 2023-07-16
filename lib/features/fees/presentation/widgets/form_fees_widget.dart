@@ -6,7 +6,7 @@ import '../../ domain/entities/Fees.dart';
 import '../../../../generated/l10n.dart';
 import '../bloc/Fees_bloc.dart';
 
-class FormFeesWidget extends StatelessWidget{
+class FormFeesWidget extends StatelessWidget {
   final Fees? feesData;
 
   final _formKey = GlobalKey<FormState>();
@@ -26,115 +26,117 @@ class FormFeesWidget extends StatelessWidget{
         children: [
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: this.feesData==null?
-            TextFormField(
-              controller: _titleController,
-              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheTypeOfFees : null,
-              decoration: InputDecoration(hintText: S.of(context).Type),
-            ):
-            TextFormField(
-              initialValue:this.feesData != null? this.feesData!.type:null,
-              validator: (val) => val!.isEmpty ? S.of(context).MustAddTheTypeOfFees : null,
-              decoration: InputDecoration(hintText: S.of(context).Type),
-              onChanged: (e){
-                _titleController.text = e;
-              },
-            ),
+            child: this.feesData == null
+                ? TextFormField(
+                    controller: _titleController,
+                    validator: (val) => val!.isEmpty
+                        ? S.of(context).MustAddTheTypeOfFees
+                        : null,
+                    decoration: InputDecoration(hintText: S.of(context).Type),
+                  )
+                : TextFormField(
+                    initialValue:
+                        this.feesData != null ? this.feesData!.type : null,
+                    validator: (val) => val!.isEmpty
+                        ? S.of(context).MustAddTheTypeOfFees
+                        : null,
+                    decoration: InputDecoration(hintText: S.of(context).Type),
+                    onChanged: (e) {
+                      _titleController.text = e;
+                    },
+                  ),
           ),
-
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: this.feesData==null?
-            TextFormField(
-              keyboardType: TextInputType.number,
-              controller: _priceController,
-              initialValue:this.feesData != null? this.feesData!.price:null,
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return S.of(context).MustAddThePriceOfFees;
-                }else{
-                  try{
-                    int.parse(val);
-                    return null;
-                  }catch(e){
-                    return S.of(context).MustBeNumbers;
-                  }
-                }
-               },
-              decoration: InputDecoration(hintText: S.of(context).price),
-            ):
-            TextFormField(
-              keyboardType: TextInputType.number,
-              initialValue: this.feesData!.price,
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return S.of(context).MustAddThePriceOfFees;
-                }else{
-                  try{
-                    int.parse(val);
-                    return null;
-                  }catch(e){
-                    double.parse(val);
-                    return S.of(context).MustBeNumbers;
-                  }
-                }
-              },
-              decoration: InputDecoration(hintText: S.of(context).price),
-              onChanged: (e){
-                _priceController.text = e;
-              },
-            ),
+            child: this.feesData == null
+                ? TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: _priceController,
+                    initialValue:
+                        this.feesData != null ? this.feesData!.price : null,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return S.of(context).MustAddThePriceOfFees;
+                      } else {
+                        try {
+                          int.parse(val);
+                          return null;
+                        } catch (e) {
+                          return S.of(context).MustBeNumbers;
+                        }
+                      }
+                    },
+                    decoration: InputDecoration(hintText: S.of(context).price),
+                  )
+                : TextFormField(
+                    keyboardType: TextInputType.number,
+                    initialValue: this.feesData!.price,
+                    validator: (val) {
+                      if (val!.isEmpty) {
+                        return S.of(context).MustAddThePriceOfFees;
+                      } else {
+                        try {
+                          int.parse(val);
+                          return null;
+                        } catch (e) {
+                          double.parse(val);
+                          return S.of(context).MustBeNumbers;
+                        }
+                      }
+                    },
+                    decoration: InputDecoration(hintText: S.of(context).price),
+                    onChanged: (e) {
+                      _priceController.text = e;
+                    },
+                  ),
           ),
           Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child:this.feesData==null?
-              DateTimePicker(
-                type: DateTimePickerType.date,
-                dateMask: 'dd-MM-yyyy',
-                firstDate: DateTime(2000),
-                decoration:InputDecoration(
-                  hintText:S.of(context).Date),
-                dateLabelText:S.of(context).ChooseTheDate,
-                lastDate: DateTime(2100),
-                // initialValue:'2022-05-10',
-                controller: _dateController,
-                onChanged: (value) {
-                  _dateController.text = '$value'.toString();
-                },
-                validator: (val) {
-                  if(val == null){
-                    return S.of(context).MustChooseDateOfFees;
-                  }
-                  return null;
-                },
-              ):
-              DateTimePicker(
-                type: DateTimePickerType.date,
-                dateMask: 'yyyy-MM-dd',
-                initialValue: this.feesData!.time,
-                firstDate: DateTime(2000),
-                decoration:InputDecoration(
-                    hintText:S.of(context).Date),
-                dateLabelText:S.of(context).ChooseTheDate,
-                lastDate: DateTime(2100),
-                onChanged: (value) {
-                  _dateController.text = '$value'.toString();
-                },
-                validator: (val) {
-                  if(val == null){
-                    return S.of(context).MustChooseDateOfFees;
-                  }
-                  return null;
-                },
-              )
-          ),
+              child: this.feesData == null
+                  ? DateTimePicker(
+                      type: DateTimePickerType.date,
+                      dateMask: 'dd-MM-yyyy',
+                      firstDate: DateTime(2000),
+                      decoration: InputDecoration(hintText: S.of(context).Date),
+                      dateLabelText: S.of(context).ChooseTheDate,
+                      lastDate: DateTime(2100),
+                      controller: _dateController,
+                      onChanged: (value) {
+                        _dateController.text = '$value'.toString();
+                      },
+                      validator: (val) {
+                        if (val == null) {
+                          return S.of(context).MustChooseDateOfFees;
+                        }
+                        return null;
+                      },
+                    )
+                  : DateTimePicker(
+                      type: DateTimePickerType.date,
+                      dateMask: 'yyyy-MM-dd',
+                      initialValue: this.feesData!.time,
+                      firstDate: DateTime(2000),
+                      decoration: InputDecoration(hintText: S.of(context).Date),
+                      dateLabelText: S.of(context).ChooseTheDate,
+                      lastDate: DateTime(2100),
+                      onChanged: (value) {
+                        _dateController.text = '$value'.toString();
+                      },
+                      validator: (val) {
+                        if (val == null) {
+                          return S.of(context).MustChooseDateOfFees;
+                        }
+                        return null;
+                      },
+                    )),
           ElevatedButton.icon(
-              onPressed:()=>this.feesData==null?
-                validateFormThenAddFees(context):
-                validateFormThenUpdateFees(context, this.feesData),
+              onPressed: () => this.feesData == null
+                  ? validateFormThenAddFees(context)
+                  : validateFormThenUpdateFees(context, this.feesData),
               icon: Icon(Icons.add),
-              label:this.feesData==null? Text(S.of(context).AddFees):Text(S.of(context).UpdateFees)
-          )
+              label: this.feesData == null
+                  ? Text(S.of(context).AddFees)
+                  : Text(S.of(context).UpdateFees))
         ],
       ),
     );
@@ -151,13 +153,11 @@ class FormFeesWidget extends StatelessWidget{
             time: _dateController.text);
         BlocProvider.of<AddUpdateGetFeesBloc>(context)
             .add(AddFeesEvent(fees: fees));
-      }
-      catch (e){
+      } catch (e) {
         print(e);
       }
     }
   }
-
 
   void validateFormThenUpdateFees(BuildContext context, Fees? feesData2) {
     final isValid = _formKey.currentState!.validate();
@@ -165,16 +165,20 @@ class FormFeesWidget extends StatelessWidget{
       try {
         final fees = Fees(
             id: feesData2!.id,
-            type: _titleController.text==''?this.feesData!.type:_titleController.text,
-            price: _priceController.text==''?this.feesData!.price:_priceController.text,
-            time: _dateController.text==''?this.feesData!.time:_dateController.text);
+            type: _titleController.text == ''
+                ? this.feesData!.type
+                : _titleController.text,
+            price: _priceController.text == ''
+                ? this.feesData!.price
+                : _priceController.text,
+            time: _dateController.text == ''
+                ? this.feesData!.time
+                : _dateController.text);
         BlocProvider.of<AddUpdateGetFeesBloc>(context)
             .add(UpdateFeesEvent(fees: fees));
-      }
-      catch (e){
+      } catch (e) {
         print(e);
       }
     }
   }
-
 }

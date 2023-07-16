@@ -5,7 +5,6 @@ import 'package:clinic/features/sick/presentation/widgets/Sick_list_widget.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/string/app_icons.dart';
 import '../../../../core/widgets/loading_widget.dart';
 import '../../../../core/injection/injection_container.dart' as di;
 import '../../../../core/widgets/message_display_widget.dart';
@@ -20,9 +19,10 @@ class GetAllSicksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      WidgetAppBar(context: context, title: S.of(context).WaitingForTheDoctorsExamination, showHomeIcon:true),
-
+      appBar: WidgetAppBar(
+          context: context,
+          title: S.of(context).WaitingForTheDoctorsExamination,
+          showHomeIcon: true),
       body: _buildBody(),
       floatingActionButton: _buildFloatingBtn(context),
     );

@@ -4,12 +4,12 @@ import 'package:dartz/dartz.dart';
 
 import '../entities/login.dart';
 
-class LoginUseCases{
+class LoginUseCases {
   final LoginRepositorie repositorie;
 
-  LoginUseCases( this.repositorie);
+  LoginUseCases(this.repositorie);
 
-  Future<Either<Failures, Unit>> call(Login login, bool stayLogin) async{
+  Future<Either<Failures, Unit>> call(Login login, bool stayLogin) async {
     return await repositorie.loginMethod(login, stayLogin);
   }
 }

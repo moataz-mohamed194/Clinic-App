@@ -7,8 +7,7 @@ import '../bloc/Nurse_bloc.dart';
 import '../bloc/Nurse_state.dart';
 import '../widgets/form_nurse_widget.dart';
 
-class AddNewNursePage extends StatelessWidget{
-
+class AddNewNursePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,30 +17,30 @@ class AddNewNursePage extends StatelessWidget{
       body: appBody(context),
     );
   }
-  Widget appBody(BuildContext context){
+
+  Widget appBody(BuildContext context) {
     return Center(
       child: Padding(
         padding: EdgeInsets.all(10),
         child: BlocConsumer<AddGetNurseBloc, AddGetNurseState>(
-          listener: (context, state){
-            if (state is MessageAddGetNurseState){
-              SnackBarMessage().showSuccesSnackBar(message: state.message, context: context);
+          listener: (context, state) {
+            if (state is MessageAddGetNurseState) {
+              SnackBarMessage()
+                  .showSuccesSnackBar(message: state.message, context: context);
               Navigator.pop(context);
-            }else if (state is ErrorNurseState){
-              SnackBarMessage().showErrorSnackBar(message: state.message, context: context);
+            } else if (state is ErrorNurseState) {
+              SnackBarMessage()
+                  .showErrorSnackBar(message: state.message, context: context);
             }
           },
-          builder: (context, state){
-            if (state is LoadingNurseState){
+          builder: (context, state) {
+            if (state is LoadingNurseState) {
               return LoadingWidget();
             }
             return FormNurseWidget();
-
           },
-
         ),
       ),
     );
   }
-
 }

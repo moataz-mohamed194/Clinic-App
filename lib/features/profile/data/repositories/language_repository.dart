@@ -15,9 +15,8 @@ class LanguageRepository implements BaseLanguageRepository {
       final languageIsChanged = await languageLocaleDataSource.changeLanguage(
           languageCode: languageCode);
       return Right(languageIsChanged);
-    } catch (e){
+    } catch (e) {
       return Left(OfflineFailures());
     }
   }
-
 }

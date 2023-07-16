@@ -11,8 +11,8 @@ class NurseRepositoriesImpl implements NurseRepository {
   final NurseRemoteDataSource remoteDataSource;
   final NetworkInfo networkInfo;
 
-  NurseRepositoriesImpl({required this.remoteDataSource,
-    required this.networkInfo});
+  NurseRepositoriesImpl(
+      {required this.remoteDataSource, required this.networkInfo});
 
   @override
   Future<Either<Failures, Unit>> addNurseData(Nurse nurse) async {
@@ -22,31 +22,29 @@ class NurseRepositoriesImpl implements NurseRepository {
         description: nurse.description.toString(),
         firstPhoneNumber: nurse.firstPhoneNumber,
         userName: nurse.userName.toString(),
-        secondPhoneNumber: nurse.secondPhoneNumber
-
-    );
-    if (await networkInfo.isConnected){
-      try{
+        secondPhoneNumber: nurse.secondPhoneNumber);
+    if (await networkInfo.isConnected) {
+      try {
         await remoteDataSource.addNurse(nurseModel);
         return Right(unit);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else {
+    } else {
       return Left(OfflineFailures());
     }
   }
 
   @override
   Future<Either<Failures, List<Nurse>>> getNurseData() async {
-    if(await networkInfo.isConnected) {
-      try{
+    if (await networkInfo.isConnected) {
+      try {
         final currentNurse = await remoteDataSource.getAllNurse();
         return Right(currentNurse);
-      }on OfflineException{
+      } on OfflineException {
         return Left(OfflineFailures());
       }
-    }else{
+    } else {
       return Left(OfflineFailures());
     }
   }

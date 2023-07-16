@@ -1,8 +1,6 @@
-// import 'package:equatable/equatable.dart';
-//
-// import '../../ domain/entities/login.dart';
 part of 'login_bloc.dart';
-abstract class LoginEvent extends Equatable{
+
+abstract class LoginEvent extends Equatable {
   const LoginEvent();
 
   @override
@@ -11,11 +9,11 @@ abstract class LoginEvent extends Equatable{
 
 class RefreshLoginEvent extends LoginEvent {}
 
-class LoginMethodEvent extends LoginEvent{
+class LoginMethodEvent extends LoginEvent {
   final Login login;
   final bool stayLogin;
 
-  LoginMethodEvent( {required this.stayLogin,required this.login});
+  LoginMethodEvent({required this.stayLogin, required this.login});
 
   @override
   List<Object> get props => [login, stayLogin];

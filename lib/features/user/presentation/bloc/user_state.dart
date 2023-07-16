@@ -2,8 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/user.dart';
 
-
-abstract class AddUpdateUserState extends Equatable{
+abstract class AddUpdateUserState extends Equatable {
   const AddUpdateUserState();
 
   @override
@@ -13,7 +12,6 @@ abstract class AddUpdateUserState extends Equatable{
 class UserInitial extends AddUpdateUserState {}
 
 class LoadingUsersState extends AddUpdateUserState {}
-
 
 class LoadedUsersState extends AddUpdateUserState {
   final List<User> user;
@@ -27,15 +25,13 @@ class LoadedUsersState extends AddUpdateUserState {
 class ErrorUsersState extends AddUpdateUserState {
   final String message;
 
-
   ErrorUsersState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-
-class MessageAddUpdateUserState extends AddUpdateUserState{
+class MessageAddUpdateUserState extends AddUpdateUserState {
   final String message;
 
   MessageAddUpdateUserState({required this.message});

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Nurse extends Equatable{
+class Nurse extends Equatable {
   final String userName;
   final String email;
   final String password;
@@ -17,6 +17,12 @@ class Nurse extends Equatable{
       required this.description});
 
   @override
-  List<Object?> get props => [userName, email, password, firstPhoneNumber,
-    secondPhoneNumber, description];
+  List<Object?> get props => [
+        userName,
+        email,
+        password,
+        firstPhoneNumber,
+        secondPhoneNumber,
+        description
+      ];
 }

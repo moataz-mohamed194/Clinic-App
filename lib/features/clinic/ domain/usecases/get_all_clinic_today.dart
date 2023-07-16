@@ -4,12 +4,12 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../core/error/failures.dart';
 
-class GetClinicData{
+class GetClinicData {
   final ClinicRepository repository;
 
   GetClinicData(this.repository);
 
-  Future<Either<Failures, List<Clinic>>> call() async{
+  Future<Either<Failures, List<Clinic>>> call() async {
     return await repository.getClinicData();
   }
 }

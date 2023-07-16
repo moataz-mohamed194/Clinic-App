@@ -87,7 +87,6 @@ class AddUserPage extends StatelessWidget {
                               Expanded(
                                 child: Container(
                                   height: 60,
-                                  // width: 10,//double.minPositive,
                                   margin: EdgeInsets.symmetric(horizontal: 10),
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
@@ -147,17 +146,17 @@ class AddUserPage extends StatelessWidget {
                             height: 15,
                           ),
                           Row(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(S.of(context).AlreadyHaveAnAccount,
+                              Text(
+                                S.of(context).AlreadyHaveAnAccount,
                                 style: TextStyle(color: Colors.grey),
                               ),
                               InkWell(
-                                child: Text(S.of(context).SignIn,
+                                child: Text(
+                                  S.of(context).SignIn,
                                   style: TextStyle(
                                     color: AppColors.mainColor,
-                                    // decoration: TextDecoration.underline,
                                   ),
                                 ),
                                 onTap: () {

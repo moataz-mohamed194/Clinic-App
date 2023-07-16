@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../ domain/entities/sick.dart';
 
-abstract class AddUpdateGetSickState extends Equatable{
+abstract class AddUpdateGetSickState extends Equatable {
   const AddUpdateGetSickState();
 
   @override
@@ -12,7 +12,6 @@ abstract class AddUpdateGetSickState extends Equatable{
 class SickInitial extends AddUpdateGetSickState {}
 
 class LoadingSicksState extends AddUpdateGetSickState {}
-
 
 class LoadedSicksState extends AddUpdateGetSickState {
   final List<Sick> sicks;
@@ -26,15 +25,13 @@ class LoadedSicksState extends AddUpdateGetSickState {
 class ErrorSicksState extends AddUpdateGetSickState {
   final String message;
 
-
   ErrorSicksState({required this.message});
 
   @override
   List<Object> get props => [message];
 }
 
-
-class MessageAddUpdateGetSickState extends AddUpdateGetSickState{
+class MessageAddUpdateGetSickState extends AddUpdateGetSickState {
   final String message;
 
   MessageAddUpdateGetSickState({required this.message});

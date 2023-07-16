@@ -7,11 +7,10 @@ import '../../../../core/error/Exception.dart';
 import '../../../../core/string/url.dart';
 import '../models/DocotrModel.dart';
 
-abstract class DoctorRemoteDataSource{
+abstract class DoctorRemoteDataSource {
   Future<List<DoctorModel>> getAllDoctor();
-  Future <Unit> addDoctor(Doctor doctor);
+  Future<Unit> addDoctor(Doctor doctor);
 }
-
 
 class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
   final http.Client client;
@@ -20,49 +19,46 @@ class DoctorRemoteDataSourceImple extends DoctorRemoteDataSource {
 
   @override
   Future<Unit> addDoctor(Doctor doctor) async {
-
     final body = {
       'name': doctor.name.toString(),
       'email': doctor.email.toString(),
       'password': doctor.password.toString(),
-      'phone_number':doctor.phoneNumber.toString(),
-      'description':doctor.description.toString(),
-      'pic':doctor.pic.toString()
+      'phone_number': doctor.phoneNumber.toString(),
+      'description': doctor.description.toString(),
+      'pic': doctor.pic.toString()
     };
-    try{
-      final response = await client.post(Uri.parse(AppUrl.UrlModelOfDoctor),body: body);
+    try {
+      final response =
+          await client.post(Uri.parse(AppUrl.UrlModelOfDoctor), body: body);
 
-      if (response.statusCode == 201 || response.body == '{"Results": "Success request"}'){
+      if (response.statusCode == 201 ||
+          response.body == '{"Results": "Success request"}') {
         return Future.value(unit);
-      }else{
+      } else {
         throw OfflineException();
-      }}
-    catch(e){
+      }
+    } catch (e) {
       throw OfflineException();
     }
   }
 
   @override
   Future<List<DoctorModel>> getAllDoctor() async {
-    final response = await client.get(
-        Uri.parse(AppUrl.UrlModelOfDoctor),
-        headers: {"Content-Type": "application/json"}
-    );
-    if (response.statusCode == 200){
+    final response = await client.get(Uri.parse(AppUrl.UrlModelOfDoctor),
+        headers: {"Content-Type": "application/json"});
+    if (response.statusCode == 200) {
       try {
         final List decodeJson = json.decode(response.body) as List;
         final List<DoctorModel> doctorModels = decodeJson
-            .map<DoctorModel>((jsonClinicModel) =>
-            DoctorModel.fromJson(jsonClinicModel))
+            .map<DoctorModel>(
+                (jsonClinicModel) => DoctorModel.fromJson(jsonClinicModel))
             .toList();
         return doctorModels;
-      }catch(e){
+      } catch (e) {
         throw OfflineException();
-
       }
-    }else{
+    } else {
       throw OfflineException();
     }
   }
-
 }

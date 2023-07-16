@@ -1,12 +1,5 @@
+class OfflineException implements Exception {}
 
-class OfflineException implements Exception{
+class FailuresLoginException implements Exception {}
 
-}
-
-class FailuresLoginException implements Exception{
-
-}
-
-class CheckDataException implements Exception{
-
-}
+class CheckDataException implements Exception {}

@@ -12,20 +12,14 @@ part 'visitor_state.dart';
 
 class VisitorBloc extends Bloc<VisitorEvent, VisitorState> {
   final GetAllVisitorToday getAllVisitors;
-  VisitorBloc({required this.getAllVisitors}) :
-   super(VisitorInitial()) {
-    on<VisitorEvent>((event, emit) async{
+  VisitorBloc({required this.getAllVisitors}) : super(VisitorInitial()) {
+    on<VisitorEvent>((event, emit) async {
       if (event is GetAllVisitorsEvent || event is RefreshVisitorsEvent) {
-      //   emit(LoadingVisitorsState());
-      //
-      //   final failureOrVisitors = await getAllVisitors();
-      //   emit(_mapFailureOrPostsToState(failureOrVisitors));
-      // } else if (event is RefreshVisitorsEvent) {
         try {
           emit(LoadingVisitorsState());
           final failureOrVisitors = await getAllVisitors();
           emit(_mapFailureOrPostsToState(failureOrVisitors));
-        }catch(e){
+        } catch (e) {
           print(e);
         }
       }
@@ -34,21 +28,21 @@ class VisitorBloc extends Bloc<VisitorEvent, VisitorState> {
 }
 
 VisitorState _mapFailureOrPostsToState(Either<Failures, List<Visitor>> either) {
-    return either.fold(
-      (failure) => ErrorVisitorssState(message: _mapFailureToMessage(failure)),
-      (visitor) => LoadedVisitorsState(
-         visitors: visitor,
-      ),
-    );
-  }
+  return either.fold(
+    (failure) => ErrorVisitorssState(message: _mapFailureToMessage(failure)),
+    (visitor) => LoadedVisitorsState(
+      visitors: visitor,
+    ),
+  );
+}
 
-  String _mapFailureToMessage(Failures failure) {
-    switch (failure.runtimeType) {
-      case OfflineFailures:
-        return SERVER_FAILURE_MESSAGE;
-      case OfflineFailures:
-        return OFFLINE_FAILURE_MESSAGE;
-      default:
-        return "Unexpected Error , Please try again later .";
-    }
+String _mapFailureToMessage(Failures failure) {
+  switch (failure.runtimeType) {
+    case OfflineFailures:
+      return SERVER_FAILURE_MESSAGE;
+    case OfflineFailures:
+      return OFFLINE_FAILURE_MESSAGE;
+    default:
+      return "Unexpected Error , Please try again later .";
   }
+}

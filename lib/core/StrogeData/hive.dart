@@ -1,12 +1,9 @@
-
 import 'package:hive/hive.dart';
 
 part 'hive.g.dart';
 
-
 @HiveType(typeId: 1)
 class Person extends HiveObject {
-
   @HiveField(0)
   String? name;
 
@@ -21,6 +18,4 @@ class Person extends HiveObject {
 
   @HiveField(4)
   String? language;
-
 }
-

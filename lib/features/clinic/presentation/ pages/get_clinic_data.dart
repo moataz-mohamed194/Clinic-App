@@ -23,7 +23,6 @@ class GetClinicDataPage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _GetClinicDataPage();
   }
 }
@@ -62,7 +61,6 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
   }
 
   _location() async {
-
     Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high)
         .catchError((onError) {
@@ -81,8 +79,10 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: WidgetAppBar(context: context, title: S.of(context).ClinicData, showHomeIcon:true),
-
+      appBar: WidgetAppBar(
+          context: context,
+          title: S.of(context).ClinicData,
+          showHomeIcon: true),
       body: _buildBody(),
       floatingActionButton: widget.showAddAndEdit == true
           ? _buildFloatingBtn(context)
@@ -118,10 +118,16 @@ class _GetClinicDataPage extends State<GetClinicDataPage> {
     return FloatingActionButton(
       onPressed: () async {
         _location();
-        Navigator.push(context,
-            MaterialPageRoute(builder: (_)=> AddNewClinicDataPage(showAddAndEdit:widget.showAddAndEdit)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => AddNewClinicDataPage(
+                    showAddAndEdit: widget.showAddAndEdit)));
       },
-      child: Icon(Icons.add, color: Colors.white,),
+      child: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
     );
   }
 

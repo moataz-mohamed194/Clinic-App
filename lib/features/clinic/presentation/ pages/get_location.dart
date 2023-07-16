@@ -13,7 +13,8 @@ class GetLocation extends StatefulWidget {
   final Clinic clinicData;
   final bool isItUpdate;
 
-  GetLocation({Key? key, required this.clinicData, required this.isItUpdate}) : super(key: key);
+  GetLocation({Key? key, required this.clinicData, required this.isItUpdate})
+      : super(key: key);
   @override
   _MapsSampleState createState() => _MapsSampleState();
 }
@@ -23,11 +24,14 @@ class _MapsSampleState extends State<GetLocation> {
 
   MapType _defaultMapType = MapType.normal;
   Completer<GoogleMapController> _controller = Completer();
-@override
+  @override
   void initState() {
     super.initState();
 
-    if (widget.clinicData.latitude != null && widget.clinicData.longitude !=null && widget.clinicData.latitude != '' && widget.clinicData.longitude !='') {
+    if (widget.clinicData.latitude != null &&
+        widget.clinicData.longitude != null &&
+        widget.clinicData.latitude != '' &&
+        widget.clinicData.longitude != '') {
       print('widget.clinicData.latitude: ${widget.clinicData.latitude}');
       print('widget.clinicData.longitude: ${widget.clinicData.longitude}');
       _createMarker.add(Marker(
@@ -36,9 +40,9 @@ class _MapsSampleState extends State<GetLocation> {
             double.parse(widget.clinicData.latitude!),
             double.parse(widget.clinicData.longitude!),
           )));
-
     }
   }
+
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
   }
@@ -130,9 +134,9 @@ class _MapsSampleState extends State<GetLocation> {
       ),
     );
   }
-  void validateFormAddClinic() {
-    if (_createMarker.length>=1){
 
+  void validateFormAddClinic() {
+    if (_createMarker.length >= 1) {
       try {
         final clinic = Clinic(
             id: widget.clinicData.id,
@@ -142,36 +146,31 @@ class _MapsSampleState extends State<GetLocation> {
             toTime: widget.clinicData.toTime,
             timeOfVacation: widget.clinicData.timeOfVacation,
             latitude: _createMarker.first.position.latitude.toString(),
-            longitude: _createMarker.first.position.longitude.toString()
-        );
+            longitude: _createMarker.first.position.longitude.toString());
         if (widget.isItUpdate == false) {
           BlocProvider.of<AddUpdateGetClinicBloc>(context)
               .add(AddClinicEvent(clinic: clinic));
-        }else{
+        } else {
           print(_createMarker);
           print(clinic.latitude);
           print(clinic.longitude);
           BlocProvider.of<AddUpdateGetClinicBloc>(context)
               .add(UpdateClinicEvent(clinic: clinic));
         }
-      }
-      catch (e){
+      } catch (e) {
         print(e);
       }
-    }else{
+    } else {
       BlocProvider.of<AddUpdateGetClinicBloc>(context)
           .add(AddClinicEvent(clinic: widget.clinicData));
       if (widget.isItUpdate == false) {
         BlocProvider.of<AddUpdateGetClinicBloc>(context)
             .add(AddClinicEvent(clinic: widget.clinicData));
-      }else{
+      } else {
         BlocProvider.of<AddUpdateGetClinicBloc>(context)
             .add(UpdateClinicEvent(clinic: widget.clinicData));
       }
     }
     Navigator.pop(context);
-
-    }
-
   }
-
+}

@@ -13,12 +13,14 @@ import '../bloc/add_sick_bloc.dart';
 import '../bloc/add_sick_event.dart';
 
 @immutable
-class FormSickWidget extends StatelessWidget{
+class FormSickWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController(text: DateTime.now().toString());
-  final TextEditingController _typeOfStatementController = TextEditingController(text: DateTime.now().toString());
+  final TextEditingController _dateController =
+      TextEditingController(text: DateTime.now().toString());
+  final TextEditingController _typeOfStatementController =
+      TextEditingController(text: DateTime.now().toString());
 
   final List dropdownItemList = [
     {'label': 'Consultation', 'value': 'A'}, // label is required and unique
@@ -43,7 +45,7 @@ class FormSickWidget extends StatelessWidget{
                 controler: _titleController,
                 keyboardType: TextInputType.text,
                 validatorTextField: (val) =>
-                val!.isEmpty ? S.of(context).MustAddTheNameOfSick : null,
+                    val!.isEmpty ? S.of(context).MustAddTheNameOfSick : null,
                 hintText: S.of(context).Name,
               ),
             ),
@@ -54,50 +56,50 @@ class FormSickWidget extends StatelessWidget{
               child: TextFieldWidget(
                 controler: _phoneNumberController,
                 keyboardType: TextInputType.number,
-                validatorTextField: (val) =>
-                val!.isEmpty ? S.of(context).MustAddThePhoneNumber :
-                      val.length>11 || val.length<11?S.of(context).YourNumberNotRight: null,
+                validatorTextField: (val) => val!.isEmpty
+                    ? S.of(context).MustAddThePhoneNumber
+                    : val.length > 11 || val.length < 11
+                        ? S.of(context).YourNumberNotRight
+                        : null,
                 hintText: S.of(context).PhoneNumber,
               ),
             ),
             Container(
                 padding: EdgeInsets.symmetric(
                   vertical: 10,
-                ),              child:DateTimePicker(
-                type: DateTimePickerType.date,
-                dateMask: 'yyyy-MM-dd',
-                decoration: InputDecoration(
-                    hintText: S.of(context).DateOfStatement,
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    filled: true,
-                    prefixIcon: Icon(Icons.date_range),
-                    fillColor: Colors.grey.shade200,
-                    hintStyle:
-                    TextStyle(color: Colors.grey, fontSize: 15.sp)),
-                controller: _dateController,
-                firstDate: DateTime(2000),
-                // decoration:InputDecoration(
-                //     hintText:'Date of Statement'),
-                dateLabelText:S.of(context).ChooseTheDate,
-                lastDate: DateTime(2100),
-                onChanged: (value) {
-                  _dateController.text = '$value'.toString();
-                },
-                validator: (val) {
-                  if(val == null){
-                    return S.of(context).MustChooseDate;
-                  }
-                  return null;
-                },
-              )
-            ),
+                ),
+                child: DateTimePicker(
+                  type: DateTimePickerType.date,
+                  dateMask: 'yyyy-MM-dd',
+                  decoration: InputDecoration(
+                      hintText: S.of(context).DateOfStatement,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.transparent),
+                      ),
+                      filled: true,
+                      prefixIcon: Icon(Icons.date_range),
+                      fillColor: Colors.grey.shade200,
+                      hintStyle:
+                          TextStyle(color: Colors.grey, fontSize: 15.sp)),
+                  controller: _dateController,
+                  firstDate: DateTime(2000),
+                  dateLabelText: S.of(context).ChooseTheDate,
+                  lastDate: DateTime(2100),
+                  onChanged: (value) {
+                    _dateController.text = '$value'.toString();
+                  },
+                  validator: (val) {
+                    if (val == null) {
+                      return S.of(context).MustChooseDate;
+                    }
+                    return null;
+                  },
+                )),
             Container(
               padding: EdgeInsets.symmetric(
                 vertical: 10,
@@ -110,19 +112,15 @@ class FormSickWidget extends StatelessWidget{
                 resultBD: BoxDecoration(
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(5),
-                  border:
-                Border.all(color: Colors.transparent, width: 1),
-
+                  border: Border.all(color: Colors.transparent, width: 1),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black,
                     ),
                   ],
                 ),
-
-                resultWidth:MediaQuery.of(context).size.width,
+                resultWidth: MediaQuery.of(context).size.width,
                 placeholder: S.of(context).TypeOfStatement,
-
               ),
             ),
             // ElevatedButton.icon(
@@ -157,16 +155,12 @@ class FormSickWidget extends StatelessWidget{
             name: _titleController.text.toString(),
             phoneNumber: int.parse(_phoneNumberController.text),
             typeOfStatment: _typeOfStatementController.text.toString(),
-            time:_dateController.text.toString()
-        );
+            time: _dateController.text.toString());
         BlocProvider.of<AddUpdateGetSickBloc>(context)
             .add(AddSickEvent(sick: sick));
-      }
-      catch (e){
+      } catch (e) {
         print(e);
       }
-
-
     }
   }
 }
