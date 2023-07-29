@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:clinic/core/string/url.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,9 +22,13 @@ class LoginRemoteDataSourceImple extends LoginRemoteDataSource {
 
   @override
   Future<Unit> loginMethod(Login login, bool stayLogin) async {
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    print('token: ${fcmToken}');
+
     final body = {
       'email': login.email.toString(),
-      'password': login.password.toString()
+      'password': login.password.toString(),
+      'token':fcmToken
     };
     try {
       final response =

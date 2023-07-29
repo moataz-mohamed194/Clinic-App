@@ -50,13 +50,14 @@ class AddUpdateGetSickBloc
             failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
       } else if (event is UpdateSickAsEnteredEvent) {
         emit(LoadingSicksState());
-        final failureOrDoneMessage = await updateSickAsEntered(event.sickId);
-        emit(_mapFailureOrPostsToStateForAdd(
-            failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
+        await updateSickAsEntered(event.sickId);
+        final failureOrDoneMessage = await getSick();
+        emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
       } else if (event is GetSickEvent || event is RefreshSickEvent) {
         emit(LoadingSicksState());
         final failureOrDoneMessage = await getSick();
         emit(_mapFailureOrPostsToStateForGet(failureOrDoneMessage));
+
       } else if (event is GetSickBasedOnUserEvent ||
           event is RefreshSickEvent) {
         emit(LoadingSicksState());

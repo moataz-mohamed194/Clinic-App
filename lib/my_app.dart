@@ -19,16 +19,11 @@ import 'features/auth/presentation/bloc/bottom_cubit.dart';
 import 'features/auth/presentation/bloc/check_box_cubit.dart';
 import 'features/auth/presentation/bloc/eyes_cubit.dart';
 import 'features/clinic/presentation/bloc/actions_clinic_bloc.dart';
-import 'features/doctor/presentation/ pages/add_doctor.dart';
-import 'features/doctor/presentation/ pages/get_all_doctors.dart';
 import 'features/doctor/presentation/bloc/doctor_bloc.dart';
-import 'features/fees/presentation/ pages/choose_date_page.dart';
 import 'features/fees/presentation/bloc/Fees_bloc.dart';
 import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/profile/presentation/bloc/locale_cubit.dart';
-import 'features/sick/presentation/ pages/add_sick.dart';
-import 'features/visitor/presentation/ pages/add_visitor.dart';
 
 class MyApp extends StatelessWidget {
   final Person? loggedData;
@@ -61,7 +56,7 @@ class MyApp extends StatelessWidget {
        return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: appTheme,
-          locale: Locale(state),
+          locale: state==null?Locale('en'):Locale(state),
           title: 'Posts App',
           localizationsDelegates: [
             S.delegate,
@@ -79,8 +74,6 @@ class MyApp extends StatelessWidget {
               loggedData!.typeOfAccount=='Doctor'?MainDoctorPage(data:loggedData!):
               MainUserPage(data:loggedData!),
           ),
-          // localeResolutionCallback:
-          // AppLocalizationsSetup.localeResolutionCallback,
         );}))
     );
   }

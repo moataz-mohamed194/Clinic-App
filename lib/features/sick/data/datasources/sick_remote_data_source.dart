@@ -89,12 +89,36 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource {
   Future<Unit> updateSickAsEntered(int id) async {
     final response =
         await client.patch(Uri.parse(AppUrl.UrlEnteredSick(id.toString())));
-    if (response.statusCode == 201 ||
-        response.body == '{"Results": "Success request"}') {
+    Map valueMap = json.decode(response.body);
+    if (response.statusCode == 201 ||response.statusCode == 200 ||
+        valueMap["Results"]== "Success request") {
+      sendNotification(valueMap["doctorToken"]);
       return Future.value(unit);
     } else {
       throw OfflineException();
     }
+  }
+
+  Future<bool> sendNotification(String token) async {
+      await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Authorization':
+          'key=AAAAUarpD78:APA91bEKKpVooZK65o2eS9cA7C2SltWF0Sx9zsyo3c_WySywniHtk6fCQOEGbyiblgQoYdV2jDLsXG-2go9zhiLibKjAMM2aXMMIaV_kIHCnP8HdUcSDmHuxoLQvetiSshAj_pBjNhid',
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            'notification': <String, dynamic>{
+              'body': 'New Sick added to queue',
+              'title': 'new sick'
+            },
+            'priority': 'high',
+            'to': token
+          },
+        ),
+      );
+      return true;
   }
 
   @override

@@ -29,6 +29,13 @@
             {
               "client_id": "350759751615-krebaeg7k892os7vvpv7qg276mdaqm27.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "350759751615-0b8upubu1a4qkr1kndujd45hf8cm0m9k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.clinic"
+              }
             }
           ]
         }
