@@ -111,7 +111,8 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource {
           <String, dynamic>{
             'notification': <String, dynamic>{
               'body': 'New Sick added to queue',
-              'title': 'new sick'
+              'title': 'new sick',
+              "sound": "cough"
             },
             'priority': 'high',
             'to': token

@@ -1,5 +1,4 @@
 import 'package:cool_dropdown/cool_dropdown.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../ domain/entities/sick.dart';
 import '../../../../core/string/app_color.dart';
 import '../../../../core/widgets/button_widget.dart';
+import '../../../../core/widgets/date_time_picker/date_time_picker.dart';
 import '../../../../core/widgets/text_field_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../bloc/add_sick_bloc.dart';

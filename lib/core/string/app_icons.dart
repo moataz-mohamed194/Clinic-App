@@ -26,4 +26,5 @@ class AppIcons {
   static const String iconSelectedClinic = 'assets/icons/clinic.png';
   static const String iconUnSelectedClinic = 'assets/icons/unclinic.png';
   static const String iconDoctor2 = 'assets/icons/doctor-2.png';
+  static const String iconClinicLog = 'assets/icons/clinic_log.png';
 }
