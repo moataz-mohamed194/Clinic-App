@@ -7,6 +7,7 @@ abstract class GlobalAlertEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class GlobalAlertShowEvent extends GlobalAlertEvent {
   final String? title;
   final String? body;

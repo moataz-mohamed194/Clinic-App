@@ -1,6 +1,7 @@
 import 'package:clinic/core/StrogeData/hive.dart' as hive;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/App_Theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -13,6 +14,8 @@ import 'features/auth/presentation/ pages/MainDoctorPage.dart';
 import 'features/auth/presentation/ pages/MainNursePage.dart';
 import 'features/auth/presentation/ pages/MainUserPage.dart';
 import 'features/profile/presentation/bloc/locale_cubit.dart';
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 
 class MyApp extends StatelessWidget {
   final hive.Person? loggedData;
@@ -60,10 +63,11 @@ class MyApp extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: BlocBuilder<GlobalAlertBloc, GlobalAlertState>(
                             builder: (context, state) {
-                          return state.isAlertVisible
-                              ? AlertAlertFire.globalAlertWidget(
-                                  context, state.title ?? '', state.body ?? '')
-                              : SizedBox.shrink();
+                           if(state.isAlertVisible== true) {
+                               AlertAlertFire.globalAlertWidget(
+                              context:context,title: state.title ?? '', body:state.body ?? '', fln:flutterLocalNotificationsPlugin);
+                            }
+                          return SizedBox.shrink();
                         }),
                       ),
                     ),
@@ -77,4 +81,3 @@ class MyApp extends StatelessWidget {
 }
 
 // Create the BLoC
-

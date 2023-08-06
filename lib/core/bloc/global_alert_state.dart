@@ -5,5 +5,5 @@ class GlobalAlertState {
   final String? title;
   final String? body;
 
-  GlobalAlertState( {this.title, this.body,required this.isAlertVisible});
+  GlobalAlertState({this.title, this.body, required this.isAlertVisible});
 }
