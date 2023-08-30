@@ -9,12 +9,11 @@ import '../../../../generated/l10n.dart';
 import '../bloc/check_box_cubit.dart';
 import '../bloc/eyes_cubit.dart';
 
-class FormWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
+
+  FormWidget({required context}) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 15),
       child: Form(
@@ -125,4 +124,3 @@ class FormWidget extends StatelessWidget {
           login: login, stayLogin: context.read<CheckBoxCubit>().state));
     }
   }
-}

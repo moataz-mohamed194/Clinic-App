@@ -81,7 +81,7 @@ class LoginPage extends StatelessWidget {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        FormWidget(),
+                        FormWidget(context:context),
                         SizedBox(
                           height: 10,
                         ),

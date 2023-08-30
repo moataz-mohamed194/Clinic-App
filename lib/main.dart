@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'core/bloc/global_alert_bloc.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/auth/presentation/bloc/login/login_bloc.dart';
@@ -25,6 +26,9 @@ import 'features/nurce/presentation/bloc/Nurse_bloc.dart';
 
 
 void main() async {
+  final shorebirdCodePush = ShorebirdCodePush();
+  await shorebirdCodePush.downloadUpdateIfAvailable();
+
   await Hive.initFlutter();
   Hive.registerAdapter(hive.PersonAdapter());
   RequestConfiguration config = RequestConfiguration(
