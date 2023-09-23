@@ -44,7 +44,7 @@ class AlertAlertFire {
 
       var not= NotificationDetails(android: androidPlatformChannelSpecifics
       );
-      await fln.show(0, title, body,not );
+      await fln.show(100, title, body,not );
     return Container();
   }
 }

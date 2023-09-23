@@ -34,4 +34,6 @@ class AppUrl {
   static String UrlGetFeesOfMonth(String month) {
     return BASE_URL + "/doctor/get_fees_of_month/" + month.toString();
   }
+  static const socketKey = '9d5683e257f6cb1e972b5de6a3b5e3bf';
+  static const socketUrl = 'wss://socketsbay.com/wss/v2/22/$socketKey/';
 }

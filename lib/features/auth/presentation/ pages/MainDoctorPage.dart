@@ -23,58 +23,63 @@ class MainDoctorPage extends StatelessWidget {
       GetClinicDataPage(showAddAndEdit: true),
       Profile(data: data)
     ];
-    return BlocBuilder<BottomCubit, int>(builder: (context, state) {
-      return Scaffold(
-        body: Center(
-          child: _widgetOptions.elementAt(context.read<BottomCubit>().state),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                context.read<BottomCubit>().state == 0
-                    ? AppIcons.iconSelectedHome
-                    : AppIcons.iconUnSelectedHome,
-                height: 22.h,
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: BlocBuilder<BottomCubit, int>(builder: (context, state) {
+        return Scaffold(
+          body: Center(
+            child: _widgetOptions.elementAt(context.read<BottomCubit>().state),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  context.read<BottomCubit>().state == 0
+                      ? AppIcons.iconSelectedHome
+                      : AppIcons.iconUnSelectedHome,
+                  height: 22.h,
+                ),
+                label: S.of(context).Home,
               ),
-              label: S.of(context).Home,
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                context.read<BottomCubit>().state == 1
-                    ? AppIcons.iconSelectedVisitor
-                    : AppIcons.iconUnSelectedVisitor,
-                height: 22.h,
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  context.read<BottomCubit>().state == 1
+                      ? AppIcons.iconSelectedVisitor
+                      : AppIcons.iconUnSelectedVisitor,
+                  height: 22.h,
+                ),
+                label: S.of(context).Visitor,
               ),
-              label: S.of(context).Visitor,
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                context.read<BottomCubit>().state == 2
-                    ? AppIcons.iconSelectedClinic
-                    : AppIcons.iconUnSelectedClinic,
-                height: 22.h,
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  context.read<BottomCubit>().state == 2
+                      ? AppIcons.iconSelectedClinic
+                      : AppIcons.iconUnSelectedClinic,
+                  height: 22.h,
+                ),
+                label: S.of(context).Clinic,
               ),
-              label: S.of(context).Clinic,
-            ),
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                context.read<BottomCubit>().state == 3
-                    ? AppIcons.iconSelectedAvatar
-                    : AppIcons.iconUnSelectedAvatar,
-                height: 22.h,
+              BottomNavigationBarItem(
+                icon: Image.asset(
+                  context.read<BottomCubit>().state == 3
+                      ? AppIcons.iconSelectedAvatar
+                      : AppIcons.iconUnSelectedAvatar,
+                  height: 22.h,
+                ),
+                label: S.of(context).Profile,
               ),
-              label: S.of(context).Profile,
-            ),
-          ],
-          currentIndex: state,
-          selectedItemColor: AppColors.mainColor,
-          unselectedItemColor: Colors.grey.shade500,
-          showUnselectedLabels: true,
-          onTap: context.read<BottomCubit>().changeCurrentPage,
-        ),
-      );
-    });
+            ],
+            currentIndex: state,
+            selectedItemColor: AppColors.mainColor,
+            unselectedItemColor: Colors.grey.shade500,
+            showUnselectedLabels: true,
+            onTap: context.read<BottomCubit>().changeCurrentPage,
+          ),
+        );
+      }),
+    );
   }
 }

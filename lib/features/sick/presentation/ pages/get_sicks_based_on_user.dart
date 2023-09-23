@@ -35,7 +35,11 @@ class GetSicksBasedOnUser extends StatelessWidget {
                 } else if (state is LoadedSicksState) {
                   return RefreshIndicator(
                       onRefresh: () => _onRefresh(context),
-                      child: sickListWidget(sick: state.sicks));
+                      child: Column(
+                        children: List.generate(state.sicks.length, (index) => sickListWidget(
+                            sick:state.sicks[index], context: context,
+                      ))
+                      ));
                 } else if (state is ErrorSicksState) {
                   return MessageDisplayWidget(message: state.message);
                 }

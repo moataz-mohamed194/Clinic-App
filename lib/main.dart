@@ -8,6 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:shorebird_code_push/shorebird_code_push.dart';
 import 'core/bloc/global_alert_bloc.dart';
+import 'core/bloc/socket/socket_bloc.dart';
 import 'core/injection/injection_container.dart' as di;
 import 'features/auth/presentation/bloc/login/login_bloc.dart';
 import 'features/profile/presentation/bloc/locale_cubit.dart';
@@ -85,6 +86,9 @@ void main() async {
     BlocProvider(create: (_) => di.sl<AddUpdateUserBloc>()),
     BlocProvider(create: (_) => di.sl<EyesCubit>()),
     BlocProvider(create: (_) => di.sl<CheckBoxCubit>()),
+    BlocProvider(
+      create: (_) => SocketBloc(),
+    ),
     BlocProvider(create: (_) => di.sl<BottomCubit>()),
     BlocProvider(create: (_) => di.sl<LocaleCubit>()),
   ], child: loggedData == null ? MyApp() : MyApp(loggedData: loggedData)));

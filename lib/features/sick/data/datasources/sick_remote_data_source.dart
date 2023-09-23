@@ -71,14 +71,21 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource {
   @override
   Future<Unit> updateSick(int id) async {
     var tasksBox = await Hive.openBox<Person>('user');
-
+print('$id:updateSick:${tasksBox.get(0)!.pk.toString()}');
     final body = {
       'row_pk': id.toString(),
       'user_pk': tasksBox.get(0)!.pk.toString()
     };
     final response = await client
         .patch(Uri.parse(AppUrl.UrlApproveBookingForSick), body: body);
-    if (response.statusCode == 200) {
+    print('response:${response.statusCode}');
+    print('response:${response.body}');
+    Map valueMap = json.decode(response.body);
+
+    if (response.statusCode == 200 ||
+        valueMap["Results"] == "Success request") {
+      sendNotification(valueMap["doctorToken"]);
+
       return Future.value(unit);
     } else {
       throw OfflineException();
@@ -93,9 +100,10 @@ class SickRemoteDataSourceImple extends SickRemoteDataSource {
     if (response.statusCode == 201 ||
         response.statusCode == 200 ||
         valueMap["Results"] == "Success request") {
-      sendNotification(valueMap["doctorToken"]);
+      // sendNotification(valueMap["doctorToken"]);
       return Future.value(unit);
     } else {
+
       throw OfflineException();
     }
   }
